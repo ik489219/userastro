@@ -397,8 +397,8 @@ class LiveController extends GetxController {
                                     totalCompletedTimeForChat + 1;
                                 update();
                               });
-                              await startRecord(
-                                  channel!, global.localLiveUid!, token!);
+                              // await startRecord(
+                              //     channel!, global.localLiveUid!, token!);
                             }
                           },
                           child: Container(
@@ -554,12 +554,12 @@ class LiveController extends GetxController {
     }
   }
 
-  Future startRecord(String channel, int localUserId, String token) async {
-    debugPrint('start recording in chat');
-    CallController callController = Get.find<CallController>();
-    await callController.getAgoraResourceId(channel, localUserId);
-    await callController.agoraStartRecording(channel, localUserId, token);
-  }
+  // Future startRecord(String channel, int localUserId, String token) async {
+  //   debugPrint('start recording in chat');
+  //   CallController callController = Get.find<CallController>();
+  //   await callController.getAgoraResourceId(channel, localUserId);
+  //   await callController.agoraStartRecording(channel, localUserId, token);
+  // }
 
   Future<dynamic> getRtmToken(String appId, String appCertificate,
       String chatId, String channelName) async {

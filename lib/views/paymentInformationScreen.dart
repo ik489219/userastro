@@ -1,148 +1,219 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: file_names, use_build_context_synchronously
 
 import 'dart:developer';
 
-import 'package:AstrowayCustomer/controllers/history_controller.dart';
-import 'package:flutter/foundation.dart';
+import 'package:AstrowayCustomer/utils/services/api_helper.dart';
+import 'package:AstrowayCustomer/views/webpaymentScreen.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../utils/global.dart';
-import '../widget/commonAppbar.dart';
-import 'bottomNavigationBarScreen.dart';
+import '../../../../../controllers/splashController.dart';
+import 'package:AstrowayCustomer/utils/global.dart' as global;
 
-import '../utils/global.dart' as global;
+import '../controllers/walletController.dart';
 
-class PaymentScreen extends StatefulWidget {
-  String url;
-  PaymentScreen({Key? key, required this.url}) : super(key: key);
+// ignore: must_be_immutable
+class PaymentInformationScreen extends StatefulWidget {
+  final double amount;
+  final int? flag;
+  final int? cashback;
+
+  const PaymentInformationScreen(
+      {super.key, required this.amount, this.flag, this.cashback});
 
   @override
-  State<PaymentScreen> createState() => _PaymentScreenState();
+  State<PaymentInformationScreen> createState() =>
+      _PaymentInformationScreenState();
 }
 
-class _PaymentScreenState extends State<PaymentScreen> {
-  late InAppWebViewController _controller;
-  final historyController = Get.find<HistoryController>();
+class _PaymentInformationScreenState extends State<PaymentInformationScreen> {
+  final WalletController walletController = Get.find<WalletController>();
 
-  @override
-  void initState() {
-    super.initState();
-  }
+  SplashController splashController = Get.find<SplashController>();
+
+  APIHelper apiHelper = APIHelper();
+
+  int? paymentMode;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(56),
-        child: CommonAppBar(
-          title: 'Payment Information',
+      appBar: AppBar(
+        title: const Text('Payment Information'),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: GetBuilder<WalletController>(builder: (c) {
+            return Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: double.infinity,
+                    child: Column(
+                      children: [
+                        Card(
+                          elevation: 1,
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Payment Details',
+                                        style: Get.textTheme.titleMedium!
+                                            .copyWith(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 15))
+                                    .tr(),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Text('Total Amount').tr(),
+                                    Text(
+                                        '${global.getSystemFlagValue(global.systemFlagNameList.currency)} ${widget.amount}'),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('GST ${global.getSystemFlagValue(global.systemFlagNameList.gst)}%')
+                                        .tr(),
+                                    Expanded(
+                                      child: Align(
+                                        alignment: Alignment.centerRight,
+                                        child: Text(
+                                            '${widget.amount * double.parse(global.getSystemFlagValue(global.systemFlagNameList.gst)) / 100}'),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                widget.cashback == 0
+                                    ? const SizedBox()
+                                    : Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text('Cashback',
+                                                  style: Get
+                                                      .textTheme.titleMedium!
+                                                      .copyWith(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w500))
+                                              .tr(),
+                                          Text(
+                                              '${global.getSystemFlagValue(global.systemFlagNameList.currency)} ${widget.amount * int.parse(widget.cashback.toString()) / 100}',
+                                              style: Get.textTheme.titleMedium!
+                                                  .copyWith(
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.w500)),
+                                        ],
+                                      ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('Total Payable Amount',
+                                            style: Get.textTheme.titleMedium!
+                                                .copyWith(
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.w500))
+                                        .tr(),
+                                    Text(
+                                        '${global.getSystemFlagValue(global.systemFlagNameList.currency)} ${(widget.amount + widget.amount * double.parse(global.getSystemFlagValue(global.systemFlagNameList.gst)) / 100).toStringAsFixed(2)}',
+                                        style: Get.textTheme.titleMedium!
+                                            .copyWith(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w500)),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                ]);
+          }),
         ),
       ),
-      body: Container(
-        child: InAppWebView(
-          initialUrlRequest: URLRequest(url: WebUri(widget.url)),
-          initialSettings: InAppWebViewSettings(
-              cacheEnabled: true,
-              javaScriptEnabled: true,
-              javaScriptCanOpenWindowsAutomatically: true,
-              useShouldOverrideUrlLoading: true,
-              useShouldInterceptRequest: true
+      bottomSheet: SizedBox(
+        height: 60,
+        width: double.infinity,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TextButton(
+            onPressed: () async {
+              await apiHelper
+                  .addAmountInWallet(
+                amount: double.parse((widget.amount +
+                        widget.amount *
+                            double.parse(global.getSystemFlagValue(
+                                global.systemFlagNameList.gst)) /
+                            100)
+                    .toStringAsFixed(2)),
+                cashback: (widget.amount) *
+                    (int.parse(widget.cashback.toString()) / 100),
+              )
+                  .then((value) {
+                if (value['status'] == 200) {
+                  global.hideLoader();
+                  log("jkasdjksa");
+                  log("$value");
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PaymentScreen(
+                                url: value['url'],
+                              )));
+                }
+              });
+            },
+            style: ButtonStyle(
+              padding: WidgetStateProperty.all(const EdgeInsets.all(0)),
+              backgroundColor: WidgetStateProperty.all(Get.theme.primaryColor),
+              shape: WidgetStateProperty.all(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ),
+            ),
+            child: Text('Proceed to Pay',
+                    style: Get.textTheme.titleMedium!
+                        .copyWith(fontSize: 12, color: Colors.white))
+                .tr(),
           ),
-          onReceivedError: (controller, request, error) {
-            log('error: ${error.toString()}');
-          },
-          onLoadResource: (controller, resource) {
-            log('onLoadResource : ${resource}');
-          },
-          onLoadStart: (controller, url) {
-            log('start url: ${url.toString()}');
-          },
-          onReceivedHttpError: (controller, request, error) {
-            log('http error: ${error.toString()} and req is $request');
-          },
-          onLoadStop: (controller, url)async {
-            log('onLoadStop called: ${url.toString()}');
-            // log('check: ${imgBaseurl}payment-success');
-
-            if (url
-                .toString()
-                .startsWith("${imgBaseurl}payment-success")) {
-              await global.splashController.getCurrentUserData();
-              await historyController.getChatHistory(
-                  global.currentUserId!, false);
-              Get.off(() => BottomNavigationBarScreen(index: 0));
-              Fluttertoast.showToast(
-                msg: "Payment Success!",
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.BOTTOM,
-                timeInSecForIosWeb: 1,
-                backgroundColor: Get.theme.primaryColor,
-                textColor: Colors.white,
-                fontSize: 14.0,
-              );
-            } else if (url
-                .toString()
-                .startsWith("${imgBaseurl}payment-failed")) {
-              Get.off(() => BottomNavigationBarScreen(index: 0));
-              Fluttertoast.showToast(
-                msg: "Payment Failed!",
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.BOTTOM,
-                timeInSecForIosWeb: 1,
-                backgroundColor: Get.theme.primaryColor,
-                textColor: Colors.white,
-                fontSize: 14.0,
-              );
-            }
-          },
-          onWebViewCreated: (webviewcontroller) {
-            _controller = webviewcontroller;
-
-            log('onWebViewCreated: }');
-
-            _controller.addJavaScriptHandler(
-              handlerName: 'PaymentSuccess',
-              callback: (args) {
-                log('loaded PaymentSuccess: ${args.toString()}');
-
-                Get.off(() => BottomNavigationBarScreen(index: 0));
-                Fluttertoast.showToast(
-                  msg: "Payment Success!",
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.BOTTOM,
-                  timeInSecForIosWeb: 1,
-                  backgroundColor: Get.theme.primaryColor,
-                  textColor: Colors.white,
-                  fontSize: 14.0,
-                );
-              },
-            );
-            _controller.addJavaScriptHandler(
-              handlerName: 'PaymentFailed',
-              callback: (args) {
-                log('loaded PaymentFailed: ${args.toString()}');
-
-                Get.off(() => BottomNavigationBarScreen(index: 0));
-                Fluttertoast.showToast(
-                  msg: "Payment Failed!",
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.BOTTOM,
-                  timeInSecForIosWeb: 1,
-                  backgroundColor: Get.theme.primaryColor,
-                  textColor: Colors.white,
-                  fontSize: 14.0,
-                );
-              },
-            );
-          },
         ),
       ),
     );
   }
-
-
 }

@@ -169,7 +169,7 @@ class CallController extends GetxController
     }
   }
 
-  getAgoraResourceId(String cname, String? uid) async {
+  getAgoraResourceId(String cname, dynamic uid) async {
     try {
       await global.checkBody().then((result) async {
         if (result) {
@@ -205,7 +205,7 @@ class CallController extends GetxController
   //   }
   // }
 
-  agoraStartRecording(String cname, String token,String uid)  async {
+  agoraStartRecording(String cname, String token, String uid) async {
     try {
       await global.checkBody().then((result) async {
         if (result) {

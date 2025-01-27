@@ -1,13 +1,12 @@
 // ignore_for_file: must_be_immutable
 
 import 'dart:developer';
-
 import 'package:AstrowayCustomer/controllers/history_controller.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../utils/global.dart';
 import '../widget/commonAppbar.dart';
@@ -50,10 +49,24 @@ class _PaymentScreenState extends State<PaymentScreen> {
               javaScriptEnabled: true,
               javaScriptCanOpenWindowsAutomatically: true,
               useShouldOverrideUrlLoading: true,
-              useShouldInterceptRequest: true
-          ),
+              useShouldInterceptRequest: true),
           onReceivedError: (controller, request, error) {
             log('error: ${error.toString()}');
+          },
+          shouldOverrideUrlLoading: (controller, navigationAction) async {
+            var url = navigationAction.request.url.toString();
+            log('shouldOverrideUrlLoading: $url');
+            // Handle custom schemes
+            if (url.startsWith('upi://') || url.startsWith('intent://')) {
+              try {
+                await launchUrl(Uri.parse(url),
+                    mode: LaunchMode.externalApplication);
+                return NavigationActionPolicy.CANCEL;
+              } catch (e) {
+                log('Error launching URL: $e');
+              }
+            }
+            return NavigationActionPolicy.ALLOW;
           },
           onLoadResource: (controller, resource) {
             log('onLoadResource : ${resource}');
@@ -64,13 +77,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
           onReceivedHttpError: (controller, request, error) {
             log('http error: ${error.toString()} and req is $request');
           },
-          onLoadStop: (controller, url)async {
+          onLoadStop: (controller, url) async {
             log('onLoadStop called: ${url.toString()}');
-            // log('check: ${imgBaseurl}paymenft-success');
+            // log('check: ${imgBaseurl}payment-success');
 
-            if (url
-                .toString()
-                .startsWith("${imgBaseurl}payment-success")) {
+            if (url.toString().startsWith("${imgBaseurl}payment-success")) {
               await global.splashController.getCurrentUserData();
               await historyController.getChatHistory(
                   global.currentUserId!, false);
@@ -104,49 +115,43 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
             log('onWebViewCreated: }');
 
-            kIsWeb
-                ? {}
-                : _controller.addJavaScriptHandler(
-                    handlerName: 'PaymentSuccess',
-                    callback: (args) {
-                      log('loaded PaymentSuccess: ${args.toString()}');
+            _controller.addJavaScriptHandler(
+              handlerName: 'PaymentSuccess',
+              callback: (args) {
+                log('loaded PaymentSuccess: ${args.toString()}');
 
-                      Get.off(() => BottomNavigationBarScreen(index: 0));
-                      Fluttertoast.showToast(
-                        msg: "Payment Success!",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Get.theme.primaryColor,
-                        textColor: Colors.white,
-                        fontSize: 14.0,
-                      );
-                    },
-                  );
-            kIsWeb
-                ? {}
-                : _controller.addJavaScriptHandler(
-                    handlerName: 'PaymentFailed',
-                    callback: (args) {
-                      log('loaded PaymentFailed: ${args.toString()}');
+                Get.off(() => BottomNavigationBarScreen(index: 0));
+                Fluttertoast.showToast(
+                  msg: "Payment Success!",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Get.theme.primaryColor,
+                  textColor: Colors.white,
+                  fontSize: 14.0,
+                );
+              },
+            );
+            _controller.addJavaScriptHandler(
+              handlerName: 'PaymentFailed',
+              callback: (args) {
+                log('loaded PaymentFailed: ${args.toString()}');
 
-                      Get.off(() => BottomNavigationBarScreen(index: 0));
-                      Fluttertoast.showToast(
-                        msg: "Payment Failed!",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Get.theme.primaryColor,
-                        textColor: Colors.white,
-                        fontSize: 14.0,
-                      );
-                    },
-                  );
+                Get.off(() => BottomNavigationBarScreen(index: 0));
+                Fluttertoast.showToast(
+                  msg: "Payment Failed!",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Get.theme.primaryColor,
+                  textColor: Colors.white,
+                  fontSize: 14.0,
+                );
+              },
+            );
           },
         ),
       ),
     );
   }
-
-
 }

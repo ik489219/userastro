@@ -155,12 +155,10 @@ class APIHelper {
       dynamic recordList;
       print("----------------asad---------$response");
       if (response.statusCode == 200) {
-
         recordList = List<KundliModel>.from(json
             .decode(response.body)["recordList"]
             .map((x) => KundliModel.fromJson(x)));
       } else {
-
         recordList = null;
         print("---recordlist");
       }
@@ -661,8 +659,6 @@ class APIHelper {
       debugPrint('Exception in getAstromallCategory():' + e.toString());
     }
   }
-
-
 
   Future<dynamic> getAstromallProduct(
       int id, int startIndex, int fetchRecord) async {
@@ -1333,7 +1329,7 @@ class APIHelper {
 
   Future<dynamic> addAmountInWallet({
     required double amount,
-    int? cashback,
+    required double cashback,
   }) async {
     try {
       final response = await http.post(
@@ -1444,7 +1440,7 @@ class APIHelper {
                   "sId": sId1,
                   "sId1": sId2,
                   "channelName": channelName,
-                  "callType":"$transactionType"
+                  "callType": "$transactionType"
                 },
               ));
       debugPrint('done : $response');
@@ -1575,16 +1571,17 @@ class APIHelper {
       debugPrint('Exception in getUpcomingList():' + e.toString());
     }
   }
+
   //Third Party API
   Future<dynamic> getAdvancedPanchang(
       {int? day,
-        int? month,
-        int? year,
-        int? hour,
-        int? min,
-        double? lat,
-        double? lon,
-        double? tzone}) async {
+      int? month,
+      int? year,
+      int? hour,
+      int? min,
+      double? lat,
+      double? lon,
+      double? tzone}) async {
     try {
       final response = await http.post(
         Uri.parse("https://json.astrologyapi.com/v1/advanced_panchang"),
@@ -1671,8 +1668,6 @@ class APIHelper {
       debugPrint('Exception in getManglic():' + e.toString());
     }
   }
-
-
 
   Future<dynamic> getPanchangVedic(String date) async {
     try {
@@ -1781,7 +1776,6 @@ class APIHelper {
     }
   }
 
-
   Future<dynamic> getMatching(
       int? dayBoy,
       int? monthBoy,
@@ -1834,7 +1828,6 @@ class APIHelper {
       debugPrint('Exception in getMatching():' + e.toString());
     }
   }
-
 
   //Search
   Future<dynamic> searchAstrologer(String filterKey, String searchString,
@@ -2554,7 +2547,16 @@ class APIHelper {
   Future<dynamic> agoraStartCloudRecording(
       String cname, String localUid, String token) async {
     log('agora recording 1 is cname is $cname and localUid is $localUid and token is $token');
+
     try {
+      if (global.agoraResourceId == "") {
+        global.showToast(
+          message: 'can\'t start recording Resource-id not generated',
+          textColor: textColor,
+          bgColor: toastBackGoundColor,
+        );
+        return;
+      }
       final response = await http.post(
         Uri.parse(
             'https://api.agora.io/v1/apps/${global.getSystemFlagValue(global.systemFlagNameList.agoraAppId)}/cloud_recording/resourceid/${global.agoraResourceId}/mode/mix/start'),
@@ -2616,8 +2618,8 @@ class APIHelper {
               base64.encode(utf8.encode(
                   "${global.getSystemFlagValue(global.systemFlagNameList.agoraKey)}:${global.getSystemFlagValue(global.systemFlagNameList.agoraSecret)}"))
         },
-        body: json
-            .encode({"uid": uid.toString(), "cname": "$cname", "clientRequest": {}}),
+        body: json.encode(
+            {"uid": uid.toString(), "cname": "$cname", "clientRequest": {}}),
       );
       debugPrint('response $response');
       dynamic recordList;
@@ -3056,7 +3058,6 @@ class APIHelper {
       debugPrint('Exception:- in updetUserProfilePic:-' + e.toString());
     }
   }
-
 
   Future<dynamic> generateRtmToken(String agoraAppId,
       String agoraAppCertificate, String chatId, String channelName) async {

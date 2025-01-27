@@ -3,7 +3,6 @@
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:AstrowayCustomer/controllers/bottomNavigationController.dart';
 import 'package:AstrowayCustomer/controllers/follow_astrologer_controller.dart';
 import 'package:AstrowayCustomer/controllers/gift_controller.dart';
@@ -24,14 +23,11 @@ import 'package:flutter_countdown_timer/current_remaining_time.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
 import '../../controllers/callController.dart';
 import '../../controllers/chatController.dart';
-
 import '../../controllers/splashController.dart';
 import '../../model/message_model.dart';
 import '../../utils/services/api_helper.dart';
@@ -981,11 +977,11 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
             isStartRecordingForAudio = true;
             print('isStartRecordingForAudio $isStartRecordingForAudio');
           });
-          await callController.getAgoraResourceId(
-              widget.channel, global.localLiveUid!);
+          // await callController.getAgoraResourceId(
+          //     widget.channel, global.localLiveUid!);
           // await callController.getAgoraResourceId2(
           //     widget.channel, global.localLiveUid2!);
-          await startRecord();
+          // await startRecord();
           // await startRecord2();
         }
       });
@@ -1423,8 +1419,7 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
                                                                           .textTheme
                                                                           .bodySmall!
                                                                           .copyWith(
-                                                                              color:
-                                                                                  Colors.white),
+                                                                              color: Colors.white),
                                                                     ),
                                                                   ),
                                                                   reverseList[index].gift !=
@@ -3541,8 +3536,8 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
           callId = liveController.callId;
           print('second call id:- $callId');
 
-          await stopRecord(callId!);
-          await stopRecord2(callId);
+          // await stopRecord(callId!);
+          // await stopRecord2(callId);
         }
         print("After call recording started");
       }
@@ -3582,8 +3577,8 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
 
         callId = liveController.callId;
 
-        await stopRecord(liveController.callId!);
-        await stopRecord2(callId!);
+        // await stopRecord(liveController.callId!);
+        // await stopRecord2(callId!);
       }
     }
     if (isHostJoinAsAudio == false) {
@@ -3651,8 +3646,8 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
 
             callId = liveController.callId;
 
-            await stopRecord(liveController.callId!);
-            await stopRecord2(callId!);
+            // await stopRecord(liveController.callId!);
+            // await stopRecord2(callId!);
           }
         }
         timer!.cancel();
@@ -3688,8 +3683,8 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
 
           callId = liveController.callId;
 
-          await stopRecord(liveController.callId!);
-          await stopRecord2(callId!);
+          // await stopRecord(liveController.callId!);
+          // await stopRecord2(callId!);
         }
       }
       if (isHostJoinAsAudio == false) {
@@ -3942,11 +3937,11 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
     );
   }
 
-  Future startRecord() async {
-    CallController callController = Get.find<CallController>();
-    await callController.agoraStartRecording(
-        widget.channel, global.localLiveUid!, widget.token);
-  }
+  // Future startRecord() async {
+  //   CallController callController = Get.find<CallController>();
+  //   await callController.agoraStartRecording(
+  //       widget.channel, global.localLiveUid!, widget.token);
+  // }
 
   // Future startRecord2() async {
   //   CallController callController = Get.find<CallController>();
@@ -3954,12 +3949,12 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
   //       widget.channel, global.localLiveUid2!, widget.token);
   // }
 
-  Future stopRecord(int callId) async {
-    CallController callController = Get.find<CallController>();
-    print('stop1 audio recording in live astrologer');
-    await callController.agoraStopRecording(
-        callId, widget.channel, global.localLiveUid!);
-  }
+  // Future stopRecord(int callId) async {
+  //   CallController callController = Get.find<CallController>();
+  //   print('stop1 audio recording in live astrologer');
+  //   await callController.agoraStopRecording(
+  //       callId, widget.channel, global.localLiveUid!);
+  // }
 
   Future stopRecord2(int callId) async {
     CallController callController = Get.find<CallController>();

@@ -76,7 +76,7 @@ class _AcceptCallScreenState extends State<AcceptCallScreen> {
     if (widget.isfromnotification == false) {
       setupVoiceSDKEngine();
 
-      timer = Timer.periodic(Duration(seconds: 3), (timer) async {
+      timer = Timer.periodic(Duration(seconds: 5), (timer) async {
         print('timer call');
         if (!isStart) {
           setState(() {
@@ -151,34 +151,34 @@ class _AcceptCallScreenState extends State<AcceptCallScreen> {
                     radius: 60,
                     child: widget.astrologerProfile == null
                         ? Image.asset(
-                      Images.deafultUser,
-                      fit: BoxFit.cover,
-                    )
+                            Images.deafultUser,
+                            fit: BoxFit.cover,
+                          )
                         : CachedNetworkImage(
-                      height: 12.h,
-                      width: 12.h,
-                      imageUrl:
-                      '${global.imgBaseurl}${widget.astrologerProfile}',
-                      imageBuilder: (context, imageProvider) =>
-                          CircleAvatar(
-                            radius: 5.h,
-                            backgroundColor: Colors.transparent,
-                            child: Image.network(
-                              height: 12.h,
-                              width: 12.h,
-                              '${global.imgBaseurl}${widget.astrologerProfile}',
-                              fit: BoxFit.cover,
+                            height: 12.h,
+                            width: 12.h,
+                            imageUrl:
+                                '${global.imgBaseurl}${widget.astrologerProfile}',
+                            imageBuilder: (context, imageProvider) =>
+                                CircleAvatar(
+                              radius: 5.h,
+                              backgroundColor: Colors.transparent,
+                              child: Image.network(
+                                height: 12.h,
+                                width: 12.h,
+                                '${global.imgBaseurl}${widget.astrologerProfile}',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            placeholder: (context, url) => const Center(
+                                child: CircularProgressIndicator()),
+                            errorWidget: (context, url, error) => Image.asset(
+                              Images.deafultUser,
+                              fit: BoxFit.contain,
+                              height: 60,
+                              width: 40,
                             ),
                           ),
-                      placeholder: (context, url) => const Center(
-                          child: CircularProgressIndicator()),
-                      errorWidget: (context, url, error) => Image.asset(
-                        Images.deafultUser,
-                        fit: BoxFit.contain,
-                        height: 60,
-                        width: 40,
-                      ),
-                    ),
                   ),
                 ),
               ),
@@ -222,11 +222,11 @@ class _AcceptCallScreenState extends State<AcceptCallScreen> {
                     Get.back();
                     Get.back();
                     BottomNavigationController bottomNavigationController =
-                    Get.find<BottomNavigationController>();
+                        Get.find<BottomNavigationController>();
                     bottomNavigationController.setIndex(0, 0);
                     Get.to(() => BottomNavigationBarScreen(
-                      index: 0,
-                    ));
+                          index: 0,
+                        ));
                   }
                 },
                 child: Container(
@@ -323,11 +323,11 @@ class _AcceptCallScreenState extends State<AcceptCallScreen> {
           Get.back();
           Get.back();
           BottomNavigationController bottomNavigationController =
-          Get.find<BottomNavigationController>();
+              Get.find<BottomNavigationController>();
           bottomNavigationController.setIndex(0, 0);
           Get.to(() => BottomNavigationBarScreen(
-            index: 0,
-          ));
+                index: 0,
+              ));
         },
         onRtcStats: (connection, stats) {},
       ),
@@ -429,63 +429,63 @@ class _AcceptCallScreenState extends State<AcceptCallScreen> {
     return endTime == null
         ? Text("Joining..")
         : CountdownTimer(
-      endTime: endTime,
-      widgetBuilder: (_, CurrentRemainingTime? time) {
-        if (time == null) {
-          return Text(
-            '00:00:00',
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              color: Colors.white,
-              fontSize: 16.sp,
-            ),
-          );
-        }
-        return Padding(
-          padding: const EdgeInsets.only(left: 10),
-          child: time.hours != null && time.hours != 0
-              ? Text(
-            '${time.hours ?? '00'} :${time.min! <= 9 ? '0${time.min}' : time.min ?? '00'} :${time.sec! <= 9 ? '0${time.sec}' : time.sec}',
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              color: Colors.white,
-              fontSize: 16.sp,
-            ),
-          )
-              : time.min != null
-              ? Text(
-            '${time.min! <= 9 ? '0${time.min}' : time.min ?? '00'} :${time.sec! <= 9 ? '0${time.sec}' : time.sec}',
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              color: Colors.white,
-              fontSize: 16.sp,
-            ),
-          )
-              : Text(
-            '${time.sec! <= 9 ? '0${time.sec}' : time.sec}',
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              color: Colors.white,
-              fontSize: 16.sp,
-            ),
-          ),
-        );
-      },
-      onEnd: () async {
-        log('in onEnd ${callController.isLeaveCall}');
-        if (callController.isLeaveCall == false) {
-          global.showOnlyLoaderDialog(Get.context);
-          await leave();
-          global.hideLoader();
-          Get.back();
-          Get.back();
+            endTime: endTime,
+            widgetBuilder: (_, CurrentRemainingTime? time) {
+              if (time == null) {
+                return Text(
+                  '00:00:00',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                    fontSize: 16.sp,
+                  ),
+                );
+              }
+              return Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: time.hours != null && time.hours != 0
+                    ? Text(
+                        '${time.hours ?? '00'} :${time.min! <= 9 ? '0${time.min}' : time.min ?? '00'} :${time.sec! <= 9 ? '0${time.sec}' : time.sec}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                          fontSize: 16.sp,
+                        ),
+                      )
+                    : time.min != null
+                        ? Text(
+                            '${time.min! <= 9 ? '0${time.min}' : time.min ?? '00'} :${time.sec! <= 9 ? '0${time.sec}' : time.sec}',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
+                              fontSize: 16.sp,
+                            ),
+                          )
+                        : Text(
+                            '${time.sec! <= 9 ? '0${time.sec}' : time.sec}',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
+                              fontSize: 16.sp,
+                            ),
+                          ),
+              );
+            },
+            onEnd: () async {
+              log('in onEnd ${callController.isLeaveCall}');
+              if (callController.isLeaveCall == false) {
+                global.showOnlyLoaderDialog(Get.context);
+                await leave();
+                global.hideLoader();
+                Get.back();
+                Get.back();
 
-          bottomNavicontroller.setIndex(1, 0);
-          Get.to(() => BottomNavigationBarScreen(
-            index: 0,
-          ));
-        }
-      },
-    );
+                bottomNavicontroller.setIndex(1, 0);
+                Get.to(() => BottomNavigationBarScreen(
+                      index: 0,
+                    ));
+              }
+            },
+          );
   }
 }
