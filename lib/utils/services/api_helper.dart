@@ -2574,13 +2574,13 @@ class APIHelper {
             "token": "$token",
             "storageConfig": {
               "secretKey":
-                  "${global.getSystemFlagValue(global.systemFlagNameList.AWSSecretKey)}",
+                  "${global.getSystemFlagValue(global.systemFlagNameList.googleSecretKey)}",
               "vendor": 1,
               "region": 14,
               "bucket":
-                  "${global.getSystemFlagValue(global.systemFlagNameList.AWSBucket)}",
+                  "${global.getSystemFlagValue(global.systemFlagNameList.googleBucketName)}",
               "accessKey":
-                  "${global.getSystemFlagValue(global.systemFlagNameList.AWSAccessKey)}"
+                  "${global.getSystemFlagValue(global.systemFlagNameList.googleAccessKey)}"
             },
             "recordingConfig": {
               "channelType": 0, //
