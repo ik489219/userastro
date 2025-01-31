@@ -1,24 +1,24 @@
 // ignore_for_file: must_be_immutable, deprecated_member_use
 
-import 'package:AstrowayCustomer/controllers/bottomNavigationController.dart';
-import 'package:AstrowayCustomer/controllers/chatController.dart';
-import 'package:AstrowayCustomer/controllers/filtterTabController.dart';
-import 'package:AstrowayCustomer/controllers/languageController.dart';
-import 'package:AstrowayCustomer/controllers/reportController.dart';
-import 'package:AstrowayCustomer/controllers/reviewController.dart';
-import 'package:AstrowayCustomer/controllers/skillController.dart';
-import 'package:AstrowayCustomer/controllers/walletController.dart';
-import 'package:AstrowayCustomer/main.dart';
-import 'package:AstrowayCustomer/utils/AppColors.dart';
-import 'package:AstrowayCustomer/utils/images.dart';
-import 'package:AstrowayCustomer/views/addMoneyToWallet.dart';
-import 'package:AstrowayCustomer/views/astrologerProfile/astrologerProfile.dart';
-import 'package:AstrowayCustomer/views/callIntakeFormScreen.dart';
-import 'package:AstrowayCustomer/views/chat/incoming_chat_request.dart';
-import 'package:AstrowayCustomer/views/paymentInformationScreen.dart';
-import 'package:AstrowayCustomer/views/searchAstrologerScreen.dart';
-import 'package:AstrowayCustomer/widget/customAppbarWidget.dart';
-import 'package:AstrowayCustomer/widget/drawerWidget.dart';
+import 'package:astromeetCustomer/controllers/bottomNavigationController.dart';
+import 'package:astromeetCustomer/controllers/chatController.dart';
+import 'package:astromeetCustomer/controllers/filtterTabController.dart';
+import 'package:astromeetCustomer/controllers/languageController.dart';
+import 'package:astromeetCustomer/controllers/reportController.dart';
+import 'package:astromeetCustomer/controllers/reviewController.dart';
+import 'package:astromeetCustomer/controllers/skillController.dart';
+import 'package:astromeetCustomer/controllers/walletController.dart';
+import 'package:astromeetCustomer/main.dart';
+import 'package:astromeetCustomer/utils/AppColors.dart';
+import 'package:astromeetCustomer/utils/images.dart';
+import 'package:astromeetCustomer/views/addMoneyToWallet.dart';
+import 'package:astromeetCustomer/views/astrologerProfile/astrologerProfile.dart';
+import 'package:astromeetCustomer/views/callIntakeFormScreen.dart';
+import 'package:astromeetCustomer/views/chat/incoming_chat_request.dart';
+import 'package:astromeetCustomer/views/paymentInformationScreen.dart';
+import 'package:astromeetCustomer/views/searchAstrologerScreen.dart';
+import 'package:astromeetCustomer/widget/customAppbarWidget.dart';
+import 'package:astromeetCustomer/widget/drawerWidget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,10 +26,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -366,7 +365,8 @@ class _ChatScreenState extends State<ChatScreen> {
                               profile: cController.bottomAstrologerProfile,
                               fireBasechatId:
                                   cController.bottomFirebaseChatId ?? "",
-                              chatId: int.parse(cController.bottomChatId!.toString()),
+                              chatId: int.parse(
+                                  cController.bottomChatId!.toString()),
                               astrologerId: cController.bottomAstrologerId!,
                               fcmToken: cController.bottomFcmToken,
                               duration: cController.duration.toString()));
@@ -1148,7 +1148,9 @@ class TabViewWidget extends StatelessWidget {
                                             isFreeAvailable:
                                                 astrologerList[index]
                                                     .isFreeAvailable,
-                                        rate:astrologerList[index].charge.toString() ,
+                                            rate: astrologerList[index]
+                                                .charge
+                                                .toString(),
                                           ));
                                       global.hideLoader();
                                     } else if (astrologerList[index]

@@ -1,4 +1,4 @@
-import 'package:AstrowayCustomer/utils/screenSize.dart';
+import 'package:astromeetCustomer/utils/screenSize.dart';
 import 'package:flutter/cupertino.dart';
 
 class FontSizes {

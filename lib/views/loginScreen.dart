@@ -2,20 +2,20 @@
 
 import 'dart:developer';
 
-import 'package:AstrowayCustomer/controllers/bottomNavigationController.dart';
-import 'package:AstrowayCustomer/controllers/homeController.dart';
-import 'package:AstrowayCustomer/controllers/loginController.dart';
-import 'package:AstrowayCustomer/controllers/search_controller.dart';
-import 'package:AstrowayCustomer/utils/images.dart';
-import 'package:AstrowayCustomer/views/bottomNavigationBarScreen.dart';
-import 'package:AstrowayCustomer/views/settings/privacyPolicyScreen.dart';
-import 'package:AstrowayCustomer/views/settings/termsAndConditionScreen.dart';
+import 'package:astromeetCustomer/controllers/bottomNavigationController.dart';
+import 'package:astromeetCustomer/controllers/homeController.dart';
+import 'package:astromeetCustomer/controllers/loginController.dart';
+import 'package:astromeetCustomer/controllers/search_controller.dart';
+import 'package:astromeetCustomer/utils/images.dart';
+import 'package:astromeetCustomer/views/bottomNavigationBarScreen.dart';
+import 'package:astromeetCustomer/views/settings/privacyPolicyScreen.dart';
+import 'package:astromeetCustomer/views/settings/termsAndConditionScreen.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -40,8 +40,9 @@ class _LoginScreenState extends State<LoginScreen> {
     // WidgetsBinding.instance.addPostFrameCallback((_) {
     //   global.warningDialog(context);
     // });
-     super.initState();
+    super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -58,533 +59,540 @@ class _LoginScreenState extends State<LoginScreen> {
           backgroundColor: Colors.white,
           body: SingleChildScrollView(
             child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      ClipPath(
-                          clipper: CustomClipPath(),
-                          child: Container(
-                              color: Colors.white,//Get.theme.primaryColor,
-                              width: Get.width,
-                              height: Get.height * 0.21,
-                              child: Center(
-                                  child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    child: Align(
-                                      alignment: Alignment.topRight,
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          Get.find<SearchControllerCustom>()
-                                              .serachTextController
-                                              .clear();
-                                          Get.find<SearchControllerCustom>()
-                                              .searchText = '';
-                                          homeController.myOrders.clear();
-                                          BottomNavigationController
-                                              bottomNavigationController =
-                                              Get.find<
-                                                  BottomNavigationController>();
-                                          bottomNavigationController.setIndex(
-                                              0, 0);
-                                          Get.off(() =>
-                                              BottomNavigationBarScreen(
-                                                  index: 0));
-                                        },
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 8.0,top:5),
-                                          child: Text(
-                                            "Skip",
-                                            textAlign: TextAlign.end,
-                                            style: Get.textTheme.titleMedium!
-                                                .copyWith(
-                                              color: Colors.black,
-                                            ),
-                                          ).tr(),
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ClipPath(
+                    clipper: CustomClipPath(),
+                    child: Container(
+                        color: Colors.white, //Get.theme.primaryColor,
+                        width: Get.width,
+                        height: Get.height * 0.21,
+                        child: Center(
+                            child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              child: Align(
+                                alignment: Alignment.topRight,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Get.find<SearchControllerCustom>()
+                                        .serachTextController
+                                        .clear();
+                                    Get.find<SearchControllerCustom>()
+                                        .searchText = '';
+                                    homeController.myOrders.clear();
+                                    BottomNavigationController
+                                        bottomNavigationController =
+                                        Get.find<BottomNavigationController>();
+                                    bottomNavigationController.setIndex(0, 0);
+                                    Get.off(() =>
+                                        BottomNavigationBarScreen(index: 0));
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 8.0, top: 5),
+                                    child: Text(
+                                      "Skip",
+                                      textAlign: TextAlign.end,
+                                      style:
+                                          Get.textTheme.titleMedium!.copyWith(
+                                        color: Colors.black,
+                                      ),
+                                    ).tr(),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: Get.height * 0.02),
+                            Image.asset(
+                              "assets/images/splash.png",
+                              fit: BoxFit.cover,
+                              height: Get.height * 0.15,
+                            ),
+                            // Text('Get Daily Horoscope',
+                            //         style: Get.textTheme.titleMedium!
+                            //             .copyWith(
+                            //                 color: Colors.white,
+                            //                 fontWeight: FontWeight.w600),
+                            //         textAlign: TextAlign.center)
+                            //     .tr()
+                          ],
+                        )))),
+                Container(
+                    width: Get.width,
+                    margin: EdgeInsets.symmetric(horizontal: Get.width * 0.03),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: Get.height * 0.06,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Login to Astroway',
+                                    style: Get.textTheme.titleMedium!.copyWith(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w800),
+                                    textAlign: TextAlign.center)
+                                .tr(),
+                          ],
+                        ),
+                        SizedBox(
+                          height: Get.height * 0.02,
+                        ),
+                        GetBuilder<LoginController>(builder: (loginController) {
+                          return Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                  border: Border.all(color: Colors.grey),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 2),
+                                  child: SizedBox(
+                                    child: Theme(
+                                      data: ThemeData(
+                                        dialogTheme: DialogTheme(
+                                          contentTextStyle: const TextStyle(
+                                              color: Colors.white),
+                                          backgroundColor: Colors.grey[800],
+                                          surfaceTintColor: Colors.grey[800],
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                  SizedBox(height: Get.height * 0.02),
-                                  Image.asset(
-                                    "assets/images/splash.png",
-                                    fit: BoxFit.cover,
-                                    height: Get.height * 0.15,
-                                  ),
-                                  // Text('Get Daily Horoscope',
-                                  //         style: Get.textTheme.titleMedium!
-                                  //             .copyWith(
-                                  //                 color: Colors.white,
-                                  //                 fontWeight: FontWeight.w600),
-                                  //         textAlign: TextAlign.center)
-                                  //     .tr()
-                                ],
-                              )))),
-                      Container(
-                          width: Get.width,
-                          margin: EdgeInsets.symmetric(
-                              horizontal: Get.width * 0.03),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                height: Get.height * 0.06,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text('Login to Astroway',
-                                          style: Get.textTheme.titleMedium!
-                                              .copyWith(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w800),
-                                          textAlign: TextAlign.center)
-                                      .tr(),
-                                ],
-                              ),
-                              SizedBox(
-                                height: Get.height * 0.02,
-                              ),
-                              GetBuilder<LoginController>(
-                                  builder: (loginController) {
-                                return Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Container(
-                                    decoration:  BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                                    border: Border.all(color: Colors.grey),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 2),
+                                      //MOBILE
                                       child: SizedBox(
-                                        child: Theme(
-                                          data: ThemeData(
-                                            dialogTheme: DialogTheme(
-                                              contentTextStyle: const TextStyle(color: Colors.white),
-                                              backgroundColor: Colors.grey[800],
-                                              surfaceTintColor: Colors.grey[800],
-                                            ),
-                                          ),
-                                          //MOBILE
-                                          child: SizedBox(
-                                            child: InternationalPhoneNumberInput(
-                                              textFieldController: loginController.phoneController,
-                                              inputDecoration: const InputDecoration(
+                                        child: InternationalPhoneNumberInput(
+                                          textFieldController:
+                                              loginController.phoneController,
+                                          inputDecoration:
+                                              const InputDecoration(
                                                   border: InputBorder.none,
                                                   hintText: 'Phone number',
                                                   hintStyle: TextStyle(
                                                     color: Colors.grey,
                                                     fontSize: 16,
-                                                    fontFamily: "verdana_regular",
+                                                    fontFamily:
+                                                        "verdana_regular",
                                                     fontWeight: FontWeight.w400,
                                                   )),
-                                              onInputValidated: (bool value) {
-                                               // log('$value');
-                                              },
-                                              selectorConfig: const SelectorConfig(
-                                                leadingPadding: 2,
-                                                selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                                              ),
-                                              ignoreBlank: false,
-                                              autoValidateMode: AutovalidateMode.disabled,
-                                              selectorTextStyle: const TextStyle(color: Colors.black),
-                                              searchBoxDecoration: InputDecoration(
-                                                  border: OutlineInputBorder(
-                                                    borderRadius: BorderRadius.all(Radius.circular(2.w)),
-                                                    borderSide: const BorderSide(color: Colors.black),
-                                                  ),
-                                                  hintText: "Search",
-                                                  hintStyle: const TextStyle(
-                                                    color: Colors.black,
-                                                  )),
-                                              initialValue: _initialPhone,
-                                              formatInput: false,
-                                              keyboardType: const TextInputType.numberWithOptions(
-                                                  signed: true, decimal: false),
-                                              inputBorder: InputBorder.none,
-                                              onSaved: (PhoneNumber number) {
-                                                log('On Saved: ${number.dialCode}');
-                                                loginController.updateCountryCode(number.dialCode);
-                                                loginController.updateCountryCode(number.dialCode);
-                                              },
-                                              onFieldSubmitted: (value) {
-                                                log('On onFieldSubmitted: $value');
-                                                FocusScope.of(context).unfocus();
-                                              },
-                                              onInputChanged: (PhoneNumber number) {
-                                                log('On onInputChanged: ${number.dialCode}');
-                                                loginController.updateCountryCode(number.dialCode);
-                                                loginController.updateCountryCode(number.dialCode);
-                                              },
-                                              onSubmit: () {
-                                                log('On onSubmit:');
-                                                FocusScope.of(context).unfocus();
-                                              },
-                                            ),
+                                          onInputValidated: (bool value) {
+                                            // log('$value');
+                                          },
+                                          selectorConfig: const SelectorConfig(
+                                            leadingPadding: 2,
+                                            selectorType: PhoneInputSelectorType
+                                                .BOTTOM_SHEET,
                                           ),
+                                          ignoreBlank: false,
+                                          autoValidateMode:
+                                              AutovalidateMode.disabled,
+                                          selectorTextStyle: const TextStyle(
+                                              color: Colors.black),
+                                          searchBoxDecoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(2.w)),
+                                                borderSide: const BorderSide(
+                                                    color: Colors.black),
+                                              ),
+                                              hintText: "Search",
+                                              hintStyle: const TextStyle(
+                                                color: Colors.black,
+                                              )),
+                                          initialValue: _initialPhone,
+                                          formatInput: false,
+                                          keyboardType: const TextInputType
+                                              .numberWithOptions(
+                                              signed: true, decimal: false),
+                                          inputBorder: InputBorder.none,
+                                          onSaved: (PhoneNumber number) {
+                                            log('On Saved: ${number.dialCode}');
+                                            loginController.updateCountryCode(
+                                                number.dialCode);
+                                            loginController.updateCountryCode(
+                                                number.dialCode);
+                                          },
+                                          onFieldSubmitted: (value) {
+                                            log('On onFieldSubmitted: $value');
+                                            FocusScope.of(context).unfocus();
+                                          },
+                                          onInputChanged: (PhoneNumber number) {
+                                            log('On onInputChanged: ${number.dialCode}');
+                                            loginController.updateCountryCode(
+                                                number.dialCode);
+                                            loginController.updateCountryCode(
+                                                number.dialCode);
+                                          },
+                                          onSubmit: () {
+                                            log('On onSubmit:');
+                                            FocusScope.of(context).unfocus();
+                                          },
                                         ),
                                       ),
                                     ),
                                   ),
-                                    GestureDetector(
-                                      onTap: () async {
-                                        bool isValid =
-                                            loginController.validedPhone();
-
-                                        if (isValid) {
-                                          global.showOnlyLoaderDialog(context);
-                                          loginController.startHeadlessWithWhatsapp('phone');
-                                        } else {
-                                          global.showToast(
-                                            message: loginController.errorText!,
-                                            textColor: global.textColor,
-                                            bgColor: global.toastBackGoundColor,
-                                          );
-                                        }
-                                      },
-                                      child: Container(
-                                        height: 45,
-                                        width: double.infinity,
-                                        margin: EdgeInsets.only(top: 20),
-                                        decoration: BoxDecoration(
-                                          color: Get.theme.primaryColor,
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(10)),
-                                        ),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            Text(
-                                              'SEND OTP',
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                              textAlign: TextAlign.center,
-                                            ).tr(),
-                                            Image.asset(
-                                              'assets/images/arrow_left.png',
-                                              color: Colors.white,
-                                              width: 20,
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: Get.height * 0.01,
-                                    ),
-                                    InkWell(
-                                      onTap: (){
-                                        global.showOnlyLoaderDialog(context);
-                                        loginController.startHeadlessWithWhatsapp("WHATSAPP");
-                                      },
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: Colors.grey
-                                          ),
-                                          borderRadius: BorderRadius.circular(10.sp)
-                                        ),
-                                        width: 100.w,
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            Image.asset("assets/images/whatsapp.png",
-                                            height:6.h,
-                                            width: 16.w,
-                                            fit: BoxFit.cover,),
-                                            Text('Continue with Whatsapp'),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: Get.height * 0.01,
-                                    ),
-                                    InkWell(
-                                      onTap: (){
-                                        global.showOnlyLoaderDialog(context);
-                                        loginController.startHeadlessWithWhatsapp("GMAIL");
-                                      },
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.grey
-                                            ),
-                                            borderRadius: BorderRadius.circular(10.sp)
-                                        ),
-                                        width: 100.w,
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            Image.asset("assets/images/gmail.png",
-                                              height:5.h,
-                                              width: 7.w,
-                                              fit: BoxFit.fitWidth,),
-                                            SizedBox(width: 3.w,),
-                                            Text('Continue with Gmail'),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-
-                                    SizedBox(height: 1.h,),
-                                    SizedBox(
-                                      child: Row(children: [
-                                        Text(
-                                          'By signing up, you agree to our ',
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 11),
-                                        ).tr(),
-                                        GestureDetector(
-                                          onTap: () {
-                                            Get.to(
-                                                () => TermAndConditionScreen());
-                                          },
-                                          child: Text(
-                                            'Terms of use',
-                                            style: TextStyle(
-                                                decoration:
-                                                    TextDecoration.underline,
-                                                fontSize: 11,
-                                                color: Colors.blue),
-                                          ).tr(),
-                                        ),
-                                        Text(' and ',
-                                                style: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 11))
-                                            .tr(),
-                                        GestureDetector(
-                                          onTap: () {
-                                            Get.to(() => PrivacyPolicyScreen());
-                                          },
-                                          child: Text(
-                                            ' Privacy',
-                                            style: TextStyle(
-                                                decoration:
-                                                    TextDecoration.underline,
-                                                fontSize: 11,
-                                                color: Colors.blue),
-                                          ).tr(),
-                                        ),
-                                      ]),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        Get.to(() => PrivacyPolicyScreen());
-                                      },
-                                      child: Text(
-                                        'Policy',
-                                        style: TextStyle(
-                                          decoration: TextDecoration.underline,
-                                          fontSize: 11,
-                                          color: Colors.blue,
-                                        ),
-                                      ).tr(),
-                                    ),
-                                  ],
-                                );
-                              }),
-                              SizedBox(
-                                height: Get.height * 0.03,
+                                ),
                               ),
-                              InkWell(
-                                onTap: (){
+                              GestureDetector(
+                                onTap: () async {
+                                  bool isValid = loginController.validedPhone();
 
+                                  if (isValid) {
+                                    global.showOnlyLoaderDialog(context);
+                                    loginController
+                                        .startHeadlessWithWhatsapp('phone');
+                                  } else {
+                                    global.showToast(
+                                      message: loginController.errorText!,
+                                      textColor: global.textColor,
+                                      bgColor: global.toastBackGoundColor,
+                                    );
+                                  }
                                 },
                                 child: Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 2.w),
-                                  height: 5.h,
-                                  color: Color(0xFFef4e5e), // Background color
-                                  child: Stack(
+                                  height: 45,
+                                  width: double.infinity,
+                                  margin: EdgeInsets.only(top: 20),
+                                  decoration: BoxDecoration(
+                                    color: Get.theme.primaryColor,
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(10)),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      Positioned(
-                                        left: -2,
-                                        top: 0,
-                                        bottom: 0,
-                                        child: CustomPaint(
-                                          size: Size(15, 5.h), // Adjust the size of the triangle
-                                          painter: LeftTrianglePainter(),
-                                        ),
+                                      SizedBox(
+                                        width: 10,
                                       ),
-                                      Positioned(
-                                        right: -2,
-                                        top: 0,
-                                        bottom: 0,
-                                        child: CustomPaint(
-                                          size: Size(15, 5.h), // Adjust the size of the triangle
-                                          painter: RightTrianglePainter(),
-                                        ),
-                                      ),
-                                      Center(
-                                        child: Text(
-                                          'First Chat Free on Signup',
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 17.sp,
-                                              fontWeight: FontWeight.w400),
-                                        ),
+                                      Text(
+                                        'SEND OTP',
+                                        style: TextStyle(color: Colors.white),
+                                        textAlign: TextAlign.center,
+                                      ).tr(),
+                                      Image.asset(
+                                        'assets/images/arrow_left.png',
+                                        color: Colors.white,
+                                        width: 20,
                                       )
                                     ],
                                   ),
                                 ),
                               ),
-                              Container(
-                                height: 19.h,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Container(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Card(
-                                        elevation: 0,
-                                        margin: EdgeInsets.only(top: 6),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.zero),
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 15, horizontal: 6)
-                                              .copyWith(bottom: 10),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Column(
-                                                children: [
-                                                  Container(
-                                                    height: 68,
-                                                    width: 70,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                      BorderRadius.circular(7),
-                                                      color: Colors.grey[200],
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                      const EdgeInsets.all(10),
-                                                      child: Image.asset(
-                                                        Images.confidential,
-                                                        height: 45,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 12,
-                                                  ),
-                                                  Text(
-                                                    'Private &\nConfidential',
-                                                    textAlign: TextAlign.center,
-                                                    style: Get
-                                                        .theme.textTheme.titleMedium!
-                                                        .copyWith(
-                                                      fontSize: 14.sp,
-                                                      fontWeight: FontWeight.w400,
-                                                      letterSpacing: 0.0,
-                                                    ),
-                                                  ).tr(),
-                                                ],
-                                              ),
-                                              Column(
-                                                children: [
-                                                  Container(
-                                                    height: 65,
-                                                    width: 70,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                      BorderRadius.circular(7),
-                                                      color: Colors.grey[200],
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                      const EdgeInsets.all(10),
-                                                      child: Image.asset(
-                                                        Images.verifiedAccount,
-                                                        height: 45,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 12,
-                                                  ),
-                                                  Text(
-                                                    'Verified\nAstrologers',
-                                                    textAlign: TextAlign.center,
-                                                    style: Get
-                                                        .theme.textTheme.titleMedium!
-                                                        .copyWith(
-                                                      fontSize: 14.sp,
-                                                      fontWeight: FontWeight.w400,
-                                                      letterSpacing: 0.0,
-                                                    ),
-                                                  ).tr(),
-                                                ],
-                                              ),
-                                              Column(
-                                                children: [
-                                                  Container(
-                                                    height: 65,
-                                                    width: 70,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                      BorderRadius.circular(7),
-                                                      color: Colors.grey[200],
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                      const EdgeInsets.all(10),
-                                                      child: Image.asset(
-                                                        Images.payment,
-                                                        height: 45,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 12,
-                                                  ),
-                                                  Text(
-                                                    'Secure\nPayments',
-                                                    textAlign: TextAlign.center,
-                                                    style: Get
-                                                        .theme.textTheme.titleMedium!
-                                                        .copyWith(
-                                                      fontSize: 14.sp,
-                                                      fontWeight: FontWeight.w400,
-                                                      letterSpacing: 0.0,
-                                                    ),
-                                                  ).tr(),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
+                              SizedBox(
+                                height: Get.height * 0.01,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  global.showOnlyLoaderDialog(context);
+                                  loginController
+                                      .startHeadlessWithWhatsapp("WHATSAPP");
+                                },
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.grey),
+                                      borderRadius:
+                                          BorderRadius.circular(10.sp)),
+                                  width: 100.w,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        "assets/images/whatsapp.png",
+                                        height: 6.h,
+                                        width: 16.w,
+                                        fit: BoxFit.cover,
                                       ),
+                                      Text('Continue with Whatsapp'),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: Get.height * 0.01,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  global.showOnlyLoaderDialog(context);
+                                  loginController
+                                      .startHeadlessWithWhatsapp("GMAIL");
+                                },
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.grey),
+                                      borderRadius:
+                                          BorderRadius.circular(10.sp)),
+                                  width: 100.w,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        "assets/images/gmail.png",
+                                        height: 5.h,
+                                        width: 7.w,
+                                        fit: BoxFit.fitWidth,
+                                      ),
+                                      SizedBox(
+                                        width: 3.w,
+                                      ),
+                                      Text('Continue with Gmail'),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 1.h,
+                              ),
+                              SizedBox(
+                                child: Row(children: [
+                                  Text(
+                                    'By signing up, you agree to our ',
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 11),
+                                  ).tr(),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Get.to(() => TermAndConditionScreen());
+                                    },
+                                    child: Text(
+                                      'Terms of use',
+                                      style: TextStyle(
+                                          decoration: TextDecoration.underline,
+                                          fontSize: 11,
+                                          color: Colors.blue),
+                                    ).tr(),
+                                  ),
+                                  Text(' and ',
+                                          style: TextStyle(
+                                              color: Colors.grey, fontSize: 11))
+                                      .tr(),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Get.to(() => PrivacyPolicyScreen());
+                                    },
+                                    child: Text(
+                                      ' Privacy',
+                                      style: TextStyle(
+                                          decoration: TextDecoration.underline,
+                                          fontSize: 11,
+                                          color: Colors.blue),
+                                    ).tr(),
+                                  ),
+                                ]),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Get.to(() => PrivacyPolicyScreen());
+                                },
+                                child: Text(
+                                  'Policy',
+                                  style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                    fontSize: 11,
+                                    color: Colors.blue,
+                                  ),
+                                ).tr(),
+                              ),
+                            ],
+                          );
+                        }),
+                        SizedBox(
+                          height: Get.height * 0.03,
+                        ),
+                        InkWell(
+                          onTap: () {},
+                          child: Container(
+                            margin: EdgeInsets.symmetric(horizontal: 2.w),
+                            height: 5.h,
+                            color: Color(0xFFef4e5e), // Background color
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                  left: -2,
+                                  top: 0,
+                                  bottom: 0,
+                                  child: CustomPaint(
+                                    size: Size(15,
+                                        5.h), // Adjust the size of the triangle
+                                    painter: LeftTrianglePainter(),
+                                  ),
+                                ),
+                                Positioned(
+                                  right: -2,
+                                  top: 0,
+                                  bottom: 0,
+                                  child: CustomPaint(
+                                    size: Size(15,
+                                        5.h), // Adjust the size of the triangle
+                                    painter: RightTrianglePainter(),
+                                  ),
+                                ),
+                                Center(
+                                  child: Text(
+                                    'First Chat Free on Signup',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 17.sp,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: 19.h,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Card(
+                                  elevation: 0,
+                                  margin: EdgeInsets.only(top: 6),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.zero),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                            vertical: 15, horizontal: 6)
+                                        .copyWith(bottom: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Container(
+                                              height: 68,
+                                              width: 70,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(7),
+                                                color: Colors.grey[200],
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10),
+                                                child: Image.asset(
+                                                  Images.confidential,
+                                                  height: 45,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 12,
+                                            ),
+                                            Text(
+                                              'Private &\nConfidential',
+                                              textAlign: TextAlign.center,
+                                              style: Get
+                                                  .theme.textTheme.titleMedium!
+                                                  .copyWith(
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w400,
+                                                letterSpacing: 0.0,
+                                              ),
+                                            ).tr(),
+                                          ],
+                                        ),
+                                        Column(
+                                          children: [
+                                            Container(
+                                              height: 65,
+                                              width: 70,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(7),
+                                                color: Colors.grey[200],
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10),
+                                                child: Image.asset(
+                                                  Images.verifiedAccount,
+                                                  height: 45,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 12,
+                                            ),
+                                            Text(
+                                              'Verified\nAstrologers',
+                                              textAlign: TextAlign.center,
+                                              style: Get
+                                                  .theme.textTheme.titleMedium!
+                                                  .copyWith(
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w400,
+                                                letterSpacing: 0.0,
+                                              ),
+                                            ).tr(),
+                                          ],
+                                        ),
+                                        Column(
+                                          children: [
+                                            Container(
+                                              height: 65,
+                                              width: 70,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(7),
+                                                color: Colors.grey[200],
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10),
+                                                child: Image.asset(
+                                                  Images.payment,
+                                                  height: 45,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 12,
+                                            ),
+                                            Text(
+                                              'Secure\nPayments',
+                                              textAlign: TextAlign.center,
+                                              style: Get
+                                                  .theme.textTheme.titleMedium!
+                                                  .copyWith(
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w400,
+                                                letterSpacing: 0.0,
+                                              ),
+                                            ).tr(),
+                                          ],
+                                        ),
+                                      ],
                                     ),
-                                  ],
+                                  ),
                                 ),
                               ),
                             ],
-                          )),
-                    ],
-                  ),
+                          ),
+                        ),
+                      ],
+                    )),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
-
 }
-
 
 class CustomClipPath extends CustomClipper<Path> {
   var radius = 5.0;
@@ -612,7 +620,6 @@ class CustomClipPath extends CustomClipper<Path> {
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
-
 
 class LeftTrianglePainter extends CustomPainter {
   @override

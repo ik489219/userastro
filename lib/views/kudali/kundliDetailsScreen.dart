@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:AstrowayCustomer/controllers/kundliController.dart';
-import 'package:AstrowayCustomer/controllers/reviewController.dart';
-import 'package:AstrowayCustomer/controllers/splashController.dart';
+import 'package:astromeetCustomer/controllers/kundliController.dart';
+import 'package:astromeetCustomer/controllers/reviewController.dart';
+import 'package:astromeetCustomer/controllers/splashController.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 import '../../utils/images.dart';
 
 // ignore: must_be_immutable
@@ -34,7 +34,7 @@ class _KundliDetailsScreenState extends State<KundliDetailsScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor:
-        Get.theme.appBarTheme.systemOverlayStyle!.statusBarColor,
+            Get.theme.appBarTheme.systemOverlayStyle!.statusBarColor,
         title: Text(
           'Kundli',
           style: Get.theme.primaryTextTheme.titleLarge!.copyWith(
@@ -46,10 +46,10 @@ class _KundliDetailsScreenState extends State<KundliDetailsScreen> {
               kIsWeb
                   ? Icons.arrow_back
                   : Platform.isIOS
-                  ? Icons.arrow_back_ios
-                  : Icons.arrow_back,
+                      ? Icons.arrow_back_ios
+                      : Icons.arrow_back,
               color: Colors.white //Get.theme.iconTheme.color,
-          ),
+              ),
         ),
         actions: [
           GestureDetector(
@@ -77,8 +77,8 @@ class _KundliDetailsScreenState extends State<KundliDetailsScreen> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text('Share',
-                          style: Get.textTheme.titleMedium!
-                              .copyWith(fontSize: 12, color: Colors.white))
+                              style: Get.textTheme.titleMedium!
+                                  .copyWith(fontSize: 12, color: Colors.white))
                           .tr(),
                     )
                   ],
@@ -90,25 +90,24 @@ class _KundliDetailsScreenState extends State<KundliDetailsScreen> {
       ),
       body: kundliController.pdfKundaliData == null
           ? Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CircularProgressIndicator(),
-              Text("Please Wait Kundali is Loading...")
-            ],
-          ))
+              child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(),
+                Text("Please Wait Kundali is Loading...")
+              ],
+            ))
           : Container(
-        child: SfPdfViewer.network(
-          "${kundliController.pdfKundaliData!.recordList!.response}",
-          onDocumentLoadFailed: (e) {
-            Fluttertoast.showToast(msg: "PDF Failed to Load");
-            Get.back();
-          },
-          onDocumentLoaded: (e) {},
-        ),
-      ),
-
+              child: SfPdfViewer.network(
+                "${kundliController.pdfKundaliData!.recordList!.response}",
+                onDocumentLoadFailed: (e) {
+                  Fluttertoast.showToast(msg: "PDF Failed to Load");
+                  Get.back();
+                },
+                onDocumentLoaded: (e) {},
+              ),
+            ),
     );
   }
 }

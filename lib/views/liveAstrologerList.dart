@@ -2,22 +2,22 @@
 
 import 'dart:io';
 
-import 'package:AstrowayCustomer/controllers/bottomNavigationController.dart';
-import 'package:AstrowayCustomer/controllers/liveAstrologerController.dart';
-import 'package:AstrowayCustomer/controllers/liveController.dart';
-import 'package:AstrowayCustomer/controllers/splashController.dart';
-import 'package:AstrowayCustomer/controllers/upcoming_controller.dart';
-import 'package:AstrowayCustomer/utils/images.dart';
-import 'package:AstrowayCustomer/views/astrologerProfile/astrologerProfile.dart';
-import 'package:AstrowayCustomer/views/live_astrologer/astrologer_event_search_screen.dart';
-import 'package:AstrowayCustomer/views/live_astrologer/live_astrologer_screen.dart';
+import 'package:astromeetCustomer/controllers/bottomNavigationController.dart';
+import 'package:astromeetCustomer/controllers/liveAstrologerController.dart';
+import 'package:astromeetCustomer/controllers/liveController.dart';
+import 'package:astromeetCustomer/controllers/splashController.dart';
+import 'package:astromeetCustomer/controllers/upcoming_controller.dart';
+import 'package:astromeetCustomer/utils/images.dart';
+import 'package:astromeetCustomer/views/astrologerProfile/astrologerProfile.dart';
+import 'package:astromeetCustomer/views/live_astrologer/astrologer_event_search_screen.dart';
+import 'package:astromeetCustomer/views/live_astrologer/live_astrologer_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 import '../controllers/reviewController.dart';
 
@@ -446,14 +446,12 @@ class LiveAstrologerListScreen extends StatelessWidget {
                                                   children: [
                                                     GestureDetector(
                                                       onTap: () async {
-
                                                         await FlutterShare
                                                             .share(
                                                           title:
                                                               'Hey! I am using ${global.getSystemFlagValue(global.systemFlagNameList.appName)} to get predictions related to marriage/career. I would recommend you to connect with best Astrologer at ${global.getSystemFlagValue(global.systemFlagNameList.appName)}.',
                                                           text:
                                                               'Hey! I am using ${global.getSystemFlagValue(global.systemFlagNameList.appName)} to get predictions related to marriage/career. I would recommend you to connect with best Astrologer at ${global.getSystemFlagValue(global.systemFlagNameList.appName)}.',
-
                                                         );
                                                       },
                                                       child: Icon(

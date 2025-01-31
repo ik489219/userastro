@@ -2,16 +2,15 @@
 
 import 'dart:developer';
 
-import 'package:AstrowayCustomer/utils/services/api_helper.dart';
-import 'package:AstrowayCustomer/views/webpaymentScreen.dart';
+import 'package:astromeetCustomer/utils/services/api_helper.dart';
+import 'package:astromeetCustomer/views/webpaymentScreen.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../../../../controllers/splashController.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 import '../controllers/walletController.dart';
 

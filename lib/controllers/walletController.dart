@@ -1,12 +1,27 @@
-import 'package:AstrowayCustomer/model/amount_model.dart';
+import 'package:astromeetCustomer/model/amount_model.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 import '../utils/services/api_helper.dart';
 
 class WalletController extends GetxController {
   APIHelper apiHelper = APIHelper();
-  List payment = ['50', '100', '200', '300', '500', '1000', '2000', '3000', '4000', '8000', '15000', '20000', '50000', '100000'];
+  List payment = [
+    '50',
+    '100',
+    '200',
+    '300',
+    '500',
+    '1000',
+    '2000',
+    '3000',
+    '4000',
+    '8000',
+    '15000',
+    '20000',
+    '50000',
+    '100000'
+  ];
   List rechrage = ['50', '100', '200', '300', '500', '1000', '2000', '3000'];
 
   var paymentAmount = <AmountModel>[];
@@ -28,7 +43,6 @@ class WalletController extends GetxController {
     try {
       await global.checkBody().then((result) async {
         if (result) {
-
           // global.showOnlyLoaderDialog(Get.context);
           // await apiHelper.addAmountInWallet(amount: 100, orderId: "orderid", paymentId: "payementid", signature: "signature", status: 'Success').then((value) {
           //   global.hideLoader();

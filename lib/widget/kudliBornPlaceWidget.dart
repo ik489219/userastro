@@ -1,12 +1,12 @@
-import 'package:AstrowayCustomer/controllers/kundliController.dart';
-import 'package:AstrowayCustomer/controllers/walletController.dart';
-import 'package:AstrowayCustomer/views/placeOfBrithSearchScreen.dart';
-import 'package:AstrowayCustomer/widget/drodownWidget.dart';
+import 'package:astromeetCustomer/controllers/kundliController.dart';
+import 'package:astromeetCustomer/controllers/walletController.dart';
+import 'package:astromeetCustomer/views/placeOfBrithSearchScreen.dart';
+import 'package:astromeetCustomer/widget/drodownWidget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class KundliBornPlaceWidget extends StatefulWidget {
@@ -23,7 +23,6 @@ class KundliBornPlaceWidget extends StatefulWidget {
 
 class _KundliBornPlaceWidgetState extends State<KundliBornPlaceWidget> {
   String type = "medium";
-  
 
   WalletController walletController = Get.find<WalletController>();
   @override
@@ -134,14 +133,19 @@ class _KundliBornPlaceWidgetState extends State<KundliBornPlaceWidget> {
             },
           ),
         ),
-        SizedBox(height: 10,),
-        Text("Select Your Kundali Language",
-        style: TextStyle(
-          color: Colors.black,
-          fontWeight: FontWeight.w500,
-          fontSize: 18.sp
-        ),),
-        SizedBox(height: 10,),
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+          "Select Your Kundali Language",
+          style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+              fontSize: 18.sp),
+        ),
+        SizedBox(
+          height: 10,
+        ),
         DropDownWidget(
           item: [
             'English',
@@ -153,27 +157,27 @@ class _KundliBornPlaceWidgetState extends State<KundliBornPlaceWidget> {
             'Spanish',
             'French',
           ],
-          hint: tr('Select Your Language',),
+          hint: tr(
+            'Select Your Language',
+          ),
           callId: 4,
         ),
-        SizedBox(height: 15,),
-
+        SizedBox(
+          height: 15,
+        ),
         SizedBox(
           width: double.infinity,
           height: 50,
           child: TextButton(
             style: ButtonStyle(
               padding: WidgetStateProperty.all(EdgeInsets.all(0)),
-              backgroundColor:
-                  WidgetStateProperty.all(Get.theme.primaryColor),
+              backgroundColor: WidgetStateProperty.all(Get.theme.primaryColor),
               shape: WidgetStateProperty.all(
                 RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                     side: BorderSide(color: Colors.grey)),
               ),
             ),
-
-
             onPressed: () async {
               if (type == "small"
                   ? (widget.kundliController.pdfPriceData!.isFreeSession == true
@@ -194,12 +198,17 @@ class _KundliBornPlaceWidgetState extends State<KundliBornPlaceWidget> {
                                   .recordList!.large
                                   .toString()))
                           : false) {
-                openBottomSheetRechrage(context, type == "small"?widget
-                    .kundliController.pdfPriceData!.recordList!.small
-                    .toString():(type == "medium"?"${widget.kundliController.pdfPriceData!.recordList!.medium.toString()}":
-                widget.kundliController.pdfPriceData!
-                    .recordList!.large
-                    .toString()));
+                openBottomSheetRechrage(
+                    context,
+                    type == "small"
+                        ? widget
+                            .kundliController.pdfPriceData!.recordList!.small
+                            .toString()
+                        : (type == "medium"
+                            ? "${widget.kundliController.pdfPriceData!.recordList!.medium.toString()}"
+                            : widget.kundliController.pdfPriceData!.recordList!
+                                .large
+                                .toString()));
               } else {
                 if (widget.kundliController.birthKundliPlaceController.text ==
                     "") {
@@ -212,20 +221,25 @@ class _KundliBornPlaceWidgetState extends State<KundliBornPlaceWidget> {
                   widget.kundliController
                       .updateIcon(widget.kundliController.initialIndex);
                   global.showOnlyLoaderDialog(context);
-                  await widget.kundliController.addKundliData(type,
-                      type.toString()=="large"?
-                      int.parse(widget.kundliController.pdfPriceData!
-                          .recordList!.large
-                          .toString()):(type.toString()=="medium"?int.parse(widget
-                          .kundliController.pdfPriceData!.recordList!.medium
-                          .toString()):(
-                          type.toString()=="small"?(widget.kundliController.pdfPriceData!.isFreeSession == true?
-                          0:int.parse(widget
-                          .kundliController.pdfPriceData!.recordList!.small
-                          .toString())):0
-                      )
-                      )
-                  );
+                  await widget.kundliController.addKundliData(
+                      type,
+                      type.toString() == "large"
+                          ? int.parse(widget
+                              .kundliController.pdfPriceData!.recordList!.large
+                              .toString())
+                          : (type.toString() == "medium"
+                              ? int.parse(widget.kundliController.pdfPriceData!
+                                  .recordList!.medium
+                                  .toString())
+                              : (type.toString() == "small"
+                                  ? (widget.kundliController.pdfPriceData!
+                                              .isFreeSession ==
+                                          true
+                                      ? 0
+                                      : int.parse(widget.kundliController
+                                          .pdfPriceData!.recordList!.small
+                                          .toString()))
+                                  : 0)));
                   await widget.kundliController.getKundliList();
                   widget.kundliController.initialIndex = 0;
                   global.hideLoader();
@@ -236,13 +250,10 @@ class _KundliBornPlaceWidgetState extends State<KundliBornPlaceWidget> {
             child: Text(
               'Submit',
               textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white
-              ),
+              style: TextStyle(color: Colors.white),
             ).tr(),
           ),
         ),
-
       ],
     );
   }

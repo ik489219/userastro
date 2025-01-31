@@ -1,13 +1,13 @@
-import 'package:AstrowayCustomer/controllers/customer_support_controller.dart';
-import 'package:AstrowayCustomer/utils/date_converter.dart';
-import 'package:AstrowayCustomer/views/customer_support/customer_support_chat_screen.dart';
-import 'package:AstrowayCustomer/views/customer_support/helpAndSupportScreen.dart';
-import 'package:AstrowayCustomer/widget/customBottomButton.dart';
+import 'package:astromeetCustomer/controllers/customer_support_controller.dart';
+import 'package:astromeetCustomer/utils/date_converter.dart';
+import 'package:astromeetCustomer/views/customer_support/customer_support_chat_screen.dart';
+import 'package:astromeetCustomer/views/customer_support/helpAndSupportScreen.dart';
+import 'package:astromeetCustomer/widget/customBottomButton.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 class ChatWithCustomerSupport extends StatelessWidget {
   const ChatWithCustomerSupport({Key? key}) : super(key: key);
@@ -20,7 +20,8 @@ class ChatWithCustomerSupport extends StatelessWidget {
         width: double.infinity,
         height: Get.height,
         decoration: BoxDecoration(color: Color.fromARGB(255, 240, 233, 233)),
-        child: GetBuilder<CustomerSupportController>(builder: (customerSupportController) {
+        child: GetBuilder<CustomerSupportController>(
+            builder: (customerSupportController) {
           return customerSupportController.ticketList.isEmpty
               ? Center(
                   child: Text('No ticket available').tr(),
@@ -28,31 +29,45 @@ class ChatWithCustomerSupport extends StatelessWidget {
               : Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-
                     Expanded(
                       child: ListView.builder(
-                          itemCount: customerSupportController.ticketList.length,
+                          itemCount:
+                              customerSupportController.ticketList.length,
                           itemBuilder: (context, index) {
                             return GestureDetector(
                               onTap: () async {
-                                print('firebase chatd :- ${customerSupportController.ticketList[index].chatId}');
-                                if (customerSupportController.ticketList[index].chatId != "") {
+                                print(
+                                    'firebase chatd :- ${customerSupportController.ticketList[index].chatId}');
+                                if (customerSupportController
+                                        .ticketList[index].chatId !=
+                                    "") {
                                   global.showOnlyLoaderDialog(context);
-                                  customerSupportController.reviewController.clear();
+                                  customerSupportController.reviewController
+                                      .clear();
                                   customerSupportController.rating = 0;
                                   customerSupportController.reviewId = null;
-                                  await customerSupportController.getCustomerReview(customerSupportController.ticketList[index].id!);
-                                  customerSupportController.status = customerSupportController.ticketList[index].ticketStatus!;
+                                  await customerSupportController
+                                      .getCustomerReview(
+                                          customerSupportController
+                                              .ticketList[index].id!);
+                                  customerSupportController.status =
+                                      customerSupportController
+                                          .ticketList[index].ticketStatus!;
                                   customerSupportController.isIn = true;
                                   customerSupportController.tickitIndex = index;
                                   customerSupportController.update();
                                   global.hideLoader();
                                   Get.to(() => CustomerSupportChatScreen(
                                         flagId: 1,
-                                        ticketNo: customerSupportController.ticketList[index].ticketNumber!,
-                                        fireBasechatId: customerSupportController.ticketList[index].chatId!,
-                                        ticketId: customerSupportController.ticketList[index].id!,
-                                        ticketStatus: customerSupportController.ticketList[index].ticketStatus!,
+                                        ticketNo: customerSupportController
+                                            .ticketList[index].ticketNumber!,
+                                        fireBasechatId:
+                                            customerSupportController
+                                                .ticketList[index].chatId!,
+                                        ticketId: customerSupportController
+                                            .ticketList[index].id!,
+                                        ticketStatus: customerSupportController
+                                            .ticketList[index].ticketStatus!,
                                       ));
                                 }
                               },
@@ -82,9 +97,12 @@ class ChatWithCustomerSupport extends StatelessWidget {
                                         flex: 4,
                                         child: ElevatedButton(
                                           onPressed: () async {
-                                            global.showOnlyLoaderDialog(context);
-                                            await customerSupportController.deleteOneTicket(
-                                              customerSupportController.ticketList[index].id!,
+                                            global
+                                                .showOnlyLoaderDialog(context);
+                                            await customerSupportController
+                                                .deleteOneTicket(
+                                              customerSupportController
+                                                  .ticketList[index].id!,
                                             );
                                             global.hideLoader();
                                             Get.back();
@@ -107,32 +125,62 @@ class ChatWithCustomerSupport extends StatelessWidget {
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
                                               Expanded(
                                                 child: Text(
-                                                  "${customerSupportController.ticketList[index].name}".toUpperCase(),
-                                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                                  "${customerSupportController.ticketList[index].name}"
+                                                      .toUpperCase(),
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
                                                 ),
                                               ),
-                                              customerSupportController.ticketList[index].ticketStatus!.toUpperCase() == "PAUSE"
+                                              customerSupportController
+                                                          .ticketList[index]
+                                                          .ticketStatus!
+                                                          .toUpperCase() ==
+                                                      "PAUSE"
                                                   ? ElevatedButton(
                                                       onPressed: () async {
-                                                        global.showOnlyLoaderDialog(context);
-                                                        await customerSupportController.restartSupportChat(customerSupportController.ticketList[index].id!);
+                                                        global
+                                                            .showOnlyLoaderDialog(
+                                                                context);
+                                                        await customerSupportController
+                                                            .restartSupportChat(
+                                                                customerSupportController
+                                                                    .ticketList[
+                                                                        index]
+                                                                    .id!);
                                                         global.hideLoader();
                                                       },
-                                                      child: Text('Restart Chat').tr())
+                                                      child:
+                                                          Text('Restart Chat')
+                                                              .tr())
                                                   : Text(
-                                                      "${customerSupportController.ticketList[index].ticketStatus ?? 'waiting'}".toUpperCase(),
+                                                      "${customerSupportController.ticketList[index].ticketStatus ?? 'waiting'}"
+                                                          .toUpperCase(),
                                                       style: TextStyle(
-                                                        fontWeight: FontWeight.bold,
-                                                        color: customerSupportController.ticketList[index].ticketStatus!.toUpperCase() == "WAITING"
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: customerSupportController
+                                                                    .ticketList[
+                                                                        index]
+                                                                    .ticketStatus!
+                                                                    .toUpperCase() ==
+                                                                "WAITING"
                                                             ? Colors.blue
-                                                            : customerSupportController.ticketList[index].ticketStatus!.toUpperCase() == "OPEN"
+                                                            : customerSupportController
+                                                                        .ticketList[
+                                                                            index]
+                                                                        .ticketStatus!
+                                                                        .toUpperCase() ==
+                                                                    "OPEN"
                                                                 ? Colors.green
                                                                 : Colors.red,
                                                       ),
@@ -140,11 +188,19 @@ class ChatWithCustomerSupport extends StatelessWidget {
                                             ],
                                           ),
                                           Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
-                                              Text('Ticket No:${customerSupportController.ticketList[index].ticketNumber}').tr(),
-                                              Text('${customerSupportController.ticketList[index].description}'),
-                                              Text(DateConverter.dateTimeStringToDateTime(customerSupportController.ticketList[index].createdAt!.toString())),
+                                              Text('Ticket No:${customerSupportController.ticketList[index].ticketNumber}')
+                                                  .tr(),
+                                              Text(
+                                                  '${customerSupportController.ticketList[index].description}'),
+                                              Text(DateConverter
+                                                  .dateTimeStringToDateTime(
+                                                      customerSupportController
+                                                          .ticketList[index]
+                                                          .createdAt!
+                                                          .toString())),
                                             ],
                                           )
                                         ],
@@ -161,7 +217,8 @@ class ChatWithCustomerSupport extends StatelessWidget {
                 );
         }),
       ),
-      bottomSheet: GetBuilder<CustomerSupportController>(builder: (customerSupportController) {
+      bottomSheet: GetBuilder<CustomerSupportController>(
+          builder: (customerSupportController) {
         return CustomBottomButton(
           title: 'Chat With Customer Support',
           onTap: () async {
@@ -177,7 +234,8 @@ class ChatWithCustomerSupport extends StatelessWidget {
                 AlertDialog(
                   backgroundColor: Colors.white,
                   contentPadding: const EdgeInsets.all(0),
-                  titlePadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+                  titlePadding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
                   title: Text(
                     "You already have an open ticket",
                     style: Get.textTheme.titleMedium,
@@ -186,7 +244,9 @@ class ChatWithCustomerSupport extends StatelessWidget {
                     onPressed: () {
                       Get.back();
                     },
-                    child: Text('Ok', style: TextStyle(color: Get.theme.primaryColor)).tr(),
+                    child: Text('Ok',
+                            style: TextStyle(color: Get.theme.primaryColor))
+                        .tr(),
                   ),
                 ),
               );

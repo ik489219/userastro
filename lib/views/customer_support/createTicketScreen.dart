@@ -1,12 +1,11 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:AstrowayCustomer/controllers/customer_support_controller.dart';
-import 'package:AstrowayCustomer/views/customer_support/customerSupportChatScreen.dart';
+import 'package:astromeetCustomer/controllers/customer_support_controller.dart';
+import 'package:astromeetCustomer/views/customer_support/customerSupportChatScreen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
-
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 import '../../widget/commonAppbar.dart';
 
@@ -15,9 +14,16 @@ class CreateTiketScreen extends StatelessWidget {
   final String helpSupportQuestion;
   final int helpSupportQuestionId;
   final String helpSupportSubQuestion;
-  CreateTiketScreen({Key? key, required this.helpSupportQuestion, required this.helpSupportSubQuestion, required this.subject, required this.helpSupportQuestionId}) : super(key: key);
+  CreateTiketScreen(
+      {Key? key,
+      required this.helpSupportQuestion,
+      required this.helpSupportSubQuestion,
+      required this.subject,
+      required this.helpSupportQuestionId})
+      : super(key: key);
 
-  CustomerSupportController customerSupportController = Get.find<CustomerSupportController>();
+  CustomerSupportController customerSupportController =
+      Get.find<CustomerSupportController>();
 
   @override
   Widget build(BuildContext context) {
@@ -38,17 +44,26 @@ class CreateTiketScreen extends StatelessWidget {
               children: [
                 Text(
                   'Subject',
-                  style: Get.textTheme.titleMedium!.copyWith(fontSize: 18, fontWeight: FontWeight.w600),
+                  style: Get.textTheme.titleMedium!
+                      .copyWith(fontSize: 18, fontWeight: FontWeight.w600),
                 ).tr(),
-                Text(helpSupportSubQuestion, style: Get.textTheme.titleMedium!.copyWith(fontSize: 15, color: Colors.grey)),
+                Text(helpSupportSubQuestion,
+                    style: Get.textTheme.titleMedium!
+                        .copyWith(fontSize: 15, color: Colors.grey)),
                 SizedBox(
                   height: 15,
                 ),
                 Text(
                   'Description',
-                  style: Get.textTheme.titleMedium!.copyWith(fontSize: 18, fontWeight: FontWeight.w600),
+                  style: Get.textTheme.titleMedium!
+                      .copyWith(fontSize: 18, fontWeight: FontWeight.w600),
                 ).tr(),
-                Text('Please mention your complete concern here', style: Get.textTheme.titleMedium!.copyWith(fontSize: 13, color: Colors.grey, fontWeight: FontWeight.w300)).tr(),
+                Text('Please mention your complete concern here',
+                        style: Get.textTheme.titleMedium!.copyWith(
+                            fontSize: 13,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w300))
+                    .tr(),
                 TextField(
                   keyboardType: TextInputType.multiline,
                   minLines: 7,
@@ -57,7 +72,8 @@ class CreateTiketScreen extends StatelessWidget {
                   onChanged: (val) {
                     customerSupportController.textLength = val.length;
                     customerSupportController.update();
-                    print('text length : ${customerSupportController.textLength}');
+                    print(
+                        'text length : ${customerSupportController.textLength}');
                   },
                   decoration: InputDecoration(
                     isDense: true,
@@ -80,7 +96,9 @@ class CreateTiketScreen extends StatelessWidget {
                   height: 15,
                   child: Align(
                     alignment: Alignment.bottomRight,
-                    child: Text('${customerSupportController.textLength}/50', style: Get.textTheme.titleMedium!.copyWith(fontSize: 10, color: Colors.grey)),
+                    child: Text('${customerSupportController.textLength}/50',
+                        style: Get.textTheme.titleMedium!
+                            .copyWith(fontSize: 10, color: Colors.grey)),
                   ),
                 )
               ],
@@ -100,19 +118,29 @@ class CreateTiketScreen extends StatelessWidget {
             } else {
               customerSupportController.textLength = 0;
               global.showOnlyLoaderDialog(context);
-              await customerSupportController.createCustomerTickets(subject, helpSupportQuestionId, helpSupportQuestion, helpSupportSubQuestion);
+              await customerSupportController.createCustomerTickets(
+                  subject,
+                  helpSupportQuestionId,
+                  helpSupportQuestion,
+                  helpSupportSubQuestion);
               global.hideLoader();
               Get.to(() => CustomerSupportChat());
             }
           },
           child: Container(
-            color: customerSupportController.textLength < 50 ? Color.fromARGB(255, 196, 191, 191) : Get.theme.primaryColor,
+            color: customerSupportController.textLength < 50
+                ? Color.fromARGB(255, 196, 191, 191)
+                : Get.theme.primaryColor,
             height: 50,
             alignment: Alignment.center,
             width: double.infinity,
             child: Text(
               'Chat with us',
-              style: Get.theme.textTheme.titleMedium!.copyWith(fontSize: 15, fontWeight: FontWeight.w600, letterSpacing: 0, color: Colors.grey),
+              style: Get.theme.textTheme.titleMedium!.copyWith(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 0,
+                  color: Colors.grey),
             ).tr(),
           ),
         );

@@ -1,13 +1,13 @@
 import 'dart:io';
 
-import 'package:AstrowayCustomer/controllers/homeController.dart';
-import 'package:AstrowayCustomer/utils/images.dart';
+import 'package:astromeetCustomer/controllers/homeController.dart';
+import 'package:astromeetCustomer/utils/images.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 class ClientsReviewScreen extends StatelessWidget {
   const ClientsReviewScreen({Key? key}) : super(key: key);
@@ -109,9 +109,8 @@ class ClientsReviewScreen extends StatelessWidget {
                                     child: Text(
                                       // ignore: unnecessary_null_comparison
                                       (homeController
-                                                      .clientReviews[index]
-                                                      .name !=
-                                                  '')
+                                                  .clientReviews[index].name !=
+                                              '')
                                           ? "${homeController.clientReviews[index].name}"
                                           : 'User',
                                       style: Get

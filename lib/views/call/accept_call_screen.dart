@@ -2,11 +2,11 @@
 
 import 'dart:async';
 import 'dart:developer';
-import 'package:AstrowayCustomer/controllers/callController.dart';
-import 'package:AstrowayCustomer/main.dart';
-import 'package:AstrowayCustomer/utils/images.dart';
-import 'package:AstrowayCustomer/views/bottomNavigationBarScreen.dart';
-import 'package:AstrowayCustomer/views/chat/endDialog.dart';
+import 'package:astromeetCustomer/controllers/callController.dart';
+import 'package:astromeetCustomer/main.dart';
+import 'package:astromeetCustomer/utils/images.dart';
+import 'package:astromeetCustomer/views/bottomNavigationBarScreen.dart';
+import 'package:astromeetCustomer/views/chat/endDialog.dart';
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -17,7 +17,7 @@ import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:get/get.dart';
 
 import 'package:permission_handler/permission_handler.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../controllers/bottomNavigationController.dart';

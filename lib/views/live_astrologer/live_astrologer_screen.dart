@@ -3,13 +3,14 @@
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
-import 'package:AstrowayCustomer/controllers/bottomNavigationController.dart';
-import 'package:AstrowayCustomer/controllers/follow_astrologer_controller.dart';
-import 'package:AstrowayCustomer/controllers/gift_controller.dart';
-import 'package:AstrowayCustomer/controllers/liveController.dart';
-import 'package:AstrowayCustomer/controllers/walletController.dart';
-import 'package:AstrowayCustomer/model/messsage_model_live.dart';
-import 'package:AstrowayCustomer/utils/images.dart';
+
+import 'package:astromeetCustomer/controllers/bottomNavigationController.dart';
+import 'package:astromeetCustomer/controllers/follow_astrologer_controller.dart';
+import 'package:astromeetCustomer/controllers/gift_controller.dart';
+import 'package:astromeetCustomer/controllers/liveController.dart';
+import 'package:astromeetCustomer/controllers/walletController.dart';
+import 'package:astromeetCustomer/model/messsage_model_live.dart';
+import 'package:astromeetCustomer/utils/images.dart';
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:agora_rtm/agora_rtm.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -18,16 +19,17 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 import 'package:flutter_countdown_timer/current_remaining_time.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
 import '../../controllers/callController.dart';
 import '../../controllers/chatController.dart';
+
 import '../../controllers/splashController.dart';
 import '../../model/message_model.dart';
 import '../../utils/services/api_helper.dart';
@@ -517,7 +519,7 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
                 children: [
                   Padding(
                     padding: EdgeInsets.only(top: 20),
-                    child: Icon(MdiIcons.alarm,
+                    child: Icon(Icons.alarm,
                         size: 75, color: Get.theme.primaryColor),
                   ),
                   Padding(
@@ -733,22 +735,6 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
                           ),
                           GestureDetector(
                             onTap: () async {
-                              // showDialog(
-                              //     context: context,
-                              //     builder:(BuildContext context){
-                              //       return AlertDialog(
-                              //         backgroundColor: Colors.white,
-                              //         contentPadding: EdgeInsets.zero,
-                              //         content: Container(
-                              //           child: InkWell(
-                              //             onTap: (){
-                              //               Get.back();
-                              //             },
-                              //               child: Text("hello")),
-                              //         )
-                              //       );
-                              //     }
-                              //     );
                               Get.back();
                               double totalCharge = charge2! * time[selectTime];
                               if (totalCharge <= global.user.walletAmount!) {
@@ -785,44 +771,6 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
                               ],
                             ),
                           ),
-                          GestureDetector(
-                            onTap: () async {
-                              Get.back();
-                              double totalCharge = charge2! * time[selectTime];
-                              if (totalCharge <= global.user.walletAmount!) {
-                                await liveController.addToWaitList(
-                                    channel2!,
-                                    "Chat",
-                                    astrologerId2!,
-                                    time[selectTime].toString());
-
-                                global.showToast(
-                                  message: 'you have joined in waitlist',
-                                  textColor: global.textColor,
-                                  bgColor: global.toastBackGoundColor,
-                                );
-                                liveController.isImInWaitList = true;
-                                liveController.update();
-                              } else {
-                                global.showOnlyLoaderDialog(context);
-                                await walletController.getAmount();
-                                global.hideLoader();
-                                openBottomSheetRechrage(
-                                    context, totalCharge, false);
-                              }
-                            },
-                            child: Column(
-                              children: [
-                                callWidget(
-                                  Icons.chat,
-                                  'Chat @${global.getSystemFlagValueForLogin(global.systemFlagNameList.currency)} $charge2/min',
-                                  'consultant on video, you on chat. you may chat anonymously.',
-                                  () {},
-                                ),
-                                const Divider(),
-                              ],
-                            ),
-                          ),
                         ],
                       ),
                     ),
@@ -832,6 +780,7 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
                       top: -50,
                       child: astrologerProfile2 == ""
                           ? CircleAvatar(
+                              backgroundColor: Get.theme.primaryColor,
                               child: Image.asset(
                                 Images.deafultUser,
                                 fit: BoxFit.contain,
@@ -846,6 +795,7 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
                                   "${global.imgBaseurl}$astrologerProfile2",
                               imageBuilder: (context, imageProvider) {
                                 return CircleAvatar(
+                                  backgroundColor: Get.theme.primaryColor,
                                   radius: 40,
                                   child: Image.network(
                                     "${global.imgBaseurl}$astrologerProfile2",
@@ -859,6 +809,7 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
                                   child: CircularProgressIndicator()),
                               errorWidget: (context, url, error) {
                                 return CircleAvatar(
+                                    backgroundColor: Get.theme.primaryColor,
                                     radius: 40,
                                     child: Image.asset(
                                       Images.deafultUser,
@@ -977,16 +928,14 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
             isStartRecordingForAudio = true;
             print('isStartRecordingForAudio $isStartRecordingForAudio');
           });
-          // await callController.getAgoraResourceId(
-          //     widget.channel, global.localLiveUid!);
-          // await callController.getAgoraResourceId2(
-          //     widget.channel, global.localLiveUid2!);
-          // await startRecord();
-          // await startRecord2();
+          await callController.getAgoraResourceId(
+              widget.channel, global.localLiveUid!);
         }
       });
     }
     await liveController.addJoinUsersData(widget.channel);
+    liveController.isStartEndingCall = false;
+    liveController.update();
   }
 
   @override
@@ -1377,9 +1326,24 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
                                                           ),
                                                         ),
                                                         SizedBox(
-                                                          width: 10,
+                                                          width: 2,
                                                         ),
-                                                        SizedBox(
+                                                        Container(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  top: 6,
+                                                                  bottom: 4,
+                                                                  left: 10,
+                                                                  right: 6),
+                                                          decoration: BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          30),
+                                                              color: Colors
+                                                                  .black
+                                                                  .withOpacity(
+                                                                      0.4)),
                                                           width:
                                                               Get.width * 0.55,
                                                           child: Column(
@@ -2006,9 +1970,7 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
                                             false
                                         ? InkWell(
                                             onTap: () {
-                                              // Get.to(() => AgoraDemo2());
                                               joinRequestDialog();
-                                              // liveController.createLiveAstrologerShareLink();
                                             },
                                             child: Container(
                                               padding: const EdgeInsets.all(8),
@@ -2915,7 +2877,6 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
                                                                       const EdgeInsets
                                                                           .all(
                                                                           8),
-                                                                  // margin: const EdgeInsets.only(right: 8),
                                                                   alignment:
                                                                       Alignment
                                                                           .center,
@@ -2949,7 +2910,6 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
                                                                         padding:
                                                                             const EdgeInsets.all(
                                                                                 8),
-                                                                        // margin: const EdgeInsets.only(right: 8),
                                                                         alignment:
                                                                             Alignment
                                                                                 .center,
@@ -2965,7 +2925,6 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
                                                                         padding: const EdgeInsets
                                                                             .all(
                                                                             8),
-                                                                        // margin: const EdgeInsets.only(right: 8),
                                                                         alignment:
                                                                             Alignment.center,
                                                                         decoration: BoxDecoration(
@@ -3014,7 +2973,6 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
                                                                           const EdgeInsets
                                                                               .all(
                                                                               8),
-                                                                      // margin: const EdgeInsets.only(right: 8),
                                                                       alignment:
                                                                           Alignment
                                                                               .center,
@@ -3088,7 +3046,6 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
                                                       padding:
                                                           const EdgeInsets.all(
                                                               8),
-                                                      // margin: const EdgeInsets.only(right: 8),
                                                       alignment:
                                                           Alignment.center,
                                                       decoration: BoxDecoration(
@@ -3117,7 +3074,6 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
                                                             padding:
                                                                 const EdgeInsets
                                                                     .all(8),
-                                                            // margin: const EdgeInsets.only(right: 8),
                                                             alignment: Alignment
                                                                 .center,
                                                             decoration: BoxDecoration(
@@ -3141,7 +3097,6 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
                                                             padding:
                                                                 const EdgeInsets
                                                                     .all(8),
-                                                            // margin: const EdgeInsets.only(right: 8),
                                                             alignment: Alignment
                                                                 .center,
                                                             decoration: BoxDecoration(
@@ -3519,27 +3474,17 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
             .deleteFromWaitList(liveController.waitList[index5].id);
       }
       if (global.user.walletAmount! > 0) {
-        await liveController.cutPaymentForLive(
-            global.user.id!,
-            liveController.totalCompletedTime,
-            astrologerId2!,
-            widget.requesType!,
-            "",
-            sId1: global.agoraSid1,
-            sId2: global.agoraSid2,
-            channelName: channel2);
-        print("Going to call stopRecording");
-        if (liveController.callId != null) {
-          int? callId;
-          print('in if stop recording condition');
-
-          callId = liveController.callId;
-          print('second call id:- $callId');
-
-          // await stopRecord(callId!);
-          // await stopRecord2(callId);
+        if (liveController.isStartEndingCall == false) {
+          await liveController.cutPaymentForLive(
+              global.user.id!,
+              liveController.totalCompletedTime,
+              astrologerId2!,
+              widget.requesType!,
+              "",
+              sId1: global.agoraSid1,
+              sId2: global.agoraSid2,
+              channelName: channel2);
         }
-        print("After call recording started");
       }
       timer!.cancel();
       timer2!.cancel();
@@ -3570,15 +3515,6 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
             sId1: global.agoraSid1,
             sId2: global.agoraSid2,
             channelName: channel2);
-      }
-      print('chat caiiId ${liveController.callId}');
-      if (liveController.callId != null) {
-        int? callId;
-
-        callId = liveController.callId;
-
-        // await stopRecord(liveController.callId!);
-        // await stopRecord2(callId!);
       }
     }
     if (isHostJoinAsAudio == false) {
@@ -3632,22 +3568,16 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
               .deleteFromWaitList(liveController.waitList[index5].id);
         }
         if (global.user.walletAmount! > 0) {
-          await liveController.cutPaymentForLive(
-              global.user.id!,
-              liveController.totalCompletedTime,
-              astrologerId2!,
-              widget.requesType!,
-              "",
-              sId1: global.agoraSid1,
-              sId2: global.agoraSid2,
-              channelName: channel2);
-          if (liveController.callId != null) {
-            int? callId;
-
-            callId = liveController.callId;
-
-            // await stopRecord(liveController.callId!);
-            // await stopRecord2(callId!);
+          if (liveController.isStartEndingCall == false) {
+            await liveController.cutPaymentForLive(
+                global.user.id!,
+                liveController.totalCompletedTime,
+                astrologerId2!,
+                widget.requesType!,
+                "",
+                sId1: global.agoraSid1,
+                sId2: global.agoraSid2,
+                channelName: channel2);
           }
         }
         timer!.cancel();
@@ -3677,14 +3607,6 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
               sId1: global.agoraSid1,
               channelName: channel2,
               sId2: global.agoraSid2);
-        }
-        if (liveController.callId != null) {
-          int? callId;
-
-          callId = liveController.callId;
-
-          // await stopRecord(liveController.callId!);
-          // await stopRecord2(callId!);
         }
       }
       if (isHostJoinAsAudio == false) {
@@ -3887,6 +3809,7 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
           Expanded(
             flex: 1,
             child: CircleAvatar(
+              backgroundColor: Get.theme.primaryColor,
               child: Icon(icon),
             ),
           ),
@@ -3935,32 +3858,6 @@ class _LiveAstrologerScreenState extends State<LiveAstrologerScreen> {
         ],
       ),
     );
-  }
-
-  // Future startRecord() async {
-  //   CallController callController = Get.find<CallController>();
-  //   await callController.agoraStartRecording(
-  //       widget.channel, global.localLiveUid!, widget.token);
-  // }
-
-  // Future startRecord2() async {
-  //   CallController callController = Get.find<CallController>();
-  //   await callController.agoraStartRecording2(
-  //       widget.channel, global.localLiveUid2!, widget.token);
-  // }
-
-  // Future stopRecord(int callId) async {
-  //   CallController callController = Get.find<CallController>();
-  //   print('stop1 audio recording in live astrologer');
-  //   await callController.agoraStopRecording(
-  //       callId, widget.channel, global.localLiveUid!);
-  // }
-
-  Future stopRecord2(int callId) async {
-    CallController callController = Get.find<CallController>();
-    print('stop2 audio recording in live astrologer');
-    await callController.agoraStopRecording2(
-        callId, widget.channel, global.localLiveUid2!);
   }
 
   firebaseChatinit() async {

@@ -2,20 +2,21 @@
 
 import 'dart:io';
 
-import 'package:AstrowayCustomer/controllers/loginController.dart';
+import 'package:astromeetCustomer/controllers/loginController.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 import 'package:pin_input_text_field/pin_input_text_field.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class VerifyPhoneScreen extends StatelessWidget {
   final String phoneNumber;
-  VerifyPhoneScreen(
-      {Key? key, required this.phoneNumber,})
-      : super(key: key);
+  VerifyPhoneScreen({
+    Key? key,
+    required this.phoneNumber,
+  }) : super(key: key);
   final LoginController loginController = Get.find<LoginController>();
   // final FirebaseAuth auth = FirebaseAuth.instance;
   final pinEditingControllerlogin = TextEditingController(text: '');
@@ -23,7 +24,7 @@ class VerifyPhoneScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        loginController.maxSecond=61;
+        loginController.maxSecond = 61;
         loginController.time!.cancel();
         loginController.update();
         return true;
@@ -31,30 +32,30 @@ class VerifyPhoneScreen extends StatelessWidget {
       child: Scaffold(
         appBar: kIsWeb
             ? AppBar(
-          leading: SizedBox(),
-          backgroundColor: Color.fromARGB(255, 245, 235, 235),
-        )
+                leading: SizedBox(),
+                backgroundColor: Color.fromARGB(255, 245, 235, 235),
+              )
             : AppBar(
-          elevation: 1,
-          backgroundColor: Color.fromARGB(255, 245, 235, 235),
-          title: Text(
-            'Verify Phone',
-            style: Get.textTheme.titleMedium,
-          ).tr(),
-          leading: IconButton(
-              onPressed: () {
-                Get.delete<LoginController>(force: true);
-                Get.back();
-              },
-              icon: Icon(
-                kIsWeb
-                    ? Icons.arrow_back
-                    : Platform.isIOS
-                    ? Icons.arrow_back_ios
-                    : Icons.arrow_back,
-                color: Colors.black,
-              )),
-        ),
+                elevation: 1,
+                backgroundColor: Color.fromARGB(255, 245, 235, 235),
+                title: Text(
+                  'Verify Phone',
+                  style: Get.textTheme.titleMedium,
+                ).tr(),
+                leading: IconButton(
+                    onPressed: () {
+                      Get.delete<LoginController>(force: true);
+                      Get.back();
+                    },
+                    icon: Icon(
+                      kIsWeb
+                          ? Icons.arrow_back
+                          : Platform.isIOS
+                              ? Icons.arrow_back_ios
+                              : Icons.arrow_back,
+                      color: Colors.black,
+                    )),
+              ),
         backgroundColor: Color.fromARGB(255, 245, 235, 235),
         body: Center(
           child: SizedBox(
@@ -129,7 +130,8 @@ class VerifyPhoneScreen extends StatelessWidget {
                           arg["countryCode"] = "+91";
                           arg["otp"] = "${loginController.smsCode}";
                           global.showOnlyLoaderDialog(context);
-                          loginController.otplessFlutterPlugin.startHeadless(loginController.onHeadlessResultVerify, arg);
+                          loginController.otplessFlutterPlugin.startHeadless(
+                              loginController.onHeadlessResultVerify, arg);
                           // PhoneAuthCredential credential =
                           // PhoneAuthProvider.credential(
                           //   verificationId: verificationId,
@@ -162,13 +164,12 @@ class VerifyPhoneScreen extends StatelessWidget {
                         ),
                         padding: MaterialStateProperty.all(EdgeInsets.all(12)),
                         backgroundColor:
-                        MaterialStateProperty.all(Get.theme.primaryColor),
+                            MaterialStateProperty.all(Get.theme.primaryColor),
                         textStyle: MaterialStateProperty.all(
                             TextStyle(fontSize: 18, color: Colors.black)),
                       ),
                     );
-                  }
-                  ),
+                  }),
                 ),
                 SizedBox(
                   height: 15,
@@ -177,77 +178,79 @@ class VerifyPhoneScreen extends StatelessWidget {
                   return SizedBox(
                       child: loginController.maxSecond != 0
                           ? Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: kIsWeb
-                            ? MainAxisAlignment.center
-                            : MainAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: 15,
-                          ),
-                            Text(
-                            'Resend OTP Available in ${loginController.maxSecond} s',
-                            style: TextStyle(
-                                color: Colors.green,
-                                fontWeight: FontWeight.w500),
-                          ).tr()
-                        ],
-                      )
-                          : Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: kIsWeb
-                              ? CrossAxisAlignment.center
-                              : CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Resend OTP Available',
-                              style: TextStyle(
-                                  color: Colors.green,
-                                  fontWeight: FontWeight.w500),
-                            ).tr(),
-                            Row(
-                              mainAxisAlignment:
-                              MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: kIsWeb
+                                  ? MainAxisAlignment.center
+                                  : MainAxisAlignment.start,
                               children: [
-                                ElevatedButton(
-                                  onPressed: () {
-                                    loginController.maxSecond = 60;
-                                    // loginController.second = 0;
-                                    loginController.update();
-                                    loginController.timer();
-                                    loginController.phoneController.text =
-                                        phoneNumber;
-                                    global.showOnlyLoaderDialog(context);
-                                    loginController.startHeadlessWithWhatsapp('phone');
-                                  },
-                                  child: Text(
-                                    'Resend OTP on SMS',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w500),
-                                  ).tr(),
-                                  style: ButtonStyle(
-                                    shape: MaterialStateProperty.all(
-                                      RoundedRectangleBorder(
-                                        borderRadius:
-                                        BorderRadius.circular(10),
-                                      ),
-                                    ),
-                                    padding: MaterialStateProperty.all(
-                                        EdgeInsets.only(
-                                            left: 25, right: 25)),
-                                    backgroundColor:
-                                    MaterialStateProperty.all(
-                                        Get.theme.primaryColor),
-                                    textStyle: MaterialStateProperty.all(
-                                        TextStyle(
-                                            fontSize: 12,
-                                            color: Colors.black)),
-                                  ),
+                                SizedBox(
+                                  width: 15,
                                 ),
+                                Text(
+                                  'Resend OTP Available in ${loginController.maxSecond} s',
+                                  style: TextStyle(
+                                      color: Colors.green,
+                                      fontWeight: FontWeight.w500),
+                                ).tr()
                               ],
                             )
-                          ]));
+                          : Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: kIsWeb
+                                  ? CrossAxisAlignment.center
+                                  : CrossAxisAlignment.start,
+                              children: [
+                                  Text(
+                                    'Resend OTP Available',
+                                    style: TextStyle(
+                                        color: Colors.green,
+                                        fontWeight: FontWeight.w500),
+                                  ).tr(),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          loginController.maxSecond = 60;
+                                          // loginController.second = 0;
+                                          loginController.update();
+                                          loginController.timer();
+                                          loginController.phoneController.text =
+                                              phoneNumber;
+                                          global.showOnlyLoaderDialog(context);
+                                          loginController
+                                              .startHeadlessWithWhatsapp(
+                                                  'phone');
+                                        },
+                                        child: Text(
+                                          'Resend OTP on SMS',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w500),
+                                        ).tr(),
+                                        style: ButtonStyle(
+                                          shape: MaterialStateProperty.all(
+                                            RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                          padding: MaterialStateProperty.all(
+                                              EdgeInsets.only(
+                                                  left: 25, right: 25)),
+                                          backgroundColor:
+                                              MaterialStateProperty.all(
+                                                  Get.theme.primaryColor),
+                                          textStyle: MaterialStateProperty.all(
+                                              TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.black)),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ]));
                 })
               ],
             ),

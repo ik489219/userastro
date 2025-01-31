@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print, use_build_context_synchronously
 
-import 'package:AstrowayCustomer/views/placeOfBrithSearchScreen.dart';
+import 'package:astromeetCustomer/views/placeOfBrithSearchScreen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -82,7 +82,7 @@ class NewMatchingScreen extends StatelessWidget {
                             padding: const EdgeInsets.only(bottom: 8.0),
                             child: CommonSmallTextFieldWidget(
                               controller:
-                              kundliMatchingController.cBoysBirthPlace,
+                                  kundliMatchingController.cBoysBirthPlace,
                               titleText: "Birth Place",
                               hintText: "Select Your Birth Place",
                               readOnly: true,
@@ -91,8 +91,8 @@ class NewMatchingScreen extends StatelessWidget {
                               onFieldSubmitted: (p0) {},
                               onTap: () {
                                 Get.to(() => PlaceOfBirthSearchScreen(
-                                  flagId: 1,
-                                ));
+                                      flagId: 1,
+                                    ));
                               },
                             ),
                           ),
@@ -158,7 +158,7 @@ class NewMatchingScreen extends StatelessWidget {
                             padding: const EdgeInsets.only(bottom: 8.0),
                             child: CommonSmallTextFieldWidget(
                               controller:
-                              kundliMatchingController.cGirlBirthPlace,
+                                  kundliMatchingController.cGirlBirthPlace,
                               titleText: "Birth Place",
                               hintText: "Select Your Birth Place",
                               readOnly: true,
@@ -167,8 +167,8 @@ class NewMatchingScreen extends StatelessWidget {
                               onFieldSubmitted: (p0) {},
                               onTap: () {
                                 Get.to(() => PlaceOfBirthSearchScreen(
-                                  flagId: 2,
-                                ));
+                                      flagId: 2,
+                                    ));
                               },
                             ),
                           ),
@@ -194,7 +194,7 @@ class NewMatchingScreen extends StatelessWidget {
           data: ThemeData(
             textButtonTheme: TextButtonThemeData(
               style:
-              TextButton.styleFrom(foregroundColor: Get.theme.primaryColor),
+                  TextButton.styleFrom(foregroundColor: Get.theme.primaryColor),
             ),
             colorScheme: ColorScheme.light(
               primary: Get.theme.primaryColor,
@@ -237,7 +237,7 @@ class NewMatchingScreen extends StatelessWidget {
           data: ThemeData(
             textButtonTheme: TextButtonThemeData(
               style:
-              TextButton.styleFrom(foregroundColor: Get.theme.primaryColor),
+                  TextButton.styleFrom(foregroundColor: Get.theme.primaryColor),
             ),
             colorScheme: ColorScheme.light(
               primary: Get.theme.primaryColor,
@@ -279,7 +279,7 @@ class NewMatchingScreen extends StatelessWidget {
           data: ThemeData(
             textButtonTheme: TextButtonThemeData(
               style:
-              TextButton.styleFrom(foregroundColor: Get.theme.primaryColor),
+                  TextButton.styleFrom(foregroundColor: Get.theme.primaryColor),
             ),
             colorScheme: ColorScheme.light(
               primary: Get.theme.primaryColor,
@@ -322,7 +322,7 @@ class NewMatchingScreen extends StatelessWidget {
           data: ThemeData(
             textButtonTheme: TextButtonThemeData(
               style:
-              TextButton.styleFrom(foregroundColor: Get.theme.primaryColor),
+                  TextButton.styleFrom(foregroundColor: Get.theme.primaryColor),
             ),
             colorScheme: ColorScheme.light(
               primary: Get.theme.primaryColor,

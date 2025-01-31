@@ -2,9 +2,9 @@
 
 import 'dart:io';
 
-import 'package:AstrowayCustomer/controllers/bottomNavigationController.dart';
-import 'package:AstrowayCustomer/theme/nativeTheme.dart';
-import 'package:AstrowayCustomer/views/bottomNavigationBarScreen.dart';
+import 'package:astromeetCustomer/controllers/bottomNavigationController.dart';
+import 'package:astromeetCustomer/theme/nativeTheme.dart';
+import 'package:astromeetCustomer/views/bottomNavigationBarScreen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

@@ -1,8 +1,8 @@
-import 'package:AstrowayCustomer/model/reviewModel.dart';
-import 'package:AstrowayCustomer/utils/services/api_helper.dart';
+import 'package:astromeetCustomer/model/reviewModel.dart';
+import 'package:astromeetCustomer/utils/services/api_helper.dart';
 
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 import 'package:url_launcher/url_launcher.dart';
 
 class ReviewController extends GetxController {
@@ -61,11 +61,14 @@ class ReviewController extends GetxController {
     }
   }
 
-  Future<dynamic> blockAstrologerReview(int id, int? isBlocked, int? isReported) async {
+  Future<dynamic> blockAstrologerReview(
+      int id, int? isBlocked, int? isReported) async {
     try {
       await global.checkBody().then((result) async {
         if (result) {
-          await apiHelper.blockAstrologerProfileReview(id, isBlocked, isReported).then((result) async {
+          await apiHelper
+              .blockAstrologerProfileReview(id, isBlocked, isReported)
+              .then((result) async {
             if (result.status == "200") {
               if (astrologerId != null) {
                 await getReviewData(astrologerId!);

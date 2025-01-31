@@ -1,8 +1,8 @@
-import 'package:AstrowayCustomer/model/assistant_model.dart';
-import 'package:AstrowayCustomer/utils/services/api_helper.dart';
+import 'package:astromeetCustomer/model/assistant_model.dart';
+import 'package:astromeetCustomer/utils/services/api_helper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 import '../model/chat_message_model.dart';
 
@@ -12,14 +12,17 @@ class AstrologerAssistantController extends GetxController {
   var assistantList = <AssistantModel>[];
   List<String> lastMessage = [];
   List<dynamic> lastMessageTime = [];
-  CollectionReference userChatCollectionRef = FirebaseFirestore.instance.collection("assistantchats");
+  CollectionReference userChatCollectionRef =
+      FirebaseFirestore.instance.collection("assistantchats");
 
   storeChatId(int partnerId) async {
     try {
       await global.checkBody().then(
         (result) async {
           if (result) {
-            await apiHelper.storeAssistantFirebaseChatId(global.user.id!, partnerId).then(
+            await apiHelper
+                .storeAssistantFirebaseChatId(global.user.id!, partnerId)
+                .then(
               (result) {
                 if (result.status == "200") {
                   firebaseChatId = result.recordList['recordList'];
@@ -27,7 +30,8 @@ class AstrologerAssistantController extends GetxController {
                   print('chat id genrated:- $firebaseChatId');
                 } else {
                   global.showToast(
-                    message: '${result.status} problem to store firebase chat id',
+                    message:
+                        '${result.status} problem to store firebase chat id',
                     textColor: global.textColor,
                     bgColor: global.toastBackGoundColor,
                   );
@@ -44,10 +48,17 @@ class AstrologerAssistantController extends GetxController {
   }
 
   bool isMe = true;
-  Stream<QuerySnapshot<Map<String, dynamic>>>? getChatMessages(String firebaseChatId, int? currentUserId) {
+  Stream<QuerySnapshot<Map<String, dynamic>>>? getChatMessages(
+      String firebaseChatId, int? currentUserId) {
     try {
-      Stream<QuerySnapshot<Map<String, dynamic>>> data = FirebaseFirestore.instance.collection('assistantchats/$firebaseChatId/userschat').doc('$currentUserId').collection('messages').orderBy("createdAt", descending: true).snapshots();
-       return data;
+      Stream<QuerySnapshot<Map<String, dynamic>>> data = FirebaseFirestore
+          .instance
+          .collection('assistantchats/$firebaseChatId/userschat')
+          .doc('$currentUserId')
+          .collection('messages')
+          .orderBy("createdAt", descending: true)
+          .snapshots();
+      return data;
     } catch (err) {
       print("Exception -  getChatMessages()" + err.toString());
       return null;
@@ -74,29 +85,52 @@ class AstrologerAssistantController extends GetxController {
     }
   }
 
-  Future uploadMessage(String idUser, String partnerId, ChatMessageModel anonymous) async {
+  Future uploadMessage(
+      String idUser, String partnerId, ChatMessageModel anonymous) async {
     try {
       final String globalId = global.currentUserId.toString();
-      final refMessages = userChatCollectionRef.doc(idUser).collection('userschat').doc(globalId).collection('messages');
-      final refMessages1 = userChatCollectionRef.doc(idUser).collection('userschat').doc(partnerId).collection('messages');
+      final refMessages = userChatCollectionRef
+          .doc(idUser)
+          .collection('userschat')
+          .doc(globalId)
+          .collection('messages');
+      final refMessages1 = userChatCollectionRef
+          .doc(idUser)
+          .collection('userschat')
+          .doc(partnerId)
+          .collection('messages');
       final newMessage1 = anonymous;
 
       final newMessage2 = anonymous;
       newMessage2.messageId = refMessages1.id;
 
-      var messageResult = await refMessages.add(newMessage1.toJson()).catchError((e) {
+      var messageResult =
+          await refMessages.add(newMessage1.toJson()).catchError((e) {
         print('send mess exception' + e);
         return e;
       });
       newMessage1.messageId = messageResult.id;
-      await userChatCollectionRef.doc(idUser).collection('userschat').doc(globalId).collection('messages').doc(newMessage1.messageId).update({"messageId": newMessage1.messageId});
+      await userChatCollectionRef
+          .doc(idUser)
+          .collection('userschat')
+          .doc(globalId)
+          .collection('messages')
+          .doc(newMessage1.messageId)
+          .update({"messageId": newMessage1.messageId});
 
       newMessage2.isRead = false;
-      var message1Result = await refMessages1.add(newMessage2.toJson()).catchError((e) {
+      var message1Result =
+          await refMessages1.add(newMessage2.toJson()).catchError((e) {
         print('send mess exception' + e);
         return e;
       });
-      await userChatCollectionRef.doc(idUser).collection('userschat').doc(partnerId).collection('messages').doc(newMessage1.messageId).update({"messageId": newMessage1.messageId});
+      await userChatCollectionRef
+          .doc(idUser)
+          .collection('userschat')
+          .doc(partnerId)
+          .collection('messages')
+          .doc(newMessage1.messageId)
+          .update({"messageId": newMessage1.messageId});
       return {
         'user1': messageResult.id,
         'user2': message1Result.id,
@@ -109,7 +143,18 @@ class AstrologerAssistantController extends GetxController {
 
   Future<ChatMessageModel?> getLastMessages({String? chatId}) async {
     try {
-      Stream<List<ChatMessageModel>> m = FirebaseFirestore.instance.collection('assistantchats').doc(chatId).collection('userschat').doc(global.user.id.toString()).collection('messages').orderBy("createdAt", descending: true).limit(1).snapshots().map((reviews) => reviews.docs.map((review) => ChatMessageModel.fromJson(review.data())).toList());
+      Stream<List<ChatMessageModel>> m = FirebaseFirestore.instance
+          .collection('assistantchats')
+          .doc(chatId)
+          .collection('userschat')
+          .doc(global.user.id.toString())
+          .collection('messages')
+          .orderBy("createdAt", descending: true)
+          .limit(1)
+          .snapshots()
+          .map((reviews) => reviews.docs
+              .map((review) => ChatMessageModel.fromJson(review.data()))
+              .toList());
       print(m.length);
       List<ChatMessageModel> mm = await m.first;
       return mm.isNotEmpty
@@ -135,7 +180,8 @@ class AstrologerAssistantController extends GetxController {
                 if (result.status == "200") {
                   assistantList = result.recordList;
                   for (int i = 0; i < assistantList.length; i++) {
-                    getLastMessages(chatId: assistantList[i].chatId).then((value) {
+                    getLastMessages(chatId: assistantList[i].chatId)
+                        .then((value) {
                       print('message :- ${value!.message}');
                       print('time ${value.createdAt}');
                       assistantList[i].lastMessage = value.message;
@@ -147,7 +193,8 @@ class AstrologerAssistantController extends GetxController {
                   print('get assistant chat history:- ${result.recordList}');
                 } else {
                   global.showToast(
-                    message: '${result.status} problem to get assistant chat history',
+                    message:
+                        '${result.status} problem to get assistant chat history',
                     textColor: global.textColor,
                     bgColor: global.toastBackGoundColor,
                   );
@@ -179,7 +226,8 @@ class AstrologerAssistantController extends GetxController {
                   print('paid session or not:- $isPaidSession');
                 } else {
                   global.showToast(
-                    message: '${result.status} problem to get assistant chat history',
+                    message:
+                        '${result.status} problem to get assistant chat history',
                     textColor: global.textColor,
                     bgColor: global.toastBackGoundColor,
                   );
@@ -199,7 +247,9 @@ class AstrologerAssistantController extends GetxController {
     try {
       await global.checkBody().then((result) async {
         if (result) {
-          await apiHelper.blockAstrologerAssistant(assistantId).then((result) async {
+          await apiHelper
+              .blockAstrologerAssistant(assistantId)
+              .then((result) async {
             if (result.status == "200") {
               global.showToast(
                 message: 'Assistant Block Successfully',

@@ -1,26 +1,25 @@
 // ignore_for_file: must_be_immutable, deprecated_member_use
 
-
-import 'package:AstrowayCustomer/controllers/IntakeController.dart';
-import 'package:AstrowayCustomer/controllers/astromallController.dart';
-import 'package:AstrowayCustomer/controllers/callController.dart';
-import 'package:AstrowayCustomer/controllers/chatController.dart';
-import 'package:AstrowayCustomer/controllers/history_controller.dart';
-import 'package:AstrowayCustomer/controllers/reviewController.dart';
-import 'package:AstrowayCustomer/controllers/splashController.dart';
-import 'package:AstrowayCustomer/utils/images.dart';
-import 'package:AstrowayCustomer/views/addMoneyToWallet.dart';
-import 'package:AstrowayCustomer/views/call/call_history_detail_screen.dart';
-import 'package:AstrowayCustomer/views/chat/chat_screen.dart';
-import 'package:AstrowayCustomer/views/view_report.dart';
-import 'package:AstrowayCustomer/widget/customAppbarWidget.dart';
-import 'package:AstrowayCustomer/widget/drawerWidget.dart';
-import 'package:AstrowayCustomer/widget/recommendedAstrologerWidget.dart';
+import 'package:astromeetCustomer/controllers/IntakeController.dart';
+import 'package:astromeetCustomer/controllers/astromallController.dart';
+import 'package:astromeetCustomer/controllers/callController.dart';
+import 'package:astromeetCustomer/controllers/chatController.dart';
+import 'package:astromeetCustomer/controllers/history_controller.dart';
+import 'package:astromeetCustomer/controllers/reviewController.dart';
+import 'package:astromeetCustomer/controllers/splashController.dart';
+import 'package:astromeetCustomer/utils/images.dart';
+import 'package:astromeetCustomer/views/addMoneyToWallet.dart';
+import 'package:astromeetCustomer/views/call/call_history_detail_screen.dart';
+import 'package:astromeetCustomer/views/chat/chat_screen.dart';
+import 'package:astromeetCustomer/views/view_report.dart';
+import 'package:astromeetCustomer/widget/customAppbarWidget.dart';
+import 'package:astromeetCustomer/widget/drawerWidget.dart';
+import 'package:astromeetCustomer/widget/recommendedAstrologerWidget.dart';
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -205,7 +204,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
                             RecommendedAstrologerWidget(astrologerList: []),
                           );
                         }
-
                       }
 
                       global.showOnlyLoaderDialog(Get.context);
@@ -317,9 +315,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                                 ),
                                               ),
                                             ),
-                                            onPressed: ()async {
-                                              global.showOnlyLoaderDialog(context);
-                                              await walletcontroller.getAmount();
+                                            onPressed: () async {
+                                              global.showOnlyLoaderDialog(
+                                                  context);
+                                              await walletcontroller
+                                                  .getAmount();
                                               global.hideLoader();
                                               Get.to(() => AddmoneyToWallet());
                                             },
@@ -334,7 +334,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                           ),
                                         ),
                                       ],
-
                                     );
                                   }),
                                   SizedBox(height: 15),
@@ -453,11 +452,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                                                                         ? 'Send ${historyController.walletTransactionList[i].transactionType} to ${historyController.walletTransactionList[i].name}'
                                                                                         : historyController.walletTransactionList[i].transactionType == 'Report'
                                                                                             ? 'Report Request to ${historyController.walletTransactionList[i].name}'
-                                                                                            :historyController.walletTransactionList[i].transactionType == 'KundliView'?
-                                                                                '${historyController.walletTransactionList[i].transactionType}':
-                                                                                historyController.walletTransactionList[i].transactionType == "Cashback"?
-                                                                                    "${historyController.walletTransactionList[i].transactionType}":
-                                                                                '${historyController.walletTransactionList[i].transactionType} with ${historyController.walletTransactionList[i].name} for ${historyController.walletTransactionList[i].totalMin} minutes',
+                                                                                            : historyController.walletTransactionList[i].transactionType == 'KundliView'
+                                                                                                ? '${historyController.walletTransactionList[i].transactionType}'
+                                                                                                : historyController.walletTransactionList[i].transactionType == "Cashback"
+                                                                                                    ? "${historyController.walletTransactionList[i].transactionType}"
+                                                                                                    : '${historyController.walletTransactionList[i].transactionType} with ${historyController.walletTransactionList[i].name} for ${historyController.walletTransactionList[i].totalMin} minutes',
                                                                                 style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
                                                                               ).tr(),
                                                                             ),
@@ -710,8 +709,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                                                               .profileImage ??
                                                                           "",
                                                                   index: index,
-                                                                  callType:historyController
-                                                                      .callHistoryList[index]
+                                                                  callType: historyController
+                                                                      .callHistoryList[
+                                                                          index]
                                                                       .callType,
                                                                 ));
                                                           },
@@ -1325,32 +1325,27 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                                                                   children: [
                                                                                     historyController.astroMallHistoryList[inx].orderStatus == 'Pending' || historyController.astroMallHistoryList[inx].orderStatus == "Confirmed"
                                                                                         ? ElevatedButton(
-                                                                                        onPressed: () async {
-                                                                                          global.showOnlyLoaderDialog(context);
-                                                                                          await historyController.cancleOrder(historyController.astroMallHistoryList[inx].id!);
-                                                                                          global.hideLoader();
-                                                                                        },
-                                                                                        child: Text(
-                                                                                          "Cancel Order",
-                                                                                          style: TextStyle(color: Colors.white),
-                                                                                        ).tr())
+                                                                                            onPressed: () async {
+                                                                                              global.showOnlyLoaderDialog(context);
+                                                                                              await historyController.cancleOrder(historyController.astroMallHistoryList[inx].id!);
+                                                                                              global.hideLoader();
+                                                                                            },
+                                                                                            child: Text(
+                                                                                              "Cancel Order",
+                                                                                              style: TextStyle(color: Colors.white),
+                                                                                            ).tr())
                                                                                         : const SizedBox(),
                                                                                     InkWell(
-                                                                                      onTap: ()async{
-                                                                                        if(await canLaunch("${historyController.astroMallHistoryList[inx].invoice_link}"))
-                                                                                          {
-                                                                                               await launchUrl(Uri.parse("${historyController.astroMallHistoryList[inx].invoice_link}"));
-                                                                                          }
-                                                                                        else
-                                                                                          {
+                                                                                        onTap: () async {
+                                                                                          if (await canLaunch("${historyController.astroMallHistoryList[inx].invoice_link}")) {
+                                                                                            await launchUrl(Uri.parse("${historyController.astroMallHistoryList[inx].invoice_link}"));
+                                                                                          } else {
                                                                                             print("error in laucnhing url");
                                                                                           }
-
-                                                                                      },
+                                                                                        },
                                                                                         child: Icon(Icons.download))
                                                                                   ],
                                                                                 )
-
                                                                               ],
                                                                             ),
                                                                             Column(children: [
@@ -1438,8 +1433,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                                       ),
                                                     )
                                             ]);
-                                          }
-                                          )
+                                          })
                                         : callController.tabController!.index ==
                                                 4
                                             ? GetBuilder<HistoryController>(

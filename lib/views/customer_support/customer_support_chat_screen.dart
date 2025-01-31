@@ -2,16 +2,16 @@
 
 import 'dart:io';
 
-import 'package:AstrowayCustomer/controllers/customer_support_controller.dart';
-import 'package:AstrowayCustomer/model/chat_message_model.dart';
-import 'package:AstrowayCustomer/utils/images.dart';
+import 'package:astromeetCustomer/controllers/customer_support_controller.dart';
+import 'package:astromeetCustomer/model/chat_message_model.dart';
+import 'package:astromeetCustomer/utils/images.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ignore: must_be_immutable

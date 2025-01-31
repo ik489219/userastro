@@ -2,13 +2,13 @@
 
 import 'dart:developer';
 
-import 'package:AstrowayCustomer/controllers/liveController.dart';
-import 'package:AstrowayCustomer/controllers/splashController.dart';
-import 'package:AstrowayCustomer/model/astrologer_model.dart';
-import 'package:AstrowayCustomer/model/kundli_model.dart';
-import 'package:AstrowayCustomer/model/live_asrtrologer_model.dart';
-import 'package:AstrowayCustomer/utils/services/api_helper.dart';
-import 'package:AstrowayCustomer/views/chatScreen.dart';
+import 'package:astromeetCustomer/controllers/liveController.dart';
+import 'package:astromeetCustomer/controllers/splashController.dart';
+import 'package:astromeetCustomer/model/astrologer_model.dart';
+import 'package:astromeetCustomer/model/kundli_model.dart';
+import 'package:astromeetCustomer/model/live_asrtrologer_model.dart';
+import 'package:astromeetCustomer/utils/services/api_helper.dart';
+import 'package:astromeetCustomer/views/chatScreen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -82,7 +82,9 @@ class BottomNavigationController extends GetxController {
         HomeScreen(userDetails: userModel),
         ChatScreen(),
         LiveAstrologerListScreen(isFromBottom: true),
-        CallScreen(flag: 0,),
+        CallScreen(
+          flag: 0,
+        ),
         HistoryScreen(
           currentIndex: historyIndex,
         ),
@@ -330,7 +332,12 @@ class BottomNavigationController extends GetxController {
   // }
 
   Future<void> dialogForJoinInWaitList(
-      context, String astrologerName, bool forChat,String status,String astroProfile,) async {
+    context,
+    String astrologerName,
+    bool forChat,
+    String status,
+    String astroProfile,
+  ) async {
     showDialog(
         context: context,
         builder: (context) {
@@ -344,8 +351,7 @@ class BottomNavigationController extends GetxController {
                   height: 50,
                   width: 50,
                   fit: BoxFit.cover,
-                  imageUrl:
-                  "${global.imgBaseurl}${astroProfile}",
+                  imageUrl: "${global.imgBaseurl}${astroProfile}",
                   imageBuilder: (context, imageProvider) {
                     return CircleAvatar(
                       radius: 35,
@@ -354,7 +360,7 @@ class BottomNavigationController extends GetxController {
                     );
                   },
                   placeholder: (context, url) =>
-                  const Center(child: CircularProgressIndicator()),
+                      const Center(child: CircularProgressIndicator()),
                   errorWidget: (context, url, error) {
                     return Container(
                       child: CircleAvatar(
@@ -388,8 +394,11 @@ class BottomNavigationController extends GetxController {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Text(
-                  status.toString()=="Offline"? 'You can not talk to astrologer because astrologer is Currently Offline':(status.toString()=="Busy"?
-                  'You can not talk to astrologer because astrologer is Currently Busy':"You can not talk to astrologer because astrologer is Currently in Break"),
+                  status.toString() == "Offline"
+                      ? 'You can not talk to astrologer because astrologer is Currently Offline'
+                      : (status.toString() == "Busy"
+                          ? 'You can not talk to astrologer because astrologer is Currently Busy'
+                          : "You can not talk to astrologer because astrologer is Currently in Break"),
                   style: TextStyle(
                     color: Colors.red,
                     fontSize: 15.sp,
@@ -578,7 +587,6 @@ class BottomNavigationController extends GetxController {
           );
         });
   }
-
 
   Future<void> dialogForNotCreatingSession(context) async {
     showDialog(
@@ -994,7 +1002,6 @@ class BottomNavigationController extends GetxController {
       print("Exception in getAstrologerbyId :-" + e.toString());
     }
   }
-
 
   Future<dynamic> astrologerReportAndBlock(int astrologerId) async {
     try {

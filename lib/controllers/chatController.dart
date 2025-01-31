@@ -3,16 +3,16 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:AstrowayCustomer/model/astrologerCategoryModel.dart';
-import 'package:AstrowayCustomer/model/astrologer_model.dart';
-import 'package:AstrowayCustomer/model/reviewModel.dart';
-import 'package:AstrowayCustomer/utils/services/api_helper.dart';
+import 'package:astromeetCustomer/model/astrologerCategoryModel.dart';
+import 'package:astromeetCustomer/model/astrologer_model.dart';
+import 'package:astromeetCustomer/model/reviewModel.dart';
+import 'package:astromeetCustomer/utils/services/api_helper.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../model/message_model.dart';

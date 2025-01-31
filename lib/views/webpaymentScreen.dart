@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'dart:developer';
-import 'package:AstrowayCustomer/controllers/history_controller.dart';
+import 'package:astromeetCustomer/controllers/history_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';

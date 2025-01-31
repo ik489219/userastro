@@ -2,14 +2,14 @@
 
 import 'dart:convert';
 
-import 'package:AstrowayCustomer/controllers/search_controller.dart';
-import 'package:AstrowayCustomer/controllers/splashController.dart';
+import 'package:astromeetCustomer/controllers/search_controller.dart';
+import 'package:astromeetCustomer/controllers/splashController.dart';
 
-import 'package:AstrowayCustomer/controllers/userProfileController.dart';
-import 'package:AstrowayCustomer/views/placeOfBrithSearchScreen.dart';
-import 'package:AstrowayCustomer/widget/customBottomButton.dart';
-import 'package:AstrowayCustomer/widget/textFieldLabelWidget.dart';
-import 'package:AstrowayCustomer/widget/textFieldWidget.dart';
+import 'package:astromeetCustomer/controllers/userProfileController.dart';
+import 'package:astromeetCustomer/views/placeOfBrithSearchScreen.dart';
+import 'package:astromeetCustomer/widget/customBottomButton.dart';
+import 'package:astromeetCustomer/widget/textFieldLabelWidget.dart';
+import 'package:astromeetCustomer/widget/textFieldWidget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:date_format/date_format.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -23,7 +23,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../utils/images.dart';
 import '../../widget/commonAppbar.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 // ignore: must_be_immutable
 class EditUserProfile extends StatelessWidget {
@@ -468,17 +468,22 @@ class EditUserProfile extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 10),
-              userProfileController.splashController.currentUser!.email.toString()==""||
-                  userProfileController.splashController.currentUser!.email.toString()=="null"?
-                  SizedBox():
-              Center(
-                  child: Text(
-                      'email:- ${userProfileController.splashController.currentUser!.email}')),
-              userProfileController.splashController.currentUser!.contactNo==null?
-                  Container():
-              Center(
-                  child: Text(
-                      '${userProfileController.splashController.currentUser!.countryCode}-${userProfileController.splashController.currentUser!.contactNo}')),
+              userProfileController.splashController.currentUser!.email
+                              .toString() ==
+                          "" ||
+                      userProfileController.splashController.currentUser!.email
+                              .toString() ==
+                          "null"
+                  ? SizedBox()
+                  : Center(
+                      child: Text(
+                          'email:- ${userProfileController.splashController.currentUser!.email}')),
+              userProfileController.splashController.currentUser!.contactNo ==
+                      null
+                  ? Container()
+                  : Center(
+                      child: Text(
+                          '${userProfileController.splashController.currentUser!.countryCode}-${userProfileController.splashController.currentUser!.contactNo}')),
               SizedBox(height: 10),
               TextFieldWidget(
                 controller: userProfileController.nameController,
@@ -516,8 +521,8 @@ class EditUserProfile extends StatelessWidget {
                     Flexible(
                       flex: 1,
                       child: RadioListTile(
-                        title: Text("Female", style: TextStyle(fontSize: 13))
-                            .tr(),
+                        title:
+                            Text("Female", style: TextStyle(fontSize: 13)).tr(),
                         value: "Female",
                         groupValue: userProfileController.gender,
                         activeColor: Get.theme.primaryColor,
@@ -565,19 +570,26 @@ class EditUserProfile extends StatelessWidget {
                   ),
                 ),
               ),
-              userProfileController.splashController.currentUser!.email.toString()==""||
-                  userProfileController.splashController.currentUser!.email.toString()=="null"?
-                  SizedBox():
-              TextFieldWidget(
-                controller: userProfileController.emailController,
-                labelText: 'Email',
-                focusNode: userProfileController.emailFocus,
-              ),
-              userProfileController.splashController.currentUser!.contactNo==null?SizedBox():TextFieldWidget(
-                controller: userProfileController.mobileController,
-                labelText: 'Contact Number',
-                //focusNode: userProfileController.emailFocus,
-              ),
+              userProfileController.splashController.currentUser!.email
+                              .toString() ==
+                          "" ||
+                      userProfileController.splashController.currentUser!.email
+                              .toString() ==
+                          "null"
+                  ? SizedBox()
+                  : TextFieldWidget(
+                      controller: userProfileController.emailController,
+                      labelText: 'Email',
+                      focusNode: userProfileController.emailFocus,
+                    ),
+              userProfileController.splashController.currentUser!.contactNo ==
+                      null
+                  ? SizedBox()
+                  : TextFieldWidget(
+                      controller: userProfileController.mobileController,
+                      labelText: 'Contact Number',
+                      //focusNode: userProfileController.emailFocus,
+                    ),
               InkWell(
                 onTap: () async {
                   userProfileController.nameFocus.unfocus();

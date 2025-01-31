@@ -1,11 +1,10 @@
 // ignore_for_file: avoid_print, deprecated_member_use
 
-import 'package:AstrowayCustomer/controllers/bottomNavigationController.dart';
-import 'package:AstrowayCustomer/controllers/customer_support_controller.dart';
+import 'package:astromeetCustomer/controllers/bottomNavigationController.dart';
+import 'package:astromeetCustomer/controllers/customer_support_controller.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 class HomeCheckController extends FullLifeCycleController
     with FullLifeCycleMixin {
@@ -22,8 +21,7 @@ class HomeCheckController extends FullLifeCycleController
 
   // Mandatory
   @override
-  void onInactive() async {
-    }
+  void onInactive() async {}
 
   // Mandatory
   @override
@@ -82,6 +80,5 @@ class HomeCheckController extends FullLifeCycleController
   }
 
   @override
-  void onHidden() {
-  }
+  void onHidden() {}
 }

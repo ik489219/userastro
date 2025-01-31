@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-import 'package:AstrowayCustomer/controllers/homeController.dart';
-import 'package:AstrowayCustomer/controllers/splashController.dart';
-import 'package:AstrowayCustomer/main.dart';
-import 'package:AstrowayCustomer/model/login_model.dart';
-import 'package:AstrowayCustomer/utils/services/api_helper.dart';
+import 'package:astromeetCustomer/controllers/homeController.dart';
+import 'package:astromeetCustomer/controllers/splashController.dart';
+import 'package:astromeetCustomer/main.dart';
+import 'package:astromeetCustomer/model/login_model.dart';
+import 'package:astromeetCustomer/utils/services/api_helper.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +17,7 @@ import '../model/device_info_login_model.dart';
 import '../utils/global.dart';
 import '../views/bottomNavigationBarScreen.dart';
 import '../views/verifyPhoneScreen.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 import 'package:http/http.dart' as http;
 
 class LoginController extends GetxController {
@@ -61,14 +61,16 @@ class LoginController extends GetxController {
     // whatsapplogindetailsModelFromJson(dataResponse);
 
     if (dataResponse['statusCode'].toString() == "200") {
-      print("result is verify:- ${json.encode({"token": dataResponse['response']['token']})}");
+      print("result is verify:- ${json.encode({
+            "token": dataResponse['response']['token']
+          })}");
       final response = await http.post(
         Uri.parse('$baseUrl/getOtlResponse'),
         body: json.encode({"token": dataResponse['response']['token']}),
         headers: await global.getApiHeaders(false),
       );
       print("stattuscodee");
-      print("${ await global.getApiHeaders(false)}");
+      print("${await global.getApiHeaders(false)}");
       print("'$baseUrl/getOtlResponse'");
       print("${response.statusCode}");
       Map data = json.decode(response.body);
@@ -325,8 +327,11 @@ class LoginController extends GetxController {
   loginAndSignupUser(int? phoneNumber, String email) async {
     try {
       await global.getDeviceData();
-      LoginModel loginModel = LoginModel();// loginModel.contactNo==null || loginModel.contactNo=="null"?loginModel.contactNo=null:
-      email.toString() != "" ? loginModel.contactNo=null:loginModel.contactNo = phoneNumber.toString();
+      LoginModel loginModel =
+          LoginModel(); // loginModel.contactNo==null || loginModel.contactNo=="null"?loginModel.contactNo=null:
+      email.toString() != ""
+          ? loginModel.contactNo = null
+          : loginModel.contactNo = phoneNumber.toString();
       email.toString() == "" ? null : loginModel.email = email.toString();
       loginModel.countryCode = countryCode.toString();
       loginModel.deviceInfo = DeviceInfoLoginModel();

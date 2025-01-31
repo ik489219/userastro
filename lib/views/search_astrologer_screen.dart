@@ -1,12 +1,12 @@
 import 'dart:io';
-import 'package:AstrowayCustomer/controllers/bottomNavigationController.dart';
-import 'package:AstrowayCustomer/controllers/languageController.dart';
-import 'package:AstrowayCustomer/controllers/reportController.dart';
-import 'package:AstrowayCustomer/controllers/reportTabFiltter.dart';
-import 'package:AstrowayCustomer/controllers/reviewController.dart';
-import 'package:AstrowayCustomer/controllers/skillController.dart';
-import 'package:AstrowayCustomer/views/paymentInformationScreen.dart';
-import 'package:AstrowayCustomer/views/reportTypeScreen.dart';
+import 'package:astromeetCustomer/controllers/bottomNavigationController.dart';
+import 'package:astromeetCustomer/controllers/languageController.dart';
+import 'package:astromeetCustomer/controllers/reportController.dart';
+import 'package:astromeetCustomer/controllers/reportTabFiltter.dart';
+import 'package:astromeetCustomer/controllers/reviewController.dart';
+import 'package:astromeetCustomer/controllers/skillController.dart';
+import 'package:astromeetCustomer/views/paymentInformationScreen.dart';
+import 'package:astromeetCustomer/views/reportTypeScreen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
@@ -16,7 +16,7 @@ import 'package:get/get.dart';
 import '../controllers/search_controller.dart';
 import '../controllers/walletController.dart';
 import '../utils/images.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 import 'astrologerProfile/astrologerProfile.dart';
 

@@ -1,4 +1,4 @@
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 class MessageModelLive {
   int? id;
@@ -11,8 +11,19 @@ class MessageModelLive {
   DateTime? createdAt;
   DateTime? updatedAt;
   String? orderId;
-  MessageModelLive({this.id, this.userId1, this.userId2, this.message, this.isActive, this.isRead, this.isDelete, this.createdAt, this.updatedAt, this.orderId});
-  static MessageModelLive fromJson(Map<String, dynamic> json) => MessageModelLive(
+  MessageModelLive(
+      {this.id,
+      this.userId1,
+      this.userId2,
+      this.message,
+      this.isActive,
+      this.isRead,
+      this.isDelete,
+      this.createdAt,
+      this.updatedAt,
+      this.orderId});
+  static MessageModelLive fromJson(Map<String, dynamic> json) =>
+      MessageModelLive(
         userId1: json['userId1'],
         userId2: json['userId2'],
         message: json['message'],

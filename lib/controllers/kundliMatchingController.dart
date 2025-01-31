@@ -3,20 +3,21 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:AstrowayCustomer/model/NorthKundaliMatchingModel.dart';
-import 'package:AstrowayCustomer/model/kundliMatchingDetailsModel.dart';
-import 'package:AstrowayCustomer/model/kundli_model.dart';
-import 'package:AstrowayCustomer/model/southkundaliMatchingModel.dart';
-import 'package:AstrowayCustomer/utils/global.dart';
-import 'package:AstrowayCustomer/utils/services/api_helper.dart';
+import 'package:astromeetCustomer/model/NorthKundaliMatchingModel.dart';
+import 'package:astromeetCustomer/model/kundliMatchingDetailsModel.dart';
+import 'package:astromeetCustomer/model/kundli_model.dart';
+import 'package:astromeetCustomer/model/southkundaliMatchingModel.dart';
+import 'package:astromeetCustomer/utils/global.dart';
+import 'package:astromeetCustomer/utils/services/api_helper.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 import 'package:http/http.dart' as http;
 
-class KundliMatchingController extends GetxController with GetTickerProviderStateMixin {
+class KundliMatchingController extends GetxController
+    with GetTickerProviderStateMixin {
 //Tab Manage
   int currentIndex = 0;
   RxInt homeTabIndex = 0.obs;
@@ -51,13 +52,13 @@ class KundliMatchingController extends GetxController with GetTickerProviderStat
     super.onInit();
   }
 
-
   String? girlapiTime, boyapiTime;
   ongirlApiTIme(String value) {
     girlapiTime = value;
     debugPrint('girlapiTime is $girlapiTime');
     update();
   }
+
   onboyApiTime(String value) {
     boyapiTime = value;
     debugPrint('boyapiTime is $boyapiTime');
@@ -65,7 +66,6 @@ class KundliMatchingController extends GetxController with GetTickerProviderStat
   }
 
   _init() {
-
     // cBoysBirthTime.text = DateFormat.jm().format(DateTime.now());
     // cGirlBirthTime.text = DateFormat.jm().format(DateTime.now());
     // cBoysBirthPlace.text = "New Delhi,Delhi,India";
@@ -79,22 +79,23 @@ class KundliMatchingController extends GetxController with GetTickerProviderStat
 
 //Boys Name
   final TextEditingController cBoysName = TextEditingController();
-  int ?boyforMatch=1;
-  int ?girlforMatch=1;
-  double ?boyLat;
-  double ?boyLong;
-  double ?boyTimezone;
-  double ?girlLat;
-  double ?girlLong;
-  double ?girlTimezone;
+  int? boyforMatch = 1;
+  int? girlforMatch = 1;
+  double? boyLat;
+  double? boyLong;
+  double? boyTimezone;
+  double? girlLat;
+  double? girlLong;
+  double? girlTimezone;
 //Boys Birth Date
   final TextEditingController cBoysBirthDate = TextEditingController();
-   DateTime ?boySelectedDate;
+  DateTime? boySelectedDate;
   onBoyDateSelected(DateTime picked) {
     if (picked != boySelectedDate) {
       boySelectedDate = picked;
       cBoysBirthDate.text = boySelectedDate.toString();
-      cBoysBirthDate.text = formatDate(boySelectedDate!, [dd, '-', mm, '-', yyyy]);
+      cBoysBirthDate.text =
+          formatDate(boySelectedDate!, [dd, '-', mm, '-', yyyy]);
       update();
     }
   }
@@ -114,7 +115,8 @@ class KundliMatchingController extends GetxController with GetTickerProviderStat
       girlSelectedDate = picked;
 
       cGirlBirthDate.text = girlSelectedDate.toString();
-      cGirlBirthDate.text = formatDate(girlSelectedDate!, [dd, '-', mm, '-', yyyy]);
+      cGirlBirthDate.text =
+          formatDate(girlSelectedDate!, [dd, '-', mm, '-', yyyy]);
     }
     update();
   }
@@ -130,36 +132,44 @@ class KundliMatchingController extends GetxController with GetTickerProviderStat
       onBoyDateSelected(kundliList[index].birthDate);
       boykundliId = kundliList[index].id;
       cBoysName.text = kundliList[index].name;
-      cBoysBirthDate.text = formatDate(kundliList[index].birthDate, [dd, '-', mm, '-', yyyy]);
+      cBoysBirthDate.text =
+          formatDate(kundliList[index].birthDate, [dd, '-', mm, '-', yyyy]);
       cBoysBirthTime.text = kundliList[index].birthTime.toString();
       cBoysBirthPlace.text = kundliList[index].birthPlace.toString();
-      boyLat=kundliList[index].latitude.toDouble();
-      boyLong=kundliList[index].longitude.toDouble();
-      boyTimezone=kundliList[index].timezone.toDouble();
-      boyforMatch=0;
+      boyLat = kundliList[index].latitude.toDouble();
+      boyLong = kundliList[index].longitude.toDouble();
+      boyTimezone = kundliList[index].timezone.toDouble();
+      boyforMatch = 0;
 
       update();
     } else if (kundliList[index].gender == "Female") {
       onGirlDateSelected(kundliList[index].birthDate);
       girlKundliId = kundliList[index].id;
       cGirlName.text = kundliList[index].name;
-      cGirlBirthDate.text = formatDate(kundliList[index].birthDate, [dd, '-', mm, '-', yyyy]);
+      cGirlBirthDate.text =
+          formatDate(kundliList[index].birthDate, [dd, '-', mm, '-', yyyy]);
       cGirlBirthTime.text = kundliList[index].birthTime.toString();
       cGirlBirthPlace.text = kundliList[index].birthPlace.toString();
-      girlLat=kundliList[index].latitude.toDouble();
-      girlLong=kundliList[index].longitude.toDouble();
-      girlTimezone=kundliList[index].timezone.toDouble();
-      girlforMatch=0;
+      girlLat = kundliList[index].latitude.toDouble();
+      girlLong = kundliList[index].longitude.toDouble();
+      girlTimezone = kundliList[index].timezone.toDouble();
+      girlforMatch = 0;
       update();
     }
   }
 
   bool isValidData() {
-    if (cBoysName.text == ""|| cBoysBirthDate.text==""||cBoysBirthTime.text==""|| cBoysBirthPlace.text=="") {
+    if (cBoysName.text == "" ||
+        cBoysBirthDate.text == "" ||
+        cBoysBirthTime.text == "" ||
+        cBoysBirthPlace.text == "") {
       errorMessage = "Please Input boy\'s detail";
       update();
       return false;
-    } else if (cGirlName.text == "" || cGirlBirthDate.text==""||cGirlBirthTime.text==""|| cGirlBirthPlace.text=="") {
+    } else if (cGirlName.text == "" ||
+        cGirlBirthDate.text == "" ||
+        cGirlBirthTime.text == "" ||
+        cGirlBirthPlace.text == "") {
       errorMessage = "Please Input Girl\'s detail";
       update();
       return false;
@@ -168,44 +178,75 @@ class KundliMatchingController extends GetxController with GetTickerProviderStat
     }
   }
 
-  NorthKundaliMatchingModel ?northKundaliMatchingModel;
-  SouthKundaliMatchingModel ?southKundaliMatchingModel;
-
-
+  NorthKundaliMatchingModel? northKundaliMatchingModel;
+  SouthKundaliMatchingModel? southKundaliMatchingModel;
 
   addKundliMatchData(String direction) async {
     global.showOnlyLoaderDialog(Get.context);
     KundliModel sendKundli;
     String lanugagecode = Get.locale!.languageCode;
     List<KundliModel> kundliModel = [
-      KundliModel(id: boykundliId, name: cBoysName.text, gender: 'Male',lang:lanugagecode, birthDate: boySelectedDate!, birthTime: cBoysBirthTime.text, birthPlace: cBoysBirthPlace.text, latitude: boyLat, longitude: boyLong,direction: direction,pdf_type: "",timezone:boyTimezone,forMatch: boyforMatch),
-      KundliModel(id: girlKundliId, name: cGirlName.text, gender: 'Female',lang: lanugagecode, birthDate: girlSelectedDate!, birthTime: cGirlBirthTime.text, birthPlace: cGirlBirthPlace.text, latitude: girlLat, longitude: girlLong,direction: direction,pdf_type: "",timezone:girlTimezone,forMatch: girlforMatch),
+      KundliModel(
+          id: boykundliId,
+          name: cBoysName.text,
+          gender: 'Male',
+          lang: lanugagecode,
+          birthDate: boySelectedDate!,
+          birthTime: cBoysBirthTime.text,
+          birthPlace: cBoysBirthPlace.text,
+          latitude: boyLat,
+          longitude: boyLong,
+          direction: direction,
+          pdf_type: "",
+          timezone: boyTimezone,
+          forMatch: boyforMatch),
+      KundliModel(
+          id: girlKundliId,
+          name: cGirlName.text,
+          gender: 'Female',
+          lang: lanugagecode,
+          birthDate: girlSelectedDate!,
+          birthTime: cGirlBirthTime.text,
+          birthPlace: cGirlBirthPlace.text,
+          latitude: girlLat,
+          longitude: girlLong,
+          direction: direction,
+          pdf_type: "",
+          timezone: girlTimezone,
+          forMatch: girlforMatch),
     ];
-    southKundaliMatchingModel=null;
-    northKundaliMatchingModel=null;
+    southKundaliMatchingModel = null;
+    northKundaliMatchingModel = null;
     update();
     await global.checkBody().then((result) async {
       if (result) {
-        await apiHelper.addKundli(kundliModel,0,true).then((result) async {
+        await apiHelper.addKundli(kundliModel, 0, true).then((result) async {
           if (result.status == "200") {
             try {
-                  final response = await http.post(
+              final response = await http.post(
                 Uri.parse('$baseUrl/KundaliMatching/report'),
                 headers: await global.getApiHeaders(true),
-                body: json.encode({"male_kundli_id": result.recordList[0]['id'].toInt(),"female_kundli_id":result.recordList[1]['id'].toInt()}),
+                body: json.encode({
+                  "male_kundli_id": result.recordList[0]['id'].toInt(),
+                  "female_kundli_id": result.recordList[1]['id'].toInt()
+                }),
               );
               dynamic recordList1;
               print("-----${response.statusCode}");
               if (response.statusCode == 200) {
                 log("---------------${response.body}");
-               direction=="South"?
-                southKundaliMatchingModel=SouthKundaliMatchingModel.fromJson(jsonDecode(response.body)):
-                northKundaliMatchingModel=NorthKundaliMatchingModel.fromJson(jsonDecode(response.body));
+                direction == "South"
+                    ? southKundaliMatchingModel =
+                        SouthKundaliMatchingModel.fromJson(
+                            jsonDecode(response.body))
+                    : northKundaliMatchingModel =
+                        NorthKundaliMatchingModel.fromJson(
+                            jsonDecode(response.body));
                 global.hideLoader();
                 update();
                 update();
               } else {
-               // recordList = null;
+                // recordList = null;
                 print("hiiiiiiiiiiiiiii");
                 global.hideLoader();
               }
@@ -234,7 +275,10 @@ class KundliMatchingController extends GetxController with GetTickerProviderStat
       int monthGirl = int.parse(DateFormat('MM').format(dateForGirl));
       await global.checkBody().then((result) async {
         if (result) {
-          await apiHelper.getMatching(formattedDay, formattedMonth, formattedYear, hourBoy, minBoy, dayGirl, monthGirl, yearGirl, hourGirl, minGirls).then((result) {
+          await apiHelper
+              .getMatching(formattedDay, formattedMonth, formattedYear, hourBoy,
+                  minBoy, dayGirl, monthGirl, yearGirl, hourGirl, minGirls)
+              .then((result) {
             if (result != null) {
               Map<String, dynamic> map = result;
               kundliMatchDetailList = KundliMatchingTitleModel.fromJson(map);
@@ -263,7 +307,10 @@ class KundliMatchingController extends GetxController with GetTickerProviderStat
       int monthGirl = int.parse(DateFormat('MM').format(dateForGirl));
       await global.checkBody().then((result) async {
         if (result) {
-          await apiHelper.getManglic(formattedDay, formattedMonth, formattedYear, hourBoy, minBoy, dayGirl, monthGirl, yearGirl, hourGirl, minGirls).then((result) {
+          await apiHelper
+              .getManglic(formattedDay, formattedMonth, formattedYear, hourBoy,
+                  minBoy, dayGirl, monthGirl, yearGirl, hourGirl, minGirls)
+              .then((result) {
             if (result != null) {
               isFemaleManglik = result['female']['is_present'];
               isMaleManglik = result['male']['is_present'];

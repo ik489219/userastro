@@ -1,19 +1,19 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:AstrowayCustomer/controllers/bottomNavigationController.dart';
-import 'package:AstrowayCustomer/controllers/callController.dart';
+import 'package:astromeetCustomer/controllers/bottomNavigationController.dart';
+import 'package:astromeetCustomer/controllers/callController.dart';
 
-import 'package:AstrowayCustomer/controllers/homeController.dart';
-import 'package:AstrowayCustomer/controllers/reviewController.dart';
-import 'package:AstrowayCustomer/model/current_user_model.dart';
-import 'package:AstrowayCustomer/model/systemFlagModel.dart';
-import 'package:AstrowayCustomer/utils/global.dart';
-import 'package:AstrowayCustomer/utils/services/api_helper.dart';
-import 'package:AstrowayCustomer/views/loginScreen.dart';
+import 'package:astromeetCustomer/controllers/homeController.dart';
+import 'package:astromeetCustomer/controllers/reviewController.dart';
+import 'package:astromeetCustomer/model/current_user_model.dart';
+import 'package:astromeetCustomer/model/systemFlagModel.dart';
+import 'package:astromeetCustomer/utils/global.dart';
+import 'package:astromeetCustomer/utils/services/api_helper.dart';
+import 'package:astromeetCustomer/views/loginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -195,6 +195,7 @@ class SplashController extends GetxController {
       await prefs.setString('is_accepted_data', '');
     }
   }
+
   void _handleNotificationNavigation(Map<String, dynamic> chatData) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('chatdata', '');
@@ -203,14 +204,14 @@ class SplashController extends GetxController {
       Map<String, dynamic> body = jsonDecode(chatData['body']);
       if (body["notificationType"] == 3) {
         Get.to(() => IncomingChatRequest(
-          astrologerName: body["astrologerName"] ?? "Astrologer",
-          profile: body["profile"] ?? "",
-          fireBasechatId: body["firebaseChatId"],
-          chatId: int.parse(body["chatId"].toString()),
-          astrologerId: body["astrologerId"],
-          fcmToken: body["fcmToken"],
-          duration: body['chat_duration'].toString(),
-        ));
+              astrologerName: body["astrologerName"] ?? "Astrologer",
+              profile: body["profile"] ?? "",
+              fireBasechatId: body["firebaseChatId"],
+              chatId: int.parse(body["chatId"].toString()),
+              astrologerId: body["astrologerId"],
+              fcmToken: body["fcmToken"],
+              duration: body['chat_duration'].toString(),
+            ));
       } else {
         print('Notification type is not 3');
       }

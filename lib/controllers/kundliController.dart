@@ -2,21 +2,22 @@
 
 import 'dart:convert';
 
-import 'package:AstrowayCustomer/controllers/dropDownController.dart';
-import 'package:AstrowayCustomer/controllers/kundliMatchingController.dart';
-import 'package:AstrowayCustomer/model/getPdfKundali_model.dart';
-import 'package:AstrowayCustomer/model/getPdfPrice_model.dart';
-import 'package:AstrowayCustomer/model/kundli.dart';
-import 'package:AstrowayCustomer/model/kundliBasicDetailMode.dart';
-import 'package:AstrowayCustomer/model/kundli_model.dart';
-import 'package:AstrowayCustomer/utils/images.dart';
-import 'package:AstrowayCustomer/utils/services/api_helper.dart';
+import 'package:astromeetCustomer/controllers/dropDownController.dart';
+import 'package:astromeetCustomer/controllers/kundliMatchingController.dart';
+import 'package:astromeetCustomer/model/getPdfKundali_model.dart';
+import 'package:astromeetCustomer/model/getPdfPrice_model.dart';
+import 'package:astromeetCustomer/model/kundli.dart';
+import 'package:astromeetCustomer/model/kundliBasicDetailMode.dart';
+import 'package:astromeetCustomer/model/kundli_model.dart';
+import 'package:astromeetCustomer/utils/images.dart';
+import 'package:astromeetCustomer/utils/services/api_helper.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 import 'package:intl/intl.dart';
+
 class KundliController extends GetxController
     with GetSingleTickerProviderStateMixin {
   TextEditingController userNameController = TextEditingController();
@@ -35,7 +36,7 @@ class KundliController extends GetxController
   double? long;
   double? timeZone;
   GetPdfKundaliModel? pdfKundaliData;
- // Change to nullable type
+  // Change to nullable type
 
   String emptyScreenText = "You haven\'t added any kundli yet!";
 
@@ -47,11 +48,9 @@ class KundliController extends GetxController
   var searchKundliList = <KundliModel>[];
   KundliBasicPanchangDetail? kundliBasicPanchangDetail;
 
-
   DropDownController dropDownController = Get.find<DropDownController>();
 
   TabController? tabController;
-
 
   // GetPdfKundaliModel? pdfKundaliData;
   GetPdfPrice? pdfPriceData;
@@ -96,7 +95,6 @@ class KundliController extends GetxController
   }
 
   _init() async {
-
     await getKundliList();
   }
 
@@ -118,8 +116,6 @@ class KundliController extends GetxController
     update();
   }
 
-
-
   shareKundli(String pdfLink) async {
     try {
       await FlutterShare.share(
@@ -136,8 +132,6 @@ class KundliController extends GetxController
       print('Excpetion in share kundli $e');
     }
   }
-
-
 
   updateBg(int index) {
     selectedGender = gender[index].title;
@@ -184,11 +178,6 @@ class KundliController extends GetxController
     }
     update();
   }
-
-
-
-
-
 
   String? dropDownGender;
   List item = ['Male', 'Female', 'Other'];
@@ -322,31 +311,27 @@ class KundliController extends GetxController
     update();
   }
 
-
   addKundliData(String pdfType, int amount) async {
-    String language_is=dropDownController.kundaliLang.toString() == "English"
-              ? 'en'
-              : (dropDownController.kundaliLang.toString() == "Tamil"
-                  ? 'ta'
-                  : (dropDownController.kundaliLang.toString() == "Kannada"
-                      ? 'ka'
-                      : (dropDownController.kundaliLang.toString() == "Telugu"
-                          ? 'te'
-                          : (dropDownController.kundaliLang.toString() ==
-                                  "Hindi"
-                              ? 'hi'
-                              : (dropDownController.kundaliLang.toString() ==
-                                      "Malayalam"
-                                  ? 'ml'
-                                  : (dropDownController.kundaliLang
-                                              .toString() ==
-                                          "Spanish"
-                                      ? 'sp'
-                                      : (dropDownController.kundaliLang
-                                                  .toString() ==
-                                              "French"
-                                          ? 'fr'
-                                          : 'en')))))));
+    String language_is = dropDownController.kundaliLang.toString() == "English"
+        ? 'en'
+        : (dropDownController.kundaliLang.toString() == "Tamil"
+            ? 'ta'
+            : (dropDownController.kundaliLang.toString() == "Kannada"
+                ? 'ka'
+                : (dropDownController.kundaliLang.toString() == "Telugu"
+                    ? 'te'
+                    : (dropDownController.kundaliLang.toString() == "Hindi"
+                        ? 'hi'
+                        : (dropDownController.kundaliLang.toString() ==
+                                "Malayalam"
+                            ? 'ml'
+                            : (dropDownController.kundaliLang.toString() ==
+                                    "Spanish"
+                                ? 'sp'
+                                : (dropDownController.kundaliLang.toString() ==
+                                        "French"
+                                    ? 'fr'
+                                    : 'en')))))));
     List<KundliModel> kundliModel = [
       KundliModel(
           name: userName!,
@@ -498,7 +483,6 @@ class KundliController extends GetxController
     }
     update();
   }
-
 
   getBasicPanchangDetail(
       {int? day,

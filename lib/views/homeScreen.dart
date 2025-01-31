@@ -3,45 +3,45 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:AstrowayCustomer/controllers/advancedPanchangController.dart';
-import 'package:AstrowayCustomer/controllers/astrologerCategoryController.dart';
-import 'package:AstrowayCustomer/controllers/astrologyBlogController.dart';
-import 'package:AstrowayCustomer/controllers/astromallController.dart';
-import 'package:AstrowayCustomer/controllers/bottomNavigationController.dart';
-import 'package:AstrowayCustomer/controllers/dailyHoroscopeController.dart';
-import 'package:AstrowayCustomer/controllers/history_controller.dart';
-import 'package:AstrowayCustomer/controllers/homeController.dart';
-import 'package:AstrowayCustomer/controllers/kundliController.dart';
-import 'package:AstrowayCustomer/controllers/liveController.dart';
-import 'package:AstrowayCustomer/controllers/reviewController.dart';
+import 'package:astromeetCustomer/controllers/advancedPanchangController.dart';
+import 'package:astromeetCustomer/controllers/astrologerCategoryController.dart';
+import 'package:astromeetCustomer/controllers/astrologyBlogController.dart';
+import 'package:astromeetCustomer/controllers/astromallController.dart';
+import 'package:astromeetCustomer/controllers/bottomNavigationController.dart';
+import 'package:astromeetCustomer/controllers/dailyHoroscopeController.dart';
+import 'package:astromeetCustomer/controllers/history_controller.dart';
+import 'package:astromeetCustomer/controllers/homeController.dart';
+import 'package:astromeetCustomer/controllers/kundliController.dart';
+import 'package:astromeetCustomer/controllers/liveController.dart';
+import 'package:astromeetCustomer/controllers/reviewController.dart';
 
-import 'package:AstrowayCustomer/model/kundli_model.dart';
-import 'package:AstrowayCustomer/utils/AppColors.dart';
-import 'package:AstrowayCustomer/utils/date_converter.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
-import 'package:AstrowayCustomer/utils/images.dart';
-import 'package:AstrowayCustomer/views/addMoneyToWallet.dart';
-import 'package:AstrowayCustomer/views/astroBlog/astrologyBlogListScreen.dart';
-import 'package:AstrowayCustomer/views/astroBlog/astrologyDetailScreen.dart';
-import 'package:AstrowayCustomer/views/astrologerNews.dart';
-import 'package:AstrowayCustomer/views/astrologerProfile/astrologerProfile.dart';
-import 'package:AstrowayCustomer/views/astrologerVideo.dart';
-import 'package:AstrowayCustomer/views/astromall/astromallScreen.dart';
-import 'package:AstrowayCustomer/views/blog_screen.dart';
-import 'package:AstrowayCustomer/views/call/call_history_detail_screen.dart';
-import 'package:AstrowayCustomer/views/callScreen.dart';
-import 'package:AstrowayCustomer/views/categoryScreen.dart';
-import 'package:AstrowayCustomer/views/chat/chat_screen.dart';
-import 'package:AstrowayCustomer/views/clientsReviewScreem.dart';
-import 'package:AstrowayCustomer/views/kudali/kundliScreen.dart';
-import 'package:AstrowayCustomer/views/kundliMatching/kundliMatchingScreen.dart';
-import 'package:AstrowayCustomer/views/liveAstrologerList.dart';
-import 'package:AstrowayCustomer/views/live_astrologer/live_astrologer_screen.dart';
-import 'package:AstrowayCustomer/views/panchangScreen.dart';
-import 'package:AstrowayCustomer/views/searchAstrologerScreen.dart';
-import 'package:AstrowayCustomer/views/settings/notificationScreen.dart';
-import 'package:AstrowayCustomer/views/stories/viewStories.dart';
-import 'package:AstrowayCustomer/widget/drawerWidget.dart';
+import 'package:astromeetCustomer/model/kundli_model.dart';
+import 'package:astromeetCustomer/utils/AppColors.dart';
+import 'package:astromeetCustomer/utils/date_converter.dart';
+import 'package:astromeetCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/images.dart';
+import 'package:astromeetCustomer/views/addMoneyToWallet.dart';
+import 'package:astromeetCustomer/views/astroBlog/astrologyBlogListScreen.dart';
+import 'package:astromeetCustomer/views/astroBlog/astrologyDetailScreen.dart';
+import 'package:astromeetCustomer/views/astrologerNews.dart';
+import 'package:astromeetCustomer/views/astrologerProfile/astrologerProfile.dart';
+import 'package:astromeetCustomer/views/astrologerVideo.dart';
+import 'package:astromeetCustomer/views/astromall/astromallScreen.dart';
+import 'package:astromeetCustomer/views/blog_screen.dart';
+import 'package:astromeetCustomer/views/call/call_history_detail_screen.dart';
+import 'package:astromeetCustomer/views/callScreen.dart';
+import 'package:astromeetCustomer/views/categoryScreen.dart';
+import 'package:astromeetCustomer/views/chat/chat_screen.dart';
+import 'package:astromeetCustomer/views/clientsReviewScreem.dart';
+import 'package:astromeetCustomer/views/kudali/kundliScreen.dart';
+import 'package:astromeetCustomer/views/kundliMatching/kundliMatchingScreen.dart';
+import 'package:astromeetCustomer/views/liveAstrologerList.dart';
+import 'package:astromeetCustomer/views/live_astrologer/live_astrologer_screen.dart';
+import 'package:astromeetCustomer/views/panchangScreen.dart';
+import 'package:astromeetCustomer/views/searchAstrologerScreen.dart';
+import 'package:astromeetCustomer/views/settings/notificationScreen.dart';
+import 'package:astromeetCustomer/views/stories/viewStories.dart';
+import 'package:astromeetCustomer/widget/drawerWidget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
@@ -65,8 +65,6 @@ import '../widget/videoPlayerWidget.dart';
 import 'CustomText.dart';
 import 'astromall/astroProductScreen.dart';
 import 'daily_horoscope/dailyHoroscopeScreen.dart';
-
-
 
 class HomeScreen extends StatefulWidget {
   final KundliModel? userDetails;
@@ -956,7 +954,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: RefreshIndicator(
           onRefresh: () async {
-             // global.warningDialog(context);
+            // global.warningDialog(context);
             await homeController.getBanner();
             await homeController.getBlog();
             await homeController.getAstroNews();
@@ -4917,7 +4915,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void refreshIt() async {
-      // global.warningDialog(context);
+    // global.warningDialog(context);
     splashController.currentLanguageCode =
         homeController.lan[homeController.selectedIndex].lanCode;
     splashController.update();

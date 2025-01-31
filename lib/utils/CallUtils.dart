@@ -2,7 +2,7 @@
 
 import 'dart:developer';
 
-import 'package:AstrowayCustomer/utils/global.dart';
+import 'package:astromeetCustomer/utils/global.dart';
 import 'package:flutter_callkit_incoming/entities/android_params.dart';
 import 'package:flutter_callkit_incoming/entities/call_kit_params.dart';
 import 'package:flutter_callkit_incoming/entities/ios_params.dart';

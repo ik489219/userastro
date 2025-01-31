@@ -1,13 +1,25 @@
-import 'package:AstrowayCustomer/model/dailyHoroscopeModel.dart';
-import 'package:AstrowayCustomer/model/vedicApis/vedicDailyHoroscopeModel.dart';
-import 'package:AstrowayCustomer/utils/services/api_helper.dart';
+import 'package:astromeetCustomer/model/dailyHoroscopeModel.dart';
+import 'package:astromeetCustomer/model/vedicApis/vedicDailyHoroscopeModel.dart';
+import 'package:astromeetCustomer/utils/services/api_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 class DailyHoroscopeController extends GetxController {
-  List borderColor = [Colors.red, Colors.orange, Colors.green, Colors.blue, Colors.purple];
-  List containerColor = [Color.fromARGB(255, 241, 223, 220), Color.fromARGB(255, 248, 233, 211), Color.fromARGB(255, 226, 248, 227), Color.fromARGB(255, 218, 234, 247), Color.fromARGB(255, 242, 227, 245)];
+  List borderColor = [
+    Colors.red,
+    Colors.orange,
+    Colors.green,
+    Colors.blue,
+    Colors.purple
+  ];
+  List containerColor = [
+    Color.fromARGB(255, 241, 223, 220),
+    Color.fromARGB(255, 248, 233, 211),
+    Color.fromARGB(255, 226, 248, 227),
+    Color.fromARGB(255, 218, 234, 247),
+    Color.fromARGB(255, 242, 227, 245)
+  ];
   int day = 2; // 1 for yesterday, 2 for today and 3 for tomorrow
   bool isMonth = true;
   bool isWeek = false;
@@ -18,7 +30,7 @@ class DailyHoroscopeController extends GetxController {
   APIHelper apiHelper = APIHelper();
   var horoscopeList = <DailyHororscopeModel>[];
   DailyscopeModel? dailyList;
-  VedicDailyHoroscopeModel?vedicdailyList;
+  VedicDailyHoroscopeModel? vedicdailyList;
   Map<String, dynamic> dailyHororscopeData = {};
   Map<String, dynamic> horoscopeListData = {};
   TextEditingController feedbackController = TextEditingController();
@@ -98,15 +110,18 @@ class DailyHoroscopeController extends GetxController {
     try {
       await global.checkBody().then((result) async {
         if (result) {
-          await apiHelper.getHoroscope(horoscopeSignId: horoscopeId).then((result) {
+          await apiHelper
+              .getHoroscope(horoscopeSignId: horoscopeId)
+              .then((result) {
             if (result != null) {
-              dailyhoroscopeData= result;
+              dailyhoroscopeData = result;
               update();
-              dailyhoroscopeData!['astroApiCallType'].toString()=="2"?
-               dailyList = DailyscopeModel.fromJson(dailyhoroscopeData!['recordList']):null;
+              dailyhoroscopeData!['astroApiCallType'].toString() == "2"
+                  ? dailyList = DailyscopeModel.fromJson(
+                      dailyhoroscopeData!['recordList'])
+                  : null;
               update();
-            } else {
-            }
+            } else {}
           });
         }
       });
@@ -120,7 +135,8 @@ class DailyHoroscopeController extends GetxController {
       await global.checkBody().then((result) async {
         if (result) {
           var feedbackType = feedbackGroupValue;
-          var feedback = feedbackController.text != '' ? feedbackController.text : null;
+          var feedback =
+              feedbackController.text != '' ? feedbackController.text : null;
           await apiHelper.addFeedBack(feedbackType!, feedback).then((result) {
             if (result.status == "200") {
               global.showToast(

@@ -1,13 +1,13 @@
-import 'package:AstrowayCustomer/model/customer_support_model.dart';
-import 'package:AstrowayCustomer/model/help_and_support_model.dart';
-import 'package:AstrowayCustomer/model/help_support_question.dart';
-import 'package:AstrowayCustomer/model/help_support_subcat_model.dart';
-import 'package:AstrowayCustomer/utils/services/api_helper.dart';
+import 'package:astromeetCustomer/model/customer_support_model.dart';
+import 'package:astromeetCustomer/model/help_and_support_model.dart';
+import 'package:astromeetCustomer/model/help_support_question.dart';
+import 'package:astromeetCustomer/model/help_support_subcat_model.dart';
+import 'package:astromeetCustomer/utils/services/api_helper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 import '../model/chat_message_model.dart';
 import '../model/customer_support_review_model.dart';
@@ -24,7 +24,8 @@ class CustomerSupportController extends GetxController {
   TextEditingController reviewController = TextEditingController();
   int textLength = 0;
   double rating = 0.0;
-  CollectionReference userChatCollectionRef = FirebaseFirestore.instance.collection("supportChat");
+  CollectionReference userChatCollectionRef =
+      FirebaseFirestore.instance.collection("supportChat");
   bool isAddEdit = true;
   bool isIn = false;
   String status = "WAITING";
@@ -119,7 +120,9 @@ class CustomerSupportController extends GetxController {
     try {
       await global.checkBody().then((result) async {
         if (result) {
-          await apiHelper.getHelpAndSupportQuestion(helpSupportId).then((result) {
+          await apiHelper
+              .getHelpAndSupportQuestion(helpSupportId)
+              .then((result) {
             if (result.status == "200") {
               helpAndSupportQuestion = result.recordList;
               update();
@@ -142,13 +145,16 @@ class CustomerSupportController extends GetxController {
     try {
       await global.checkBody().then((result) async {
         if (result) {
-          await apiHelper.getHelpAndSupportQuestionAnswer(helpSupportId).then((result) {
+          await apiHelper
+              .getHelpAndSupportQuestionAnswer(helpSupportId)
+              .then((result) {
             if (result.status == "200") {
               helpSupportSubCat = result.recordList;
               update();
             } else {
               global.showToast(
-                message: 'customer help and support getHelpAndSupportQuestionAnswer',
+                message:
+                    'customer help and support getHelpAndSupportQuestionAnswer',
                 textColor: global.textColor,
                 bgColor: global.toastBackGoundColor,
               );
@@ -184,7 +190,8 @@ class CustomerSupportController extends GetxController {
     }
   }
 
-  createCustomerTickets(String subject, int helpSupportQuestionId, String helpSupportQuestion, String helpSupportSubQuestion) async {
+  createCustomerTickets(String subject, int helpSupportQuestionId,
+      String helpSupportQuestion, String helpSupportSubQuestion) async {
     try {
       await global.checkBody().then((result) async {
         if (result) {
@@ -194,21 +201,31 @@ class CustomerSupportController extends GetxController {
             description: descriptionController.text,
             helpSupportId: helpSupportQuestionId,
           );
-          await apiHelper.creaetTicket(customerSuppportModel).then((result) async {
+          await apiHelper
+              .creaetTicket(customerSuppportModel)
+              .then((result) async {
             if (result.status == "200") {
               await getCustomerTickets();
               update();
               if (helpSupportQuestion != "") {
                 if (helpSupportSubQuestion != "") {
-                  sendMessage('$helpSupportQuestion -> $helpSupportSubQuestion -> ${result.recordList["subject"]}', result.recordList["chatId"], result.recordList["id"]);
+                  sendMessage(
+                      '$helpSupportQuestion -> $helpSupportSubQuestion -> ${result.recordList["subject"]}',
+                      result.recordList["chatId"],
+                      result.recordList["id"]);
                 } else {
-                  sendMessage('$helpSupportQuestion -> ${result.recordList["subject"]}', result.recordList["chatId"], result.recordList["id"]);
+                  sendMessage(
+                      '$helpSupportQuestion -> ${result.recordList["subject"]}',
+                      result.recordList["chatId"],
+                      result.recordList["id"]);
                 }
               } else {
-                sendMessage('${result.recordList["subject"]}', result.recordList["chatId"], result.recordList["id"]);
+                sendMessage('${result.recordList["subject"]}',
+                    result.recordList["chatId"], result.recordList["id"]);
               }
 
-              sendMessage('${result.recordList["description"]}', result.recordList["chatId"], result.recordList["id"]);
+              sendMessage('${result.recordList["description"]}',
+                  result.recordList["chatId"], result.recordList["id"]);
 
               global.showToast(
                 message: 'Ticket created successfully!',
@@ -235,7 +252,9 @@ class CustomerSupportController extends GetxController {
     try {
       await global.checkBody().then((result) async {
         if (result) {
-          await apiHelper.addCustomerSupportReview(reviewController.text, rating, ticketId).then((result) async {
+          await apiHelper
+              .addCustomerSupportReview(reviewController.text, rating, ticketId)
+              .then((result) async {
             if (result.status == "200") {
               global.showToast(
                 message: 'Review added successfully!',
@@ -263,7 +282,10 @@ class CustomerSupportController extends GetxController {
     try {
       await global.checkBody().then((result) async {
         if (result) {
-          await apiHelper.editCustomerSupportReview(reviewController.text, rating, ticketId).then((result) async {
+          await apiHelper
+              .editCustomerSupportReview(
+                  reviewController.text, rating, ticketId)
+              .then((result) async {
             if (result.status == "200") {
               global.showToast(
                 message: 'Review updated successfully!',
@@ -317,9 +339,16 @@ class CustomerSupportController extends GetxController {
 
   bool isMe = true;
 
-  Stream<QuerySnapshot<Map<String, dynamic>>>? getChatMessages(String firebaseChatId, int? currentUserId) {
+  Stream<QuerySnapshot<Map<String, dynamic>>>? getChatMessages(
+      String firebaseChatId, int? currentUserId) {
     try {
-      Stream<QuerySnapshot<Map<String, dynamic>>> data = FirebaseFirestore.instance.collection('supportChat/$firebaseChatId/userschat').doc('$currentUserId').collection('messages').orderBy("createdAt", descending: true).snapshots(); //orderBy("createdAt", descending: true)
+      Stream<QuerySnapshot<Map<String, dynamic>>> data = FirebaseFirestore
+          .instance
+          .collection('supportChat/$firebaseChatId/userschat')
+          .doc('$currentUserId')
+          .collection('messages')
+          .orderBy("createdAt", descending: true)
+          .snapshots(); //orderBy("createdAt", descending: true)
       return data;
     } catch (err) {
       print("Exception - apiHelper.dart - getChatMessages()" + err.toString());
@@ -347,35 +376,57 @@ class CustomerSupportController extends GetxController {
     }
   }
 
-  Future uploadMessage(String idUser, String partnerId, ChatMessageModel anonymous) async {
+  Future uploadMessage(
+      String idUser, String partnerId, ChatMessageModel anonymous) async {
     try {
       final String globalId = global.currentUserId.toString();
-      final refMessages = userChatCollectionRef.doc(idUser).collection('userschat').doc(globalId).collection('messages');
-      final refMessages1 = userChatCollectionRef.doc(idUser).collection('userschat').doc(partnerId).collection('messages');
+      final refMessages = userChatCollectionRef
+          .doc(idUser)
+          .collection('userschat')
+          .doc(globalId)
+          .collection('messages');
+      final refMessages1 = userChatCollectionRef
+          .doc(idUser)
+          .collection('userschat')
+          .doc(partnerId)
+          .collection('messages');
       final newMessage1 = anonymous;
 
       final newMessage2 = anonymous;
       newMessage2.messageId = refMessages1.id;
 
-      var messageResult = await refMessages.add(newMessage1.toJson()).catchError((e) {
+      var messageResult =
+          await refMessages.add(newMessage1.toJson()).catchError((e) {
         print('send mess exception' + e);
         return e;
       });
       newMessage1.messageId = messageResult.id;
-      await userChatCollectionRef.doc(idUser).collection('userschat').doc(globalId).collection('messages').doc(newMessage1.messageId).update({"messageId": newMessage1.messageId});
+      await userChatCollectionRef
+          .doc(idUser)
+          .collection('userschat')
+          .doc(globalId)
+          .collection('messages')
+          .doc(newMessage1.messageId)
+          .update({"messageId": newMessage1.messageId});
 
       newMessage2.isRead = false;
-      var message1Result = await refMessages1.add(newMessage2.toJson()).catchError((e) {
+      var message1Result =
+          await refMessages1.add(newMessage2.toJson()).catchError((e) {
         print('send mess exception' + e);
         return e;
       });
-      await userChatCollectionRef.doc(idUser).collection('userschat').doc(partnerId).collection('messages').doc(newMessage1.messageId).update({"messageId": newMessage1.messageId});
+      await userChatCollectionRef
+          .doc(idUser)
+          .collection('userschat')
+          .doc(partnerId)
+          .collection('messages')
+          .doc(newMessage1.messageId)
+          .update({"messageId": newMessage1.messageId});
       return {
         'user1': messageResult.id,
         'user2': message1Result.id,
       };
     } catch (err) {
-
       print('uploadMessage err $err');
     }
   }

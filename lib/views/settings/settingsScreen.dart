@@ -1,15 +1,14 @@
-import 'package:AstrowayCustomer/controllers/history_controller.dart';
-import 'package:AstrowayCustomer/controllers/settings_controller.dart';
-import 'package:AstrowayCustomer/views/astrologerProfile/block_astrologer_screen.dart';
-import 'package:AstrowayCustomer/views/settings/privacyPolicyScreen.dart';
-import 'package:AstrowayCustomer/views/settings/termsAndConditionScreen.dart';
+import 'package:astromeetCustomer/controllers/history_controller.dart';
+import 'package:astromeetCustomer/controllers/settings_controller.dart';
+import 'package:astromeetCustomer/views/astrologerProfile/block_astrologer_screen.dart';
+import 'package:astromeetCustomer/views/settings/privacyPolicyScreen.dart';
+import 'package:astromeetCustomer/views/settings/termsAndConditionScreen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 import '../../widget/commonAppbar.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 class SettingListScreen extends StatelessWidget {
   const SettingListScreen({Key? key}) : super(key: key);
@@ -56,7 +55,7 @@ class SettingListScreen extends StatelessWidget {
                         ),
                       );
               }),
-               GestureDetector(
+              GestureDetector(
                 onTap: () {
                   Get.to(() => TermAndConditionScreen());
                 },
@@ -68,7 +67,10 @@ class SettingListScreen extends StatelessWidget {
                       padding: EdgeInsets.all(15.0),
                       child: Text(
                         "Terms and Condition",
-                        style: TextStyle(color: Colors.green, fontWeight: FontWeight.w500, fontSize: 16),
+                        style: TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16),
                       ).tr(),
                     ),
                   ),
@@ -76,7 +78,7 @@ class SettingListScreen extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Get.to(() =>  PrivacyPolicyScreen());
+                  Get.to(() => PrivacyPolicyScreen());
                 },
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width,
@@ -86,7 +88,10 @@ class SettingListScreen extends StatelessWidget {
                       padding: EdgeInsets.all(15.0),
                       child: Text(
                         "Privacy Policy",
-                        style: TextStyle(color: Colors.green, fontWeight: FontWeight.w500, fontSize: 16),
+                        style: TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16),
                       ).tr(),
                     ),
                   ),
@@ -119,7 +124,8 @@ class SettingListScreen extends StatelessWidget {
                             flex: 4,
                             child: ElevatedButton(
                               onPressed: () {
-                                HistoryController historyController = Get.find<HistoryController>();
+                                HistoryController historyController =
+                                    Get.find<HistoryController>();
                                 historyController.chatHistoryList.clear();
                                 historyController.astroMallHistoryList.clear();
                                 historyController.reportHistoryList.clear();
@@ -152,7 +158,10 @@ class SettingListScreen extends StatelessWidget {
                             padding: EdgeInsets.only(left: 12.0),
                             child: Text(
                               "Logout my account",
-                              style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 16),
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16),
                             ).tr(),
                           ),
                         ],
@@ -192,7 +201,9 @@ class SettingListScreen extends StatelessWidget {
                                 child: ElevatedButton(
                                   onPressed: () async {
                                     global.showOnlyLoaderDialog(context);
-                                    settingsController.deleteAccount(global.sp!.getInt("currentUserId") ?? 0);
+                                    settingsController.deleteAccount(
+                                        global.sp!.getInt("currentUserId") ??
+                                            0);
                                     global.logoutUser();
                                     global.hideLoader();
                                   },
@@ -221,7 +232,10 @@ class SettingListScreen extends StatelessWidget {
                               padding: const EdgeInsets.only(left: 12.0),
                               child: Text(
                                 "Delete my account",
-                                style: TextStyle(color: Colors.red, fontWeight: FontWeight.w500, fontSize: 16),
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16),
                               ).tr(),
                             ),
                           ],

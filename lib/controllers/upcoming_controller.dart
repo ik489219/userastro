@@ -1,8 +1,8 @@
-import 'package:AstrowayCustomer/model/astrologer_model.dart';
-import 'package:AstrowayCustomer/model/availableTimes_model.dart';
-import 'package:AstrowayCustomer/utils/services/api_helper.dart';
+import 'package:astromeetCustomer/model/astrologer_model.dart';
+import 'package:astromeetCustomer/model/availableTimes_model.dart';
+import 'package:astromeetCustomer/utils/services/api_helper.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 import 'package:intl/intl.dart';
 
 class UpcomingController extends GetxController {
@@ -32,7 +32,10 @@ class UpcomingController extends GetxController {
                 for (var i = 0; i < upComingList.length; i++) {
                   if (upComingList[i].availability!.isNotEmpty) {
                     List<AvailableTimes>? times = [];
-                    times = upComingList[i].availability!.firstWhere((element) => element.day == todayDay).time;
+                    times = upComingList[i]
+                        .availability!
+                        .firstWhere((element) => element.day == todayDay)
+                        .time;
                     if (times!.isNotEmpty) {
                       upComingList[i].isTimeSlotAvailable = true;
                       upComingList[i].availableTimes = times;
@@ -75,7 +78,10 @@ class UpcomingController extends GetxController {
                 for (var i = 0; i < searchUpComing.length; i++) {
                   if (searchUpComing[i].availability!.isNotEmpty) {
                     List<AvailableTimes>? times = [];
-                    times = searchUpComing[i].availability!.firstWhere((element) => element.day == todayDay).time;
+                    times = searchUpComing[i]
+                        .availability!
+                        .firstWhere((element) => element.day == todayDay)
+                        .time;
                     if (times!.isNotEmpty) {
                       searchUpComing[i].isTimeSlotAvailable = true;
                       searchUpComing[i].availableTimes = times;

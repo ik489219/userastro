@@ -1,15 +1,14 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:AstrowayCustomer/controllers/callController.dart';
-import 'package:AstrowayCustomer/utils/images.dart';
-import 'package:AstrowayCustomer/views/call/accept_call_screen.dart';
+import 'package:astromeetCustomer/controllers/callController.dart';
+import 'package:astromeetCustomer/utils/images.dart';
+import 'package:astromeetCustomer/views/call/accept_call_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
-
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 import '../../controllers/bottomNavigationController.dart';
 import '../bottomNavigationBarScreen.dart';
@@ -25,7 +24,16 @@ class IncomingCallRequest extends StatelessWidget {
   final String fcmToken;
   String duration;
 
-  IncomingCallRequest({super.key, this.astrologerName, required this.fcmToken, required this.callId, this.astrologerProfile, required this.astrologerId, required this.token, required this.channel,required this.duration});
+  IncomingCallRequest(
+      {super.key,
+      this.astrologerName,
+      required this.fcmToken,
+      required this.callId,
+      this.astrologerProfile,
+      required this.astrologerId,
+      required this.token,
+      required this.channel,
+      required this.duration});
   CallController callController = Get.find<CallController>();
 
   @override
@@ -33,7 +41,8 @@ class IncomingCallRequest extends StatelessWidget {
     return SafeArea(
         child: WillPopScope(
       onWillPop: () async {
-        BottomNavigationController bottomNavigationController = Get.find<BottomNavigationController>();
+        BottomNavigationController bottomNavigationController =
+            Get.find<BottomNavigationController>();
         bottomNavigationController.setIndex(1, 0);
         Get.to(() => BottomNavigationBarScreen(index: 1));
         return true;
@@ -64,13 +73,17 @@ class IncomingCallRequest extends StatelessWidget {
                                   width: 40,
                                 )
                               : CachedNetworkImage(
-                                  imageUrl: '${global.imgBaseurl}$astrologerProfile',
-                                  imageBuilder: (context, imageProvider) => CircleAvatar(
+                                  imageUrl:
+                                      '${global.imgBaseurl}$astrologerProfile',
+                                  imageBuilder: (context, imageProvider) =>
+                                      CircleAvatar(
                                     radius: 48,
                                     backgroundImage: imageProvider,
                                   ),
-                                  placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-                                  errorWidget: (context, url, error) => Image.asset(
+                                  placeholder: (context, url) => const Center(
+                                      child: CircularProgressIndicator()),
+                                  errorWidget: (context, url, error) =>
+                                      Image.asset(
                                     Images.deafultUser,
                                     fit: BoxFit.fill,
                                     height: 50,
@@ -82,7 +95,9 @@ class IncomingCallRequest extends StatelessWidget {
                           height: 15,
                         ),
                         Text(
-                          astrologerName == null || astrologerName == "" ? "Astrologer" : astrologerName ?? "Astrologer",
+                          astrologerName == null || astrologerName == ""
+                              ? "Astrologer"
+                              : astrologerName ?? "Astrologer",
                           style: Get.textTheme.headlineSmall,
                         ).tr(),
                       ],
@@ -130,9 +145,13 @@ class IncomingCallRequest extends StatelessWidget {
                           onTap: () async {
                             global.showOnlyLoaderDialog(context);
                             await callController.rejectedCall(callId);
-                            global.callOnFcmApiSendPushNotifications(fcmTokem: [fcmToken], title: 'Reject call request from astrologer');
+                            global.callOnFcmApiSendPushNotifications(
+                                fcmTokem: [fcmToken],
+                                title: 'Reject call request from astrologer');
                             global.hideLoader();
-                            BottomNavigationController bottomNavigationController = Get.find<BottomNavigationController>();
+                            BottomNavigationController
+                                bottomNavigationController =
+                                Get.find<BottomNavigationController>();
                             bottomNavigationController.setIndex(0, 0);
                             Get.to(() => BottomNavigationBarScreen(
                                   index: 0,
@@ -158,18 +177,23 @@ class IncomingCallRequest extends StatelessWidget {
                             global.hideLoader();
                             Get.to(() => AcceptCallScreen(
                                   astrologerId: astrologerId,
-                                  astrologerName: astrologerName == null || astrologerName == "" ? "Astrologer" : astrologerName ?? "Astrologer",
+                                  astrologerName: astrologerName == null ||
+                                          astrologerName == ""
+                                      ? "Astrologer"
+                                      : astrologerName ?? "Astrologer",
                                   astrologerProfile: astrologerProfile,
                                   token: token,
                                   callChannel: channel,
                                   callId: callId,
-                                   duration: duration,
+                                  duration: duration,
                                 ));
                           },
                           child: Container(
                             padding: const EdgeInsets.all(10),
                             margin: const EdgeInsets.only(left: 20),
-                            decoration: BoxDecoration(color: Colors.green, borderRadius: BorderRadius.circular(30)),
+                            decoration: BoxDecoration(
+                                color: Colors.green,
+                                borderRadius: BorderRadius.circular(30)),
                             child: Icon(
                               Icons.ring_volume,
                               color: Colors.white,

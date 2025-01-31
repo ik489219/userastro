@@ -1,4 +1,4 @@
-import 'package:AstrowayCustomer/model/systemFlagModel.dart';
+import 'package:astromeetCustomer/model/systemFlagModel.dart';
 
 class CurrentUserModel {
   CurrentUserModel({
@@ -42,12 +42,14 @@ class CurrentUserModel {
   String? sessionToken;
   String? countryCode;
 
-  factory CurrentUserModel.fromJson(Map<String, dynamic> json) => CurrentUserModel(
+  factory CurrentUserModel.fromJson(Map<String, dynamic> json) =>
+      CurrentUserModel(
         id: json["id"],
         name: json["name"] ?? "User",
         contactNo: json["contactNo"],
         email: json["email"] ?? "",
-        birthDate: DateTime.parse(json["birthDate"] ?? DateTime.now().toIso8601String()), //?? DateTime.now(),
+        birthDate: DateTime.parse(json["birthDate"] ??
+            DateTime.now().toIso8601String()), //?? DateTime.now(),
         birthTime: json["birthTime"] ?? "",
         profile: json["profile"] ?? "",
         birthPlace: json["birthPlace"] ?? "",
@@ -57,10 +59,20 @@ class CurrentUserModel {
         gender: json["gender"] ?? "Male",
         location: json["location"] ?? "",
         sessionToken: json["sessionToken"] ?? "",
-        walletAmount: (json["totalWalletAmount"] != null && json["totalWalletAmount"] != '') ? double.parse(json["totalWalletAmount"].toString()) : 0,
-        latitude: (json["latitude"] != null && json["latitude"] != '') ? double.parse(json["latitude"].toString()) : 0,
-        longitude: (json["longitude"] != null && json["longitude"] != '') ? double.parse(json["longitude"].toString()) : 0,
-        systemFlagList: json['systemFlag'] != null ? List<SystemFlag>.from(json['systemFlag'].map((p) => SystemFlag.fromJson(p))) : [],
+        walletAmount: (json["totalWalletAmount"] != null &&
+                json["totalWalletAmount"] != '')
+            ? double.parse(json["totalWalletAmount"].toString())
+            : 0,
+        latitude: (json["latitude"] != null && json["latitude"] != '')
+            ? double.parse(json["latitude"].toString())
+            : 0,
+        longitude: (json["longitude"] != null && json["longitude"] != '')
+            ? double.parse(json["longitude"].toString())
+            : 0,
+        systemFlagList: json['systemFlag'] != null
+            ? List<SystemFlag>.from(
+                json['systemFlag'].map((p) => SystemFlag.fromJson(p)))
+            : [],
         countryCode: json["countryCode"] ?? "+91",
       );
 

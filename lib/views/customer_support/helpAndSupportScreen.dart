@@ -1,17 +1,18 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:AstrowayCustomer/controllers/customer_support_controller.dart';
-import 'package:AstrowayCustomer/views/customer_support/helpOptionScreen.dart';
-import 'package:AstrowayCustomer/widget/commonListTileWidget.dart';
+import 'package:astromeetCustomer/controllers/customer_support_controller.dart';
+import 'package:astromeetCustomer/views/customer_support/helpOptionScreen.dart';
+import 'package:astromeetCustomer/widget/commonListTileWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 import '../../widget/commonAppbar.dart';
 
 class HeplAndSupportScreen extends StatelessWidget {
   HeplAndSupportScreen({Key? key}) : super(key: key);
-  final CustomerSupportController customerSupportController = Get.find<CustomerSupportController>();
+  final CustomerSupportController customerSupportController =
+      Get.find<CustomerSupportController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,20 +29,27 @@ class HeplAndSupportScreen extends StatelessWidget {
             itemBuilder: (context, i) {
               return CommonListTileWidget(
                 title: customerSupportController.helpAndSupport[i].name,
-                helpSupportQuestion: customerSupportController.helpAndSupport[i].name,
+                helpSupportQuestion:
+                    customerSupportController.helpAndSupport[i].name,
                 isChatWithUs: 0,
                 subject: '',
                 helpSupportSubQuestion: '',
-                isSubCategory: customerSupportController.helpAndSupport[i].isSubCategory ?? false,
+                isSubCategory:
+                    customerSupportController.helpAndSupport[i].isSubCategory ??
+                        false,
                 helpSupportQuestionId: 0,
                 onTap: () async {
-                  if (customerSupportController.helpAndSupport[i].isSubCategory!) {
+                  if (customerSupportController
+                      .helpAndSupport[i].isSubCategory!) {
                     global.showOnlyLoaderDialog(context);
-                    await customerSupportController.getHelpAndSupportQuestion(customerSupportController.helpAndSupport[i].id);
+                    await customerSupportController.getHelpAndSupportQuestion(
+                        customerSupportController.helpAndSupport[i].id);
                     global.hideLoader();
                     Get.to(() => HelpOptionScreen(
-                          helpSupportQuestionId: customerSupportController.helpAndSupport[i].id,
-                          title: customerSupportController.helpAndSupport[i].name,
+                          helpSupportQuestionId:
+                              customerSupportController.helpAndSupport[i].id,
+                          title:
+                              customerSupportController.helpAndSupport[i].name,
                         ));
                   }
                 },

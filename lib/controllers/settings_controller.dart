@@ -1,9 +1,9 @@
-import 'package:AstrowayCustomer/controllers/bottomNavigationController.dart';
-import 'package:AstrowayCustomer/model/blocked_astrologe_model.dart';
-import 'package:AstrowayCustomer/model/notifications_model.dart';
-import 'package:AstrowayCustomer/utils/services/api_helper.dart';
+import 'package:astromeetCustomer/controllers/bottomNavigationController.dart';
+import 'package:astromeetCustomer/model/blocked_astrologe_model.dart';
+import 'package:astromeetCustomer/model/notifications_model.dart';
+import 'package:astromeetCustomer/utils/services/api_helper.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 class SettingsController extends GetxController {
   APIHelper apiHelper = APIHelper();
@@ -158,7 +158,8 @@ class SettingsController extends GetxController {
                 bgColor: global.toastBackGoundColor,
               );
               await getBlockAstrologerList();
-              BottomNavigationController bottomNavigationController = Get.find<BottomNavigationController>();
+              BottomNavigationController bottomNavigationController =
+                  Get.find<BottomNavigationController>();
               await bottomNavigationController.getAstrologerbyId(astrologerId);
               bottomNavigationController.update();
             } else {

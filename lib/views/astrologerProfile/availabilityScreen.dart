@@ -1,4 +1,4 @@
-import 'package:AstrowayCustomer/controllers/bottomNavigationController.dart';
+import 'package:astromeetCustomer/controllers/bottomNavigationController.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,12 +8,14 @@ import '../../widget/commonAppbar.dart';
 class AvailabilityScreen extends StatelessWidget {
   final String astrologerName;
   final String astrologerProfile;
-  const AvailabilityScreen({Key? key, required this.astrologerName, required this.astrologerProfile}) : super(key: key);
+  const AvailabilityScreen(
+      {Key? key, required this.astrologerName, required this.astrologerProfile})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+        backgroundColor: Colors.white,
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(56),
             child: CommonAppBar(
@@ -23,13 +25,16 @@ class AvailabilityScreen extends StatelessWidget {
             )),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: GetBuilder<BottomNavigationController>(builder: (bottombarController) {
+          child: GetBuilder<BottomNavigationController>(
+              builder: (bottombarController) {
             return bottombarController.astrologerAvailavility.isEmpty
                 ? Center(
-                    child: Text('$astrologerName ${tr("Not Set Available Time")}'),
+                    child:
+                        Text('$astrologerName ${tr("Not Set Available Time")}'),
                   )
                 : ListView.builder(
-                    itemCount: bottombarController.astrologerAvailavility.length,
+                    itemCount:
+                        bottombarController.astrologerAvailavility.length,
                     itemBuilder: (context, index) {
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -39,7 +44,11 @@ class AvailabilityScreen extends StatelessWidget {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text(bottombarController.astrologerAvailavility[index].day ?? "day").tr(),
+                                Text(bottombarController
+                                            .astrologerAvailavility[index]
+                                            .day ??
+                                        "day")
+                                    .tr(),
                               ],
                             ),
                           ),
@@ -47,8 +56,15 @@ class AvailabilityScreen extends StatelessWidget {
                             children: [
                               DotIndicator(color: Colors.black),
                               SizedBox(
-                                height: bottombarController.astrologerAvailavility[index].time!.isNotEmpty
-                                    ? bottombarController.astrologerAvailavility[index].time!.length > 2
+                                height: bottombarController
+                                        .astrologerAvailavility[index]
+                                        .time!
+                                        .isNotEmpty
+                                    ? bottombarController
+                                                .astrologerAvailavility[index]
+                                                .time!
+                                                .length >
+                                            2
                                         ? 200.0
                                         : 100
                                     : 100,
@@ -56,7 +72,8 @@ class AvailabilityScreen extends StatelessWidget {
                               )
                             ],
                           ),
-                          bottombarController.astrologerAvailavility[index].time!.isEmpty
+                          bottombarController
+                                  .astrologerAvailavility[index].time!.isEmpty
                               ? Container(
                                   width: Get.width * 0.45,
                                   margin: EdgeInsets.only(top: 10),
@@ -75,16 +92,32 @@ class AvailabilityScreen extends StatelessWidget {
                                   child: ListView.builder(
                                       physics: NeverScrollableScrollPhysics(),
                                       shrinkWrap: true,
-                                      itemCount: bottombarController.astrologerAvailavility[index].time!.length,
+                                      itemCount: bottombarController
+                                          .astrologerAvailavility[index]
+                                          .time!
+                                          .length,
                                       itemBuilder: (context, i) {
                                         return Container(
                                           padding: EdgeInsets.all(8),
                                           margin: const EdgeInsets.only(top: 8),
                                           decoration: BoxDecoration(
-                                            border: Border.all(color: Colors.grey),
-                                            borderRadius: BorderRadius.circular(20),
+                                            border:
+                                                Border.all(color: Colors.grey),
+                                            borderRadius:
+                                                BorderRadius.circular(20),
                                           ),
-                                          child: (bottombarController.astrologerAvailavility[index].time![i].fromTime == null || bottombarController.astrologerAvailavility[index].time![i].toTime == null)
+                                          child: (bottombarController
+                                                          .astrologerAvailavility[
+                                                              index]
+                                                          .time![i]
+                                                          .fromTime ==
+                                                      null ||
+                                                  bottombarController
+                                                          .astrologerAvailavility[
+                                                              index]
+                                                          .time![i]
+                                                          .toTime ==
+                                                      null)
                                               ? Text(
                                                   'Not Available',
                                                   textAlign: TextAlign.center,

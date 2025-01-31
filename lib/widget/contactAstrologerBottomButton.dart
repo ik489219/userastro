@@ -1,4 +1,4 @@
-import 'package:AstrowayCustomer/views/bottomNavigationBarScreen.dart';
+import 'package:astromeetCustomer/views/bottomNavigationBarScreen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -22,7 +22,8 @@ class ContactAstrologerCottomButton extends StatelessWidget {
             Expanded(
               child: GestureDetector(
                 onTap: () {
-                  BottomNavigationController bottomNavigationController = Get.find<BottomNavigationController>();
+                  BottomNavigationController bottomNavigationController =
+                      Get.find<BottomNavigationController>();
                   bottomNavigationController.setIndex(1, 0);
                   Get.to(() => BottomNavigationBarScreen(index: 1));
                 },
@@ -51,12 +52,12 @@ class ContactAstrologerCottomButton extends StatelessWidget {
                           padding: const EdgeInsets.only(left: 5),
                           child: Text(
                             'Chat with Astrologers',
-                            style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
-                              fontWeight: FontWeight.w500,
-                              letterSpacing: -0.2,
-                              wordSpacing: 0,
-                              color: Colors.white
-                            ),
+                            style: Get.theme.primaryTextTheme.bodySmall!
+                                .copyWith(
+                                    fontWeight: FontWeight.w500,
+                                    letterSpacing: -0.2,
+                                    wordSpacing: 0,
+                                    color: Colors.white),
                           ).tr(),
                         ),
                       ],
@@ -71,7 +72,8 @@ class ContactAstrologerCottomButton extends StatelessWidget {
             Expanded(
               child: GestureDetector(
                 onTap: () {
-                  BottomNavigationController bottomNavigationController = Get.find<BottomNavigationController>();
+                  BottomNavigationController bottomNavigationController =
+                      Get.find<BottomNavigationController>();
                   bottomNavigationController.setIndex(3, 0);
                   Get.to(() => BottomNavigationBarScreen(
                         index: 3,
@@ -102,12 +104,12 @@ class ContactAstrologerCottomButton extends StatelessWidget {
                           padding: const EdgeInsets.only(left: 5),
                           child: Text(
                             'Call with Astrologers',
-                            style: Get.theme.primaryTextTheme.bodySmall!.copyWith(
-                              fontWeight: FontWeight.w500,
-                              letterSpacing: -0.2,
-                              wordSpacing: 0,
-                              color: Colors.white
-                            ),
+                            style: Get.theme.primaryTextTheme.bodySmall!
+                                .copyWith(
+                                    fontWeight: FontWeight.w500,
+                                    letterSpacing: -0.2,
+                                    wordSpacing: 0,
+                                    color: Colors.white),
                           ).tr(),
                         ),
                       ],

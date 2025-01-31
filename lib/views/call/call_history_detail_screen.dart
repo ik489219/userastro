@@ -3,10 +3,10 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:AstrowayCustomer/controllers/chatController.dart';
-import 'package:AstrowayCustomer/controllers/history_controller.dart';
-import 'package:AstrowayCustomer/controllers/splashController.dart';
-import 'package:AstrowayCustomer/views/call/player.dart';
+import 'package:astromeetCustomer/controllers/chatController.dart';
+import 'package:astromeetCustomer/controllers/history_controller.dart';
+import 'package:astromeetCustomer/controllers/splashController.dart';
+import 'package:astromeetCustomer/views/call/player.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -14,7 +14,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../../controllers/bottomNavigationController.dart';
@@ -276,8 +276,10 @@ class _CallHistoryDetailScreenState extends State<CallHistoryDetailScreen> {
                                     color: Get.theme.primaryColor,
                                     borderRadius: BorderRadius.circular(15),
                                   ),
-                                  child: Icon(Icons.share,
-                                  color: Colors.white,),
+                                  child: Icon(
+                                    Icons.share,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               )
                             ],
@@ -318,7 +320,6 @@ class _CallHistoryDetailScreenState extends State<CallHistoryDetailScreen> {
                             ),
                           )
                         : SizedBox.shrink(),
-
                     SizedBox(
                       height: 5,
                     ),

@@ -1,24 +1,24 @@
 import 'dart:io';
 
-import 'package:AstrowayCustomer/controllers/astrologyBlogController.dart';
-import 'package:AstrowayCustomer/controllers/bottomNavigationController.dart';
-import 'package:AstrowayCustomer/controllers/dailyHoroscopeController.dart';
-import 'package:AstrowayCustomer/controllers/homeController.dart';
-import 'package:AstrowayCustomer/controllers/kundliController.dart';
-import 'package:AstrowayCustomer/controllers/kundliMatchingController.dart';
-import 'package:AstrowayCustomer/controllers/liveController.dart';
-import 'package:AstrowayCustomer/views/astroBlog/astrologyBlogListScreen.dart';
-import 'package:AstrowayCustomer/views/astroBlog/astrologyDetailScreen.dart';
-import 'package:AstrowayCustomer/views/astrologerVideo.dart';
-import 'package:AstrowayCustomer/views/blog_screen.dart';
-import 'package:AstrowayCustomer/views/daily_horoscope/dailyHoroScopeDetailScreen.dart';
-import 'package:AstrowayCustomer/views/kudali/kundliScreen.dart';
-import 'package:AstrowayCustomer/views/kundliMatching/kundliMatchingScreen.dart';
-import 'package:AstrowayCustomer/views/liveAstrologerList.dart';
-import 'package:AstrowayCustomer/views/live_astrologer/live_astrologer_screen.dart';
-import 'package:AstrowayCustomer/views/panchangScreen.dart';
+import 'package:astromeetCustomer/controllers/astrologyBlogController.dart';
+import 'package:astromeetCustomer/controllers/bottomNavigationController.dart';
+import 'package:astromeetCustomer/controllers/dailyHoroscopeController.dart';
+import 'package:astromeetCustomer/controllers/homeController.dart';
+import 'package:astromeetCustomer/controllers/kundliController.dart';
+import 'package:astromeetCustomer/controllers/kundliMatchingController.dart';
+import 'package:astromeetCustomer/controllers/liveController.dart';
+import 'package:astromeetCustomer/views/astroBlog/astrologyBlogListScreen.dart';
+import 'package:astromeetCustomer/views/astroBlog/astrologyDetailScreen.dart';
+import 'package:astromeetCustomer/views/astrologerVideo.dart';
+import 'package:astromeetCustomer/views/blog_screen.dart';
+import 'package:astromeetCustomer/views/daily_horoscope/dailyHoroScopeDetailScreen.dart';
+import 'package:astromeetCustomer/views/kudali/kundliScreen.dart';
+import 'package:astromeetCustomer/views/kundliMatching/kundliMatchingScreen.dart';
+import 'package:astromeetCustomer/views/liveAstrologerList.dart';
+import 'package:astromeetCustomer/views/live_astrologer/live_astrologer_screen.dart';
+import 'package:astromeetCustomer/views/panchangScreen.dart';
 
-import 'package:AstrowayCustomer/widget/contactAstrologerBottomButton.dart';
+import 'package:astromeetCustomer/widget/contactAstrologerBottomButton.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
@@ -26,7 +26,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../utils/images.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 // ignore: must_be_immutable
 class FreeServiceScreen extends StatelessWidget {

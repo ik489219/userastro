@@ -1,4 +1,4 @@
-import 'package:AstrowayCustomer/controllers/themeController.dart';
+import 'package:astromeetCustomer/controllers/themeController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -22,7 +22,9 @@ ThemeData nativeTheme({bool? darkModeEnabled}) {
   }
   if (darkModeEnabled) {
     return ThemeData(
-      appBarTheme: AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.transparent)),
+      appBarTheme: AppBarTheme(
+          systemOverlayStyle:
+              SystemUiOverlayStyle(statusBarColor: Colors.transparent)),
       fontFamily: 'Roboto',
       primaryColor: Colors.black,
       primaryColorLight: Colors.black,
@@ -54,8 +56,7 @@ ThemeData nativeTheme({bool? darkModeEnabled}) {
         bodyMedium: TextStyle(color: Colors.white),
       ),
     );
-  }
-  else {
+  } else {
     return ThemeData(
       appBarTheme: AppBarTheme(
         systemOverlayStyle: SystemUiOverlayStyle(

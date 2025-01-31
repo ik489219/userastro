@@ -1,18 +1,17 @@
 import 'dart:async';
 import 'dart:developer';
-import 'package:AstrowayCustomer/controllers/bottomNavigationController.dart';
-import 'package:AstrowayCustomer/controllers/callController.dart';
-import 'package:AstrowayCustomer/controllers/splashController.dart';
-import 'package:AstrowayCustomer/main.dart';
-import 'package:AstrowayCustomer/model/messsage_model_live.dart';
-import 'package:AstrowayCustomer/model/live_user_model.dart';
+import 'package:astromeetCustomer/controllers/bottomNavigationController.dart';
+import 'package:astromeetCustomer/controllers/splashController.dart';
+import 'package:astromeetCustomer/main.dart';
+import 'package:astromeetCustomer/model/messsage_model_live.dart';
+import 'package:astromeetCustomer/model/live_user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 import '../model/wait_list_model.dart';
 import '../utils/services/api_helper.dart';
@@ -154,10 +153,14 @@ class LiveController extends GetxController {
     }
   }
 
+  bool isStartEndingCall = false;
+
   Future<dynamic> cutPaymentForLive(int userId, int timeInSecond,
       int astrologerId, String transactionType, String chatId,
       {String? sId1, String? sId2, String? channelName}) async {
     try {
+      isStartEndingCall = true;
+      update();
       debugPrint("SIDCut payment called");
       debugPrint('SID1:- $sId1');
       debugPrint('SID2:- $sId2');
@@ -307,16 +310,15 @@ class LiveController extends GetxController {
                                         1000 * int.parse(waitList[index5].time);
                               }
                               await global.callOnFcmApiSendPushNotifications(
-                                  fcmTokem: ["$astrologerFcmToken"],
-                                  title: "For timer and session start for live",
-                                  subTitle:
-                                      "For timer and session start for live",
-                                  waitListId:"${id}",
-                                  channelname: channel.toString(),
-                                  profile: global.user.profile.toString(),
-                                  name:global.user.name ?? "user" ,
-
-                                  );
+                                fcmTokem: ["$astrologerFcmToken"],
+                                title: "For timer and session start for live",
+                                subTitle:
+                                    "For timer and session start for live",
+                                waitListId: "${id}",
+                                channelname: channel.toString(),
+                                profile: global.user.profile.toString(),
+                                name: global.user.name ?? "user",
+                              );
                               if (liveController.liveUsers.isEmpty) {
                                 await liveController.getLiveuserData(channel!);
                               }
@@ -337,18 +339,16 @@ class LiveController extends GetxController {
                               debugPrint("otherJoinUsersFcmTokens" +
                                   otherJoinUsersFcmTokens.toString());
                               await global.callOnFcmApiSendPushNotifications(
-                                  fcmTokem: otherJoinUsersFcmTokens,
-                                  title:
-                                      "For starting the timer in other audions for video and audio",
-                                  subTitle:
-                                      "For starting the timer in other audions for video and audio",
-                                  waitListId:"${id}",
-                                  channelname: channel.toString(),
-                                  profile: global.user.profile.toString(),
-                                  name:global.user.name ?? "user" ,
-
-
-                                  );
+                                fcmTokem: otherJoinUsersFcmTokens,
+                                title:
+                                    "For starting the timer in other audions for video and audio",
+                                subTitle:
+                                    "For starting the timer in other audions for video and audio",
+                                waitListId: "${id}",
+                                channelname: channel.toString(),
+                                profile: global.user.profile.toString(),
+                                name: global.user.name ?? "user",
+                              );
                               //here we will call the methods for sending all other users notification for timer start.
                               isLeaveCalled = false;
                               update();
@@ -381,14 +381,14 @@ class LiveController extends GetxController {
                               chatId = "${global.user.id}" + "_" + "$astroId";
                               update();
                               global.callOnFcmApiSendPushNotifications(
-                                  fcmTokem: ["$astrologerFcmToken"],
-                                  title: "For Live Streaming Chat",
-                                  subTitle: "For Live Streaming Chat",
-                                  waitListId:"${id}",
-                                  liveChatSUserName:global.user.name,
-                                  sessionType:"start",
-                                  chatId:chatId,
-                                  );
+                                fcmTokem: ["$astrologerFcmToken"],
+                                title: "For Live Streaming Chat",
+                                subTitle: "For Live Streaming Chat",
+                                waitListId: "${id}",
+                                liveChatSUserName: global.user.name,
+                                sessionType: "start",
+                                chatId: chatId,
+                              );
                               timer2 =
                                   Timer.periodic(Duration(seconds: 1), (timer) {
                                 debugPrint("totalCompletedTimeForChat:" +
@@ -430,7 +430,7 @@ class LiveController extends GetxController {
   }
 
   Future<dynamic> addToWaitList(
-      String channel, String requestType, int astrologerId,String time) async {
+      String channel, String requestType, int astrologerId, String time) async {
     try {
       await global.checkBody().then((result) async {
         if (result) {
@@ -441,7 +441,7 @@ class LiveController extends GetxController {
               .addToWaitlist(
                   channel: channel,
                   requestType: requestType,
-                  time: "${int.parse(time.toString())*60}",
+                  time: "${int.parse(time.toString()) * 60}",
                   userId: global.currentUserId,
                   userName: "${global.user.name}",
                   userProfile: "${global.user.profile}",

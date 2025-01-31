@@ -1,9 +1,9 @@
 import 'dart:developer';
 
-import 'package:AstrowayCustomer/model/geoCodingModel.dart';
+import 'package:astromeetCustomer/model/geoCodingModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 import '../model/astrologer_model.dart';
 import '../model/astromall_product_model.dart';
 import '../utils/services/api_helper.dart';
@@ -60,7 +60,9 @@ class SearchControllerCustom extends GetxController {
 
   void paginateTask() {
     searchScrollController.addListener(() async {
-      if (searchScrollController.position.pixels == searchScrollController.position.maxScrollExtent && !isAllDataLoaded) {
+      if (searchScrollController.position.pixels ==
+              searchScrollController.position.maxScrollExtent &&
+          !isAllDataLoaded) {
         isMoreDataAvailable = true;
         update();
         if (searchString != null || searchString != "") {
@@ -70,7 +72,9 @@ class SearchControllerCustom extends GetxController {
       }
     });
     searchAstromallScrollController.addListener(() async {
-      if (searchAstromallScrollController.position.pixels == searchAstromallScrollController.position.maxScrollExtent && !isAllDataLoadedForAstromall) {
+      if (searchAstromallScrollController.position.pixels ==
+              searchAstromallScrollController.position.maxScrollExtent &&
+          !isAllDataLoadedForAstromall) {
         isMoreDataAvailableForAstromall = true;
         update();
         if (searchString != null || searchString != "") {
@@ -81,7 +85,8 @@ class SearchControllerCustom extends GetxController {
     });
   }
 
-  getSearchResult(String searchString, String? filter, bool isLazyLoading) async {
+  getSearchResult(
+      String searchString, String? filter, bool isLazyLoading) async {
     try {
       global.showOnlyLoaderDialog(Get.context);
       String filterKey = "";
@@ -109,10 +114,13 @@ class SearchControllerCustom extends GetxController {
 
       await global.checkBody().then((result) async {
         if (result) {
-          await apiHelper.searchAstrologer(filter ?? filterKey, searchString, startIndex, fetchRecord).then((result) {
+          await apiHelper
+              .searchAstrologer(
+                  filter ?? filterKey, searchString, startIndex, fetchRecord)
+              .then((result) {
             if (result.status == "200") {
-               log("searchlist");
-               log("${result.recordList}");
+              log("searchlist");
+              log("${result.recordList}");
               if (filterKey == "astromall") {
                 astroProduct.addAll(result.recordList);
                 print('astromall search list length ${astroProduct.length} ');
@@ -122,7 +130,8 @@ class SearchControllerCustom extends GetxController {
                 }
               } else {
                 astrologerList.addAll(result.recordList);
-                print('astrologer search list length ${astrologerList.length} ');
+                print(
+                    'astrologer search list length ${astrologerList.length} ');
                 if (result.recordList.length == 0) {
                   isMoreDataAvailable = false;
                   isAllDataLoaded = true;
@@ -150,7 +159,9 @@ class SearchControllerCustom extends GetxController {
     try {
       await global.checkBody().then((result) async {
         if (result) {
-          await apiHelper.searchProductByCategory(productCategoryId, searchString).then((result) {
+          await apiHelper
+              .searchProductByCategory(productCategoryId, searchString)
+              .then((result) {
             if (result.status == "200") {
               astroCategoryProduct = result.recordList;
               update();

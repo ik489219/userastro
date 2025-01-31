@@ -3,24 +3,24 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:AstrowayCustomer/controllers/astrologer_assistant_controller.dart';
-import 'package:AstrowayCustomer/controllers/bottomNavigationController.dart';
-import 'package:AstrowayCustomer/controllers/callController.dart';
-import 'package:AstrowayCustomer/controllers/chatController.dart';
-import 'package:AstrowayCustomer/controllers/follow_astrologer_controller.dart';
-import 'package:AstrowayCustomer/controllers/gift_controller.dart';
-import 'package:AstrowayCustomer/controllers/homeController.dart';
-import 'package:AstrowayCustomer/controllers/reviewController.dart';
-import 'package:AstrowayCustomer/controllers/settings_controller.dart';
-import 'package:AstrowayCustomer/controllers/splashController.dart';
-import 'package:AstrowayCustomer/controllers/userProfileController.dart';
-import 'package:AstrowayCustomer/controllers/walletController.dart';
-import 'package:AstrowayCustomer/main.dart';
-import 'package:AstrowayCustomer/views/astrologerProfile/availabilityScreen.dart';
-import 'package:AstrowayCustomer/views/astrologerProfile/chat_with_assistant_screen.dart';
-import 'package:AstrowayCustomer/views/paymentInformationScreen.dart';
-import 'package:AstrowayCustomer/views/stories/viewStories.dart';
-import 'package:AstrowayCustomer/widget/showReviewWidget.dart';
+import 'package:astromeetCustomer/controllers/astrologer_assistant_controller.dart';
+import 'package:astromeetCustomer/controllers/bottomNavigationController.dart';
+import 'package:astromeetCustomer/controllers/callController.dart';
+import 'package:astromeetCustomer/controllers/chatController.dart';
+import 'package:astromeetCustomer/controllers/follow_astrologer_controller.dart';
+import 'package:astromeetCustomer/controllers/gift_controller.dart';
+import 'package:astromeetCustomer/controllers/homeController.dart';
+import 'package:astromeetCustomer/controllers/reviewController.dart';
+import 'package:astromeetCustomer/controllers/settings_controller.dart';
+import 'package:astromeetCustomer/controllers/splashController.dart';
+import 'package:astromeetCustomer/controllers/userProfileController.dart';
+import 'package:astromeetCustomer/controllers/walletController.dart';
+import 'package:astromeetCustomer/main.dart';
+import 'package:astromeetCustomer/views/astrologerProfile/availabilityScreen.dart';
+import 'package:astromeetCustomer/views/astrologerProfile/chat_with_assistant_screen.dart';
+import 'package:astromeetCustomer/views/paymentInformationScreen.dart';
+import 'package:astromeetCustomer/views/stories/viewStories.dart';
+import 'package:astromeetCustomer/widget/showReviewWidget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -29,7 +29,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -38,8 +38,7 @@ import '../callIntakeFormScreen.dart';
 
 class AstrologerProfile extends StatefulWidget {
   final int index;
-  AstrologerProfile({a, o, required this.index})
-      : super();
+  AstrologerProfile({a, o, required this.index}) : super();
 
   @override
   State<AstrologerProfile> createState() => _AstrologerProfileState();
@@ -53,18 +52,15 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
 
   WalletController walletController = Get.find<WalletController>();
 
-
   SplashController splashController = Get.find<SplashController>();
-
 
   HomeController homeController = Get.find<HomeController>();
 
   BottomNavigationController bottomNavigationController2 =
       Get.find<BottomNavigationController>();
 
-
   Future<void> dialogForJoinInWaitList(
-      context, String astrologerName, bool forChat,String status) async {
+      context, String astrologerName, bool forChat, String status) async {
     showDialog(
         context: context,
         builder: (context) {
@@ -79,7 +75,7 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                   width: 50,
                   fit: BoxFit.cover,
                   imageUrl:
-                  "${global.imgBaseurl}${bottomNavigationController2.astrologerbyId[0].profileImage}",
+                      "${global.imgBaseurl}${bottomNavigationController2.astrologerbyId[0].profileImage}",
                   imageBuilder: (context, imageProvider) {
                     return CircleAvatar(
                       radius: 35,
@@ -88,7 +84,7 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                     );
                   },
                   placeholder: (context, url) =>
-                  const Center(child: CircularProgressIndicator()),
+                      const Center(child: CircularProgressIndicator()),
                   errorWidget: (context, url, error) {
                     return Container(
                       child: CircleAvatar(
@@ -122,8 +118,11 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Text(
-                  status.toString()=="Offline"? 'You can not talk to astrologer because astrologer is Currently Offline':(status.toString()=="Busy"?
-                  'You can not talk to astrologer because astrologer is Currently Busy':"You can not talk to astrologer because astrologer is Currently in Break"),
+                  status.toString() == "Offline"
+                      ? 'You can not talk to astrologer because astrologer is Currently Offline'
+                      : (status.toString() == "Busy"
+                          ? 'You can not talk to astrologer because astrologer is Currently Busy'
+                          : "You can not talk to astrologer because astrologer is Currently in Break"),
                   style: TextStyle(
                     color: Colors.red,
                     fontSize: 15.sp,
@@ -315,10 +314,11 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
 
   @override
   void initState() {
-
-    homeController.getAstroStory(bottomController.astrologerbyId[0].id.toString());
+    homeController
+        .getAstroStory(bottomController.astrologerbyId[0].id.toString());
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -356,10 +356,9 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                 onTap: () async {
                   await FlutterShare.share(
                       title:
-                      '${global.getSystemFlagValueForLogin(global.systemFlagNameList.appName)}',
+                          '${global.getSystemFlagValueForLogin(global.systemFlagNameList.appName)}',
                       text:
-                      "Hey! I am using ${global.getSystemFlagValue(global.systemFlagNameList.appName)} to get predictions related to marriage/career. I would recommend you to connect with best Astrologer at ${global.getSystemFlagValue(global.systemFlagNameList.appName)}. ");
-
+                          "Hey! I am using ${global.getSystemFlagValue(global.systemFlagNameList.appName)} to get predictions related to marriage/career. I would recommend you to connect with best Astrologer at ${global.getSystemFlagValue(global.systemFlagNameList.appName)}. ");
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
@@ -469,53 +468,79 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(top: 5),
-                                      child:   GetBuilder<HomeController>(builder: (homeController) {
-                                          return InkWell(
-                                            onTap: (){
-                                              homeController.viewSingleStory.length==0?null:
-                                              Navigator.of(context).push(
-                                                MaterialPageRoute(builder: (context) => ViewStoriesScreen(profile: "${global.imgBaseurl}${bottomController.astrologerbyId[0].profileImage}",
-                                                  name: bottomController.astrologerbyId[0].name.toString(),isprofile: true,
-                                                astroId:int.parse(bottomController.astrologerbyId[0].id.toString()) ,)),
-                                              );
-                                            },
-                                            child: Container(
-                                                height: 70,
-                                              width: 70,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(36),
-                                                  border: Border.all(
-
-                                                      width: 4,
-                                                      color:homeController.viewSingleStory.length==0?Colors.grey: Get.theme.primaryColor)),
-                                              child: ClipRRect(
-                                                borderRadius: BorderRadius.circular(36),
-                                               // backgroundColor: Colors.white,
-                                                child: CachedNetworkImage(
-                                                  imageUrl:
-                                                      "${global.imgBaseurl}${bottomController.astrologerbyId[0].profileImage}",
-                                                  fit: BoxFit.cover,
-                                                  placeholder: (context, url) =>
-                                                      const Center(
-                                                          child:
-                                                              CircularProgressIndicator()),
-                                                  errorWidget: (context, url, error) {
-                                                    return CircleAvatar(
-                                                        radius: 35,
-                                                        backgroundColor: Colors.white,
-                                                        child: Image.asset(
-                                                          Images.deafultUser,
-                                                          fit: BoxFit.fill,
-                                                          height: 50,
-                                                        ));
-                                                  },
-                                                ),
+                                      child: GetBuilder<HomeController>(
+                                          builder: (homeController) {
+                                        return InkWell(
+                                          onTap: () {
+                                            homeController.viewSingleStory
+                                                        .length ==
+                                                    0
+                                                ? null
+                                                : Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ViewStoriesScreen(
+                                                              profile:
+                                                                  "${global.imgBaseurl}${bottomController.astrologerbyId[0].profileImage}",
+                                                              name: bottomController
+                                                                  .astrologerbyId[
+                                                                      0]
+                                                                  .name
+                                                                  .toString(),
+                                                              isprofile: true,
+                                                              astroId: int.parse(
+                                                                  bottomController
+                                                                      .astrologerbyId[
+                                                                          0]
+                                                                      .id
+                                                                      .toString()),
+                                                            )),
+                                                  );
+                                          },
+                                          child: Container(
+                                            height: 70,
+                                            width: 70,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(36),
+                                                border: Border.all(
+                                                    width: 4,
+                                                    color: homeController
+                                                                .viewSingleStory
+                                                                .length ==
+                                                            0
+                                                        ? Colors.grey
+                                                        : Get.theme
+                                                            .primaryColor)),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(36),
+                                              // backgroundColor: Colors.white,
+                                              child: CachedNetworkImage(
+                                                imageUrl:
+                                                    "${global.imgBaseurl}${bottomController.astrologerbyId[0].profileImage}",
+                                                fit: BoxFit.cover,
+                                                placeholder: (context, url) =>
+                                                    const Center(
+                                                        child:
+                                                            CircularProgressIndicator()),
+                                                errorWidget:
+                                                    (context, url, error) {
+                                                  return CircleAvatar(
+                                                      radius: 35,
+                                                      backgroundColor:
+                                                          Colors.white,
+                                                      child: Image.asset(
+                                                        Images.deafultUser,
+                                                        fit: BoxFit.fill,
+                                                        height: 50,
+                                                      ));
+                                                },
                                               ),
                                             ),
-                                          );
-                                        }
-                                      ),
+                                          ),
+                                        );
+                                      }),
                                     ),
                                     bottomController.astrologerbyId[0].isFollow!
                                         ? Padding(
@@ -992,29 +1017,29 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                                 }
                                               }
 
-                                              await Get.to(() =>
-                                                  CallIntakeFormScreen(
-                                                    type: "Chat",
-                                                    astrologerId:
-                                                        bottomNavigationController
-                                                            .astrologerbyId[0]
-                                                            .id!,
-                                                    astrologerName:
-                                                        bottomNavigationController
-                                                            .astrologerbyId[0]
-                                                            .name!,
-                                                    astrologerProfile:
-                                                        bottomNavigationController
-                                                            .astrologerbyId[0]
-                                                            .profileImage!,
-                                                    isFreeAvailable:
-                                                        bottomNavigationController
-                                                            .astrologerbyId[0]
-                                                            .isFreeAvailable!,
-                                                      rate:bottomNavigationController
+                                              await Get.to(() => CallIntakeFormScreen(
+                                                  type: "Chat",
+                                                  astrologerId:
+                                                      bottomNavigationController
                                                           .astrologerbyId[0]
-                                                          .charge!.toString()
-                                                  ));
+                                                          .id!,
+                                                  astrologerName:
+                                                      bottomNavigationController
+                                                          .astrologerbyId[0]
+                                                          .name!,
+                                                  astrologerProfile:
+                                                      bottomNavigationController
+                                                          .astrologerbyId[0]
+                                                          .profileImage!,
+                                                  isFreeAvailable:
+                                                      bottomNavigationController
+                                                          .astrologerbyId[0]
+                                                          .isFreeAvailable!,
+                                                  rate:
+                                                      bottomNavigationController
+                                                          .astrologerbyId[0]
+                                                          .charge!
+                                                          .toString()));
                                               global.hideLoader();
                                             } else {
                                               bottomNavigationController
@@ -1031,8 +1056,9 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                                     .astrologerbyId[0].name!,
                                                 true,
                                                 bottomNavigationController
-                                                    .astrologerbyId[0].chatStatus.toString()
-                                            );
+                                                    .astrologerbyId[0]
+                                                    .chatStatus
+                                                    .toString());
                                           }
                                         } else {
                                           global.showOnlyLoaderDialog(context);
@@ -1119,29 +1145,29 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                                           "Online");
                                                 }
                                               }
-                                              await Get.to(() =>
-                                                  CallIntakeFormScreen(
-                                                    astrologerProfile:
-                                                        bottomNavigationController
-                                                            .astrologerbyId[0]
-                                                            .profileImage!,
-                                                    type: "Call",
-                                                    astrologerId:
-                                                        bottomNavigationController
-                                                            .astrologerbyId[0]
-                                                            .id!,
-                                                    astrologerName:
-                                                        bottomNavigationController
-                                                            .astrologerbyId[0]
-                                                            .name!,
-                                                    isFreeAvailable:
-                                                        bottomNavigationController
-                                                            .astrologerbyId[0]
-                                                            .isFreeAvailable,
-                                                      rate:bottomNavigationController
+                                              await Get.to(() => CallIntakeFormScreen(
+                                                  astrologerProfile:
+                                                      bottomNavigationController
                                                           .astrologerbyId[0]
-                                                          .charge.toString()
-                                                  ));
+                                                          .profileImage!,
+                                                  type: "Call",
+                                                  astrologerId:
+                                                      bottomNavigationController
+                                                          .astrologerbyId[0]
+                                                          .id!,
+                                                  astrologerName:
+                                                      bottomNavigationController
+                                                          .astrologerbyId[0]
+                                                          .name!,
+                                                  isFreeAvailable:
+                                                      bottomNavigationController
+                                                          .astrologerbyId[0]
+                                                          .isFreeAvailable,
+                                                  rate:
+                                                      bottomNavigationController
+                                                          .astrologerbyId[0]
+                                                          .charge
+                                                          .toString()));
                                               global.hideLoader();
                                             } else {
                                               bottomNavigationController
@@ -1158,8 +1184,9 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                                     .astrologerbyId[0].name!,
                                                 true,
                                                 bottomNavigationController
-                                                    .astrologerbyId[0].chatStatus.toString()
-                                            );
+                                                    .astrologerbyId[0]
+                                                    .chatStatus
+                                                    .toString());
                                           }
                                         } else {
                                           global.showOnlyLoaderDialog(context);
@@ -2296,7 +2323,7 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                 children: [
                   Expanded(
                     child:
-                    GetBuilder<ChatController>(builder: (chatController) {
+                        GetBuilder<ChatController>(builder: (chatController) {
                       return InkWell(
                         onTap: () async {
                           bool isLogin = await global.isLogin();
@@ -2306,80 +2333,80 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                     .astrologerbyId[0].charge!
                                     .toString());
                             if (charge * 5 <=
-                                global.splashController.currentUser!
-                                    .walletAmount! ||
+                                    global.splashController.currentUser!
+                                        .walletAmount! ||
                                 bottomNavigationController
-                                    .astrologerbyId[0].isFreeAvailable ==
+                                        .astrologerbyId[0].isFreeAvailable ==
                                     true) {
                               if (bottomNavigationController
-                                  .astrologerbyId[0].chatStatus ==
+                                      .astrologerbyId[0].chatStatus ==
                                   "Online") {
                                 await bottomNavigationController
                                     .checkAlreadyInReq(
-                                    bottomNavigationController
-                                        .astrologerbyId[0].id!);
+                                        bottomNavigationController
+                                            .astrologerbyId[0].id!);
                                 if (bottomNavigationController
-                                    .isUserAlreadyInChatReq ==
+                                        .isUserAlreadyInChatReq ==
                                     false) {
                                   global.showOnlyLoaderDialog(context);
 
                                   if (bottomNavigationController
-                                      .astrologerbyId[0].chatWaitTime !=
+                                          .astrologerbyId[0].chatWaitTime !=
                                       null) {
                                     if (bottomNavigationController
-                                        .astrologerbyId[0].chatWaitTime!
-                                        .difference(DateTime.now())
-                                        .inMinutes <
+                                            .astrologerbyId[0].chatWaitTime!
+                                            .difference(DateTime.now())
+                                            .inMinutes <
                                         0) {
                                       await bottomNavigationController
                                           .changeOfflineStatus(
-                                          bottomNavigationController
-                                              .astrologerbyId[0].id!,
-                                          "Online");
+                                              bottomNavigationController
+                                                  .astrologerbyId[0].id!,
+                                              "Online");
                                     }
                                   }
 
                                   await Get.to(() => CallIntakeFormScreen(
-                                    type: "Chat",
-                                    astrologerId: bottomNavigationController
-                                        .astrologerbyId[0].id!,
-                                    astrologerName:
-                                    bottomNavigationController
-                                        .astrologerbyId[0].name!,
-                                    astrologerProfile:
-                                    bottomNavigationController
-                                        .astrologerbyId[0]
-                                        .profileImage!,
-                                    isFreeAvailable:
-                                    bottomNavigationController
-                                        .astrologerbyId[0]
-                                        .isFreeAvailable,
-                                    rate: bottomNavigationController
-                                        .astrologerbyId[0]
-                                        .charge.toString(),
-                                    //index: index,
-                                  ));
+                                        type: "Chat",
+                                        astrologerId: bottomNavigationController
+                                            .astrologerbyId[0].id!,
+                                        astrologerName:
+                                            bottomNavigationController
+                                                .astrologerbyId[0].name!,
+                                        astrologerProfile:
+                                            bottomNavigationController
+                                                .astrologerbyId[0]
+                                                .profileImage!,
+                                        isFreeAvailable:
+                                            bottomNavigationController
+                                                .astrologerbyId[0]
+                                                .isFreeAvailable,
+                                        rate: bottomNavigationController
+                                            .astrologerbyId[0].charge
+                                            .toString(),
+                                        //index: index,
+                                      ));
                                   global.hideLoader();
                                 } else {
                                   bottomNavigationController
                                       .dialogForNotCreatingSession(context);
                                 }
-                              } else if (
-                              bottomNavigationController
-                                  .astrologerbyId[0].chatStatus ==
-                                  "Offline" || bottomNavigationController
-                                  .astrologerbyId[0].chatStatus ==
-                                  "Wait Time" ) {
+                              } else if (bottomNavigationController
+                                          .astrologerbyId[0].chatStatus ==
+                                      "Offline" ||
+                                  bottomNavigationController
+                                          .astrologerbyId[0].chatStatus ==
+                                      "Wait Time") {
                                 dialogForJoinInWaitList(
                                     context,
                                     bottomNavigationController
                                         .astrologerbyId[0].name!,
                                     true,
                                     bottomNavigationController
-                                        .astrologerbyId[0].chatStatus.toString()
-                                );
+                                        .astrologerbyId[0].chatStatus
+                                        .toString());
                               } else if (bottomNavigationController
-                                  .astrologerbyId[0].chatStatus ==
+                                      .astrologerbyId[0].chatStatus ==
                                   "Busy") {
                                 dialogForJoinInWaitList(
                                     context,
@@ -2387,8 +2414,8 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                         .astrologerbyId[0].name!,
                                     true,
                                     bottomNavigationController
-                                        .astrologerbyId[0].chatStatus.toString()
-                                );
+                                        .astrologerbyId[0].chatStatus
+                                        .toString());
                               }
                             } else {
                               global.showOnlyLoaderDialog(context);
@@ -2407,75 +2434,74 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                             borderRadius: BorderRadius.circular(15.0),
                           ),
                           color: bottomNavigationController
-                              .astrologerbyId[0]
-                              .chatStatus ==
-                              "Online"?Colors.lightBlue:Colors.orangeAccent, //Get.theme.primaryColor,
+                                      .astrologerbyId[0].chatStatus ==
+                                  "Online"
+                              ? Colors.lightBlue
+                              : Colors.orangeAccent, //Get.theme.primaryColor,
                           elevation: 10,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              Icon(
-                                  CupertinoIcons.chat_bubble_2,
-                                  color: Colors.white
-                              ),
+                              Icon(CupertinoIcons.chat_bubble_2,
+                                  color: Colors.white),
                               Center(
                                 child: Column(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceAround,
+                                      MainAxisAlignment.spaceAround,
                                   children: [
                                     Column(
                                       children: [
                                         Text(
                                           "Chat",
                                           textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              color: Colors.white),
+                                          style: TextStyle(color: Colors.white),
                                         ).tr(),
                                         bottomNavigationController
-                                            .astrologerbyId[0]
-                                            .chatStatus ==
-                                            "Offline"||bottomNavigationController
-                                            .astrologerbyId[0]
-                                            .chatStatus ==
-                                            "Busy"
+                                                        .astrologerbyId[0]
+                                                        .chatStatus ==
+                                                    "Offline" ||
+                                                bottomNavigationController
+                                                        .astrologerbyId[0]
+                                                        .chatStatus ==
+                                                    "Busy"
                                             ? Text(
-                                          bottomNavigationController
-                                              .astrologerbyId[0]
-                                              .chatStatus ==
-                                              "Offline"? "Currently Offline":'Currently Busy',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 8,
-                                              fontWeight:
-                                              FontWeight.w500),
-                                        ).tr()
+                                                bottomNavigationController
+                                                            .astrologerbyId[0]
+                                                            .chatStatus ==
+                                                        "Offline"
+                                                    ? "Currently Offline"
+                                                    : 'Currently Busy',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 8,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ).tr()
                                             : bottomNavigationController
-                                            .astrologerbyId[0]
-                                            .chatStatus ==
-                                            "Online"
-                                            ? SizedBox()
-                                            : Text(
-                                          bottomNavigationController
-                                              .astrologerbyId[
-                                          0]
-                                              .chatWaitTime!
-                                              .difference(
-                                              DateTime
-                                                  .now())
-                                              .inMinutes >
-                                              0
-                                              ? "Wait till - ${bottomNavigationController.astrologerbyId[0].chatWaitTime!.difference(DateTime.now()).inMinutes} min"
-                                              : "Waiting",
-                                          textAlign:
-                                          TextAlign.center,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 8,
-                                              fontWeight:
-                                              FontWeight
-                                                  .w500),
-                                        ).tr(),
+                                                        .astrologerbyId[0]
+                                                        .chatStatus ==
+                                                    "Online"
+                                                ? SizedBox()
+                                                : Text(
+                                                    bottomNavigationController
+                                                                .astrologerbyId[
+                                                                    0]
+                                                                .chatWaitTime!
+                                                                .difference(
+                                                                    DateTime
+                                                                        .now())
+                                                                .inMinutes >
+                                                            0
+                                                        ? "Wait till - ${bottomNavigationController.astrologerbyId[0].chatWaitTime!.difference(DateTime.now()).inMinutes} min"
+                                                        : "Waiting",
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 8,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ).tr(),
                                       ],
                                     ),
                                   ],
@@ -2490,7 +2516,7 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                   ),
                   Expanded(
                     child:
-                    GetBuilder<CallController>(builder: (callController) {
+                        GetBuilder<CallController>(builder: (callController) {
                       return InkWell(
                         onTap: () async {
                           bool isLogin = await global.isLogin();
@@ -2500,56 +2526,56 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                     .astrologerbyId[0].charge!
                                     .toString());
                             if (charge * 5 <=
-                                global.splashController.currentUser!
-                                    .walletAmount! ||
+                                    global.splashController.currentUser!
+                                        .walletAmount! ||
                                 bottomNavigationController
-                                    .astrologerbyId[0].isFreeAvailable ==
+                                        .astrologerbyId[0].isFreeAvailable ==
                                     true) {
                               if (bottomNavigationController
-                                  .astrologerbyId[0].callStatus ==
-                                  "Online" ) {
+                                      .astrologerbyId[0].callStatus ==
+                                  "Online") {
                                 await bottomNavigationController
                                     .checkAlreadyInReqForCall(
-                                    bottomNavigationController
-                                        .astrologerbyId[0].id!);
+                                        bottomNavigationController
+                                            .astrologerbyId[0].id!);
                                 if (bottomNavigationController
-                                    .isUserAlreadyInCallReq ==
+                                        .isUserAlreadyInCallReq ==
                                     false) {
                                   global.showOnlyLoaderDialog(context);
                                   if (bottomNavigationController
-                                      .astrologerbyId[0].callWaitTime !=
+                                          .astrologerbyId[0].callWaitTime !=
                                       null) {
                                     if (bottomNavigationController
-                                        .astrologerbyId[0].callWaitTime!
-                                        .difference(DateTime.now())
-                                        .inMinutes <
+                                            .astrologerbyId[0].callWaitTime!
+                                            .difference(DateTime.now())
+                                            .inMinutes <
                                         0) {
                                       await bottomNavigationController
                                           .changeOfflineCallStatus(
-                                          bottomNavigationController
-                                              .astrologerbyId[0].id!,
-                                          "Online");
+                                              bottomNavigationController
+                                                  .astrologerbyId[0].id!,
+                                              "Online");
                                     }
                                   }
                                   await Get.to(() => CallIntakeFormScreen(
-                                    astrologerProfile:
-                                    bottomNavigationController
-                                        .astrologerbyId[0]
-                                        .profileImage!,
-                                    type: "Call",
-                                    astrologerId: bottomNavigationController
-                                        .astrologerbyId[0].id!,
-                                    astrologerName:
-                                    bottomNavigationController
-                                        .astrologerbyId[0].name!,
-                                    isFreeAvailable:
-                                    bottomNavigationController
-                                        .astrologerbyId[0]
-                                        .isFreeAvailable,
-                                    rate: bottomNavigationController
-                                        .astrologerbyId[0]
-                                        .charge.toString(),
-                                  ));
+                                        astrologerProfile:
+                                            bottomNavigationController
+                                                .astrologerbyId[0]
+                                                .profileImage!,
+                                        type: "Call",
+                                        astrologerId: bottomNavigationController
+                                            .astrologerbyId[0].id!,
+                                        astrologerName:
+                                            bottomNavigationController
+                                                .astrologerbyId[0].name!,
+                                        isFreeAvailable:
+                                            bottomNavigationController
+                                                .astrologerbyId[0]
+                                                .isFreeAvailable,
+                                        rate: bottomNavigationController
+                                            .astrologerbyId[0].charge
+                                            .toString(),
+                                      ));
 
                                   global.hideLoader();
                                 } else {
@@ -2557,13 +2583,13 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                       .dialogForNotCreatingSession(context);
                                 }
                               } else if (bottomNavigationController
-                                  .astrologerbyId[0].callStatus ==
-                                  "Offline" ||
+                                          .astrologerbyId[0].callStatus ==
+                                      "Offline" ||
                                   bottomNavigationController
-                                      .astrologerbyId[0].callStatus ==
-                                      "Busy"||
+                                          .astrologerbyId[0].callStatus ==
+                                      "Busy" ||
                                   bottomNavigationController
-                                      .astrologerbyId[0].callStatus ==
+                                          .astrologerbyId[0].callStatus ==
                                       "Wait Time") {
                                 dialogForJoinInWaitList(
                                     context,
@@ -2571,8 +2597,8 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                         .astrologerbyId[0].name!,
                                     true,
                                     bottomNavigationController
-                                        .astrologerbyId[0].chatStatus.toString()
-                                );
+                                        .astrologerbyId[0].chatStatus
+                                        .toString());
                               }
                             } else {
                               global.showOnlyLoaderDialog(context);
@@ -2591,72 +2617,73 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                             borderRadius: BorderRadius.circular(15.0),
                           ),
                           color: bottomNavigationController
-                              .astrologerbyId[0]
-                              .callStatus=="Online"?Colors.green:Colors.orangeAccent , //Get.theme.primaryColor,
+                                      .astrologerbyId[0].callStatus ==
+                                  "Online"
+                              ? Colors.green
+                              : Colors.orangeAccent, //Get.theme.primaryColor,
                           elevation: 10,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              Icon(Icons.call,
-                                  color:  Colors.white
-                              ),
+                              Icon(Icons.call, color: Colors.white),
                               Center(
                                 child: Column(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceAround,
+                                      MainAxisAlignment.spaceAround,
                                   children: [
                                     Column(
                                       children: [
                                         Text(
                                           "Audio",
                                           textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              color: Colors.white),
+                                          style: TextStyle(color: Colors.white),
                                         ).tr(),
                                         bottomNavigationController
-                                            .astrologerbyId[0]
-                                            .callStatus ==
-                                            "Offline" ||bottomNavigationController
-                                            .astrologerbyId[0]
-                                            .callStatus ==
-                                            "Busy"
+                                                        .astrologerbyId[0]
+                                                        .callStatus ==
+                                                    "Offline" ||
+                                                bottomNavigationController
+                                                        .astrologerbyId[0]
+                                                        .callStatus ==
+                                                    "Busy"
                                             ? Text(
-                                          bottomNavigationController
-                                              .astrologerbyId[0]
-                                              .callStatus=="Offline"?"Currently Offline":"Currently Busy",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 8,
-                                              fontWeight:
-                                              FontWeight.w500),
-                                        ).tr()
+                                                bottomNavigationController
+                                                            .astrologerbyId[0]
+                                                            .callStatus ==
+                                                        "Offline"
+                                                    ? "Currently Offline"
+                                                    : "Currently Busy",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 8,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ).tr()
                                             : bottomNavigationController
-                                            .astrologerbyId[0]
-                                            .callStatus ==
-                                            "Online"
-                                            ? SizedBox():
-                                        Text(
-                                          bottomNavigationController
-                                              .astrologerbyId[
-                                          0]
-                                              .callWaitTime!
-                                              .difference(
-                                              DateTime
-                                                  .now())
-                                              .inMinutes >
-                                              0
-                                              ? "Wait till - ${bottomNavigationController.astrologerbyId[0].callWaitTime!.difference(DateTime.now()).inMinutes} min"
-                                              : "Waiting",
-                                          textAlign:
-                                          TextAlign.center,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 8,
-                                              fontWeight:
-                                              FontWeight
-                                                  .w500),
-                                        ).tr(),
+                                                        .astrologerbyId[0]
+                                                        .callStatus ==
+                                                    "Online"
+                                                ? SizedBox()
+                                                : Text(
+                                                    bottomNavigationController
+                                                                .astrologerbyId[
+                                                                    0]
+                                                                .callWaitTime!
+                                                                .difference(
+                                                                    DateTime
+                                                                        .now())
+                                                                .inMinutes >
+                                                            0
+                                                        ? "Wait till - ${bottomNavigationController.astrologerbyId[0].callWaitTime!.difference(DateTime.now()).inMinutes} min"
+                                                        : "Waiting",
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 8,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ).tr(),
                                       ],
                                     ),
                                   ],
@@ -2671,70 +2698,69 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                   ),
                   Expanded(
                     child:
-                    GetBuilder<CallController>(builder: (callController) {
+                        GetBuilder<CallController>(builder: (callController) {
                       return InkWell(
                         onTap: () async {
                           bool isLogin = await global.isLogin();
                           if (isLogin) {
                             print("video call rate");
-                            print("${bottomNavigationController
-                                .astrologerbyId[0].videoCallRate!
-                                .toString()}");
+                            print(
+                                "${bottomNavigationController.astrologerbyId[0].videoCallRate!.toString()}");
                             double charge = double.parse(
                                 bottomNavigationController
                                     .astrologerbyId[0].videoCallRate!
                                     .toString());
                             if (charge * 5 <=
-                                global.splashController.currentUser!
-                                    .walletAmount! ||
+                                    global.splashController.currentUser!
+                                        .walletAmount! ||
                                 bottomNavigationController
-                                    .astrologerbyId[0].isFreeAvailable ==
+                                        .astrologerbyId[0].isFreeAvailable ==
                                     true) {
                               if (bottomNavigationController
-                                  .astrologerbyId[0].callStatus ==
-                                  "Online" ) {
+                                      .astrologerbyId[0].callStatus ==
+                                  "Online") {
                                 await bottomNavigationController
                                     .checkAlreadyInReqForCall(
-                                    bottomNavigationController
-                                        .astrologerbyId[0].id!);
+                                        bottomNavigationController
+                                            .astrologerbyId[0].id!);
                                 if (bottomNavigationController
-                                    .isUserAlreadyInCallReq ==
+                                        .isUserAlreadyInCallReq ==
                                     false) {
                                   global.showOnlyLoaderDialog(context);
                                   if (bottomNavigationController
-                                      .astrologerbyId[0].callWaitTime !=
+                                          .astrologerbyId[0].callWaitTime !=
                                       null) {
                                     if (bottomNavigationController
-                                        .astrologerbyId[0].callWaitTime!
-                                        .difference(DateTime.now())
-                                        .inMinutes <
+                                            .astrologerbyId[0].callWaitTime!
+                                            .difference(DateTime.now())
+                                            .inMinutes <
                                         0) {
                                       await bottomNavigationController
                                           .changeOfflineCallStatus(
-                                          bottomNavigationController
-                                              .astrologerbyId[0].id!,
-                                          "Online");
+                                              bottomNavigationController
+                                                  .astrologerbyId[0].id!,
+                                              "Online");
                                     }
                                   }
                                   await Get.to(() => CallIntakeFormScreen(
-                                    astrologerProfile:
-                                    bottomNavigationController
-                                        .astrologerbyId[0]
-                                        .profileImage!,
-                                    type: "Videocall",
-                                    astrologerId: bottomNavigationController
-                                        .astrologerbyId[0].id!,
-                                    astrologerName:
-                                    bottomNavigationController
-                                        .astrologerbyId[0].name!,
-                                    isFreeAvailable:
-                                    bottomNavigationController
-                                        .astrologerbyId[0]
-                                        .isFreeAvailable,
-                                    rate: bottomNavigationController
-                                        .astrologerbyId[0]
-                                        .videoCallRate.toString(),
-                                  ));
+                                        astrologerProfile:
+                                            bottomNavigationController
+                                                .astrologerbyId[0]
+                                                .profileImage!,
+                                        type: "Videocall",
+                                        astrologerId: bottomNavigationController
+                                            .astrologerbyId[0].id!,
+                                        astrologerName:
+                                            bottomNavigationController
+                                                .astrologerbyId[0].name!,
+                                        isFreeAvailable:
+                                            bottomNavigationController
+                                                .astrologerbyId[0]
+                                                .isFreeAvailable,
+                                        rate: bottomNavigationController
+                                            .astrologerbyId[0].videoCallRate
+                                            .toString(),
+                                      ));
 
                                   global.hideLoader();
                                 } else {
@@ -2742,13 +2768,13 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                       .dialogForNotCreatingSession(context);
                                 }
                               } else if (bottomNavigationController
-                                  .astrologerbyId[0].callStatus ==
-                                  "Offline" ||
+                                          .astrologerbyId[0].callStatus ==
+                                      "Offline" ||
                                   bottomNavigationController
-                                      .astrologerbyId[0].callStatus ==
-                                      "Busy"||
+                                          .astrologerbyId[0].callStatus ==
+                                      "Busy" ||
                                   bottomNavigationController
-                                      .astrologerbyId[0].callStatus ==
+                                          .astrologerbyId[0].callStatus ==
                                       "Wait Time") {
                                 dialogForJoinInWaitList(
                                     context,
@@ -2756,8 +2782,8 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                                         .astrologerbyId[0].name!,
                                     true,
                                     bottomNavigationController
-                                        .astrologerbyId[0].chatStatus.toString()
-                                );
+                                        .astrologerbyId[0].chatStatus
+                                        .toString());
                               }
                             } else {
                               global.showOnlyLoaderDialog(context);
@@ -2775,74 +2801,74 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0),
                           ),
-                          color:
-                          bottomNavigationController
-                              .astrologerbyId[0].callStatus ==
-                              "Online"? Colors.redAccent:Colors.orangeAccent, //Get.theme.primaryColor,
+                          color: bottomNavigationController
+                                      .astrologerbyId[0].callStatus ==
+                                  "Online"
+                              ? Colors.redAccent
+                              : Colors.orangeAccent, //Get.theme.primaryColor,
                           elevation: 10,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              Icon(Icons.video_call,
-                                  color:Colors.white),
+                              Icon(Icons.video_call, color: Colors.white),
                               Center(
                                 child: Column(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceAround,
+                                      MainAxisAlignment.spaceAround,
                                   children: [
                                     Column(
                                       children: [
                                         Text(
                                           "Video",
                                           textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              color: Colors.white),
+                                          style: TextStyle(color: Colors.white),
                                         ).tr(),
                                         bottomNavigationController
-                                            .astrologerbyId[0]
-                                            .callStatus ==
-                                            "Offline"||bottomNavigationController
-                                            .astrologerbyId[0]
-                                            .callStatus ==
-                                            "Busy"
+                                                        .astrologerbyId[0]
+                                                        .callStatus ==
+                                                    "Offline" ||
+                                                bottomNavigationController
+                                                        .astrologerbyId[0]
+                                                        .callStatus ==
+                                                    "Busy"
                                             ? Text(
-                                          bottomNavigationController
-                                              .astrologerbyId[0]
-                                              .callStatus ==
-                                              "Busy"? 'Currently Busy':"Currently Offline",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 8,
-                                              fontWeight:
-                                              FontWeight.w500),
-                                        ).tr()
+                                                bottomNavigationController
+                                                            .astrologerbyId[0]
+                                                            .callStatus ==
+                                                        "Busy"
+                                                    ? 'Currently Busy'
+                                                    : "Currently Offline",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 8,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ).tr()
                                             : bottomNavigationController
-                                            .astrologerbyId[0]
-                                            .callStatus ==
-                                            "Online"
-                                            ? SizedBox()
-                                            : Text(
-                                          bottomNavigationController
-                                              .astrologerbyId[
-                                          0]
-                                              .callWaitTime!
-                                              .difference(
-                                              DateTime
-                                                  .now())
-                                              .inMinutes >
-                                              0
-                                              ? "Wait till - ${bottomNavigationController.astrologerbyId[0].callWaitTime!.difference(DateTime.now()).inMinutes} min"
-                                              : "Waiting",
-                                          textAlign:
-                                          TextAlign.center,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 8,
-                                              fontWeight:
-                                              FontWeight
-                                                  .w500),
-                                        ).tr(),
+                                                        .astrologerbyId[0]
+                                                        .callStatus ==
+                                                    "Online"
+                                                ? SizedBox()
+                                                : Text(
+                                                    bottomNavigationController
+                                                                .astrologerbyId[
+                                                                    0]
+                                                                .callWaitTime!
+                                                                .difference(
+                                                                    DateTime
+                                                                        .now())
+                                                                .inMinutes >
+                                                            0
+                                                        ? "Wait till - ${bottomNavigationController.astrologerbyId[0].callWaitTime!.difference(DateTime.now()).inMinutes} min"
+                                                        : "Waiting",
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 8,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ).tr(),
                                       ],
                                     ),
                                   ],
@@ -3049,7 +3075,6 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
                           // await walletController.getAmount();
                           // global.hideLoader();
                           // Get.to(() => AddmoneyToWallet());
-
 
                           Get.to(() => PaymentInformationScreen(
                               flag: 0,

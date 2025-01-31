@@ -2,15 +2,15 @@
 
 import 'dart:io';
 
-import 'package:AstrowayCustomer/controllers/astrologyBlogController.dart';
-import 'package:AstrowayCustomer/controllers/homeController.dart';
-import 'package:AstrowayCustomer/views/astroBlog/astrologyDetailScreen.dart';
+import 'package:astromeetCustomer/controllers/astrologyBlogController.dart';
+import 'package:astromeetCustomer/controllers/homeController.dart';
+import 'package:astromeetCustomer/views/astroBlog/astrologyDetailScreen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 import '../../model/home_Model.dart';
 import '../../utils/images.dart';

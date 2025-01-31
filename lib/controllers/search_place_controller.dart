@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_google_places_sdk/flutter_google_places_sdk.dart';
 import 'package:get/get.dart';
 
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 class SearchPlaceController extends GetxController {
   FlutterGooglePlacesSdk? placesSdk;
@@ -15,9 +15,11 @@ class SearchPlaceController extends GetxController {
 
   @override
   void onInit() {
-    placesSdk = FlutterGooglePlacesSdk(global.getSystemFlagValue(global.systemFlagNameList.googleMapApiKey));
+    placesSdk = FlutterGooglePlacesSdk(
+        global.getSystemFlagValue(global.systemFlagNameList.googleMapApiKey));
     print("google key");
-    print("${global.getSystemFlagValue(global.systemFlagNameList.googleMapApiKey)}");
+    print(
+        "${global.getSystemFlagValue(global.systemFlagNameList.googleMapApiKey)}");
     super.onInit();
   }
 

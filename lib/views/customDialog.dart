@@ -1,13 +1,14 @@
 // ignore_for_file: must_be_immutable
 import 'dart:developer';
-import 'package:AstrowayCustomer/controllers/chatController.dart';
-import 'package:AstrowayCustomer/utils/images.dart';
+import 'package:astromeetCustomer/controllers/chatController.dart';
+import 'package:astromeetCustomer/utils/images.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
 class CustomDialog extends StatefulWidget {
   String? astrologerName;
   String? astrologerProfile;
@@ -17,6 +18,7 @@ class CustomDialog extends StatefulWidget {
   @override
   State<CustomDialog> createState() => _CustomDialogState();
 }
+
 class _CustomDialogState extends State<CustomDialog> {
   @override
   void initState() {
@@ -25,11 +27,13 @@ class _CustomDialogState extends State<CustomDialog> {
     log('init2 ${widget.astrologerProfile}');
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return contentBox(widget.astrologerName, widget.astrologerProfile,
         widget.astrologerId, context);
   }
+
   contentBox(astroname, astroProfile, astrologerID, context) {
     return Material(
       color: Colors.transparent,
@@ -163,7 +167,7 @@ class _CustomDialogState extends State<CustomDialog> {
                     );
                   },
                   placeholder: (context, url) =>
-                  const Center(child: CircularProgressIndicator()),
+                      const Center(child: CircularProgressIndicator()),
                   errorWidget: (context, url, error) {
                     return CircleAvatar(
                         radius: 4.h,

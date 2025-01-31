@@ -1,14 +1,13 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:AstrowayCustomer/controllers/counsellorController.dart';
-import 'package:AstrowayCustomer/controllers/walletController.dart';
-import 'package:AstrowayCustomer/views/counsellor/callWithCounsellor.dart';
-import 'package:AstrowayCustomer/views/counsellor/chatWithCounSellor.dart';
+import 'package:astromeetCustomer/controllers/counsellorController.dart';
+import 'package:astromeetCustomer/controllers/walletController.dart';
+import 'package:astromeetCustomer/views/counsellor/callWithCounsellor.dart';
+import 'package:astromeetCustomer/views/counsellor/chatWithCounSellor.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
-
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 import '../../widget/customAppbarWidget.dart';
 import '../../widget/drawerWidget.dart';
@@ -39,7 +38,7 @@ class CounsellorScreen extends StatelessWidget {
             bgColor: Get.theme.primaryColor,
             actions: [
               InkWell(
-                onTap: () async{
+                onTap: () async {
                   global.showOnlyLoaderDialog(context);
                   await walletcontroller.getAmount();
                   global.hideLoader();

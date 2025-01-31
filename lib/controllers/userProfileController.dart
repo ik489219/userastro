@@ -2,15 +2,15 @@
 
 import 'dart:io';
 
-import 'package:AstrowayCustomer/controllers/splashController.dart';
+import 'package:astromeetCustomer/controllers/splashController.dart';
 
-import 'package:AstrowayCustomer/utils/services/api_helper.dart';
+import 'package:astromeetCustomer/utils/services/api_helper.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -64,8 +64,11 @@ class UserProfileController extends GetxController {
   Future<File> getImageFileFromAssets(String path) async {
     final byteData = await rootBundle.load('assets/$path');
 
-    final file = await File('${(await getApplicationDocumentsDirectory()).path}/$path').create(recursive: true);
-    await file.writeAsBytes(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+    final file =
+        await File('${(await getApplicationDocumentsDirectory()).path}/$path')
+            .create(recursive: true);
+    await file.writeAsBytes(byteData.buffer
+        .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
 
     return file;
   }
@@ -77,12 +80,17 @@ class UserProfileController extends GetxController {
       mobileController.text = splashController.currentUser!.contactNo!;
       profile = splashController.currentUser!.profile ?? "";
       updateGeneder(splashController.currentUser!.gender!);
-      dateController.text = formatDate(splashController.currentUser!.birthDate!, [dd, '-', mm, '-', yyyy]);
+      dateController.text = formatDate(
+          splashController.currentUser!.birthDate!, [dd, '-', mm, '-', yyyy]);
       timeController.text = splashController.currentUser!.birthTime!;
       placeBirthController.text = splashController.currentUser!.birthPlace!;
-      currentAddressController.text = splashController.currentUser!.addressLine1!;
+      currentAddressController.text =
+          splashController.currentUser!.addressLine1!;
       addressController.text = splashController.currentUser!.location!;
-      pinController.text = splashController.currentUser!.pincode.toString() == "null" ? "" : splashController.currentUser!.pincode.toString();
+      pinController.text =
+          splashController.currentUser!.pincode.toString() == "null"
+              ? ""
+              : splashController.currentUser!.pincode.toString();
       imageFile = null;
       userFile = null;
       update();
@@ -126,7 +134,8 @@ class UserProfileController extends GetxController {
   Future<XFile?> openCamera(Color color, {bool isProfile = true}) async {
     try {
       final ImagePicker picker = ImagePicker();
-      XFile? _selectedImage = await picker.pickImage(source: ImageSource.camera);
+      XFile? _selectedImage =
+          await picker.pickImage(source: ImageSource.camera);
 
       if (_selectedImage != null) {
         print("cropped file :- $_selectedImage");
@@ -134,7 +143,8 @@ class UserProfileController extends GetxController {
       }
     } catch (e) {
       // ignore: avoid_print
-      print("Exception - user_profile_controller.dart - openCamera():" + e.toString());
+      print("Exception - user_profile_controller.dart - openCamera():" +
+          e.toString());
     }
     return null;
   }
@@ -142,22 +152,32 @@ class UserProfileController extends GetxController {
   updateCurrentUser(int id) async {
     var basicDetails = {
       "name": nameController.text,
-      "contactNo": splashController.currentUser!.contactNo ==null?mobileController.text:splashController.currentUser!.contactNo,
+      "contactNo": splashController.currentUser!.contactNo == null
+          ? mobileController.text
+          : splashController.currentUser!.contactNo,
       "gender": gender,
       "birthTime": timeController.text == "" ? null : timeController.text,
       "birthDate": pickedDate == null ? null : pickedDate!.toIso8601String(),
-      "birthPlace": placeBirthController.text == "" ? null : placeBirthController.text,
-      "addressLine1": currentAddressController.text == "" ? null : currentAddressController.text,
+      "birthPlace":
+          placeBirthController.text == "" ? null : placeBirthController.text,
+      "addressLine1": currentAddressController.text == ""
+          ? null
+          : currentAddressController.text,
       "addressLine2": null,
       "location": addressController.text == "" ? null : addressController.text,
-      "pincode": pinController.text == "" ? null : int.parse(pinController.text),
+      "pincode":
+          pinController.text == "" ? null : int.parse(pinController.text),
       "profile": profile == "" ? null : profile,
-      "email":emailController.text==""?splashController.currentUser!.email:emailController.text
+      "email": emailController.text == ""
+          ? splashController.currentUser!.email
+          : emailController.text
     };
     try {
       await global.checkBody().then((result) async {
         if (result) {
-          await apiHelper.updateUserProfile(id, basicDetails).then((result) async {
+          await apiHelper
+              .updateUserProfile(id, basicDetails)
+              .then((result) async {
             if (result.status == "200") {
               global.showToast(
                 message: 'Your Profile has been updated',

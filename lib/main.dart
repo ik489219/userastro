@@ -2,29 +2,29 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:AstrowayCustomer/controllers/bottomNavigationController.dart';
-import 'package:AstrowayCustomer/controllers/callController.dart';
-import 'package:AstrowayCustomer/controllers/chatController.dart';
-import 'package:AstrowayCustomer/controllers/customer_support_controller.dart';
-import 'package:AstrowayCustomer/controllers/liveController.dart';
-import 'package:AstrowayCustomer/controllers/splashController.dart';
-import 'package:AstrowayCustomer/controllers/themeController.dart';
-import 'package:AstrowayCustomer/firebase_options.dart';
-import 'package:AstrowayCustomer/theme/nativeTheme.dart';
-import 'package:AstrowayCustomer/utils/CallUtils.dart';
-import 'package:AstrowayCustomer/utils/FallbackLocalizationDelegate.dart';
-import 'package:AstrowayCustomer/utils/binding/networkBinding.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
-import 'package:AstrowayCustomer/utils/global.dart';
-import 'package:AstrowayCustomer/utils/images.dart';
-import 'package:AstrowayCustomer/views/bottomNavigationBarScreen.dart';
-import 'package:AstrowayCustomer/views/call/accept_call_screen.dart';
-import 'package:AstrowayCustomer/views/call/incoming_call_request.dart';
-import 'package:AstrowayCustomer/views/call/oneToOneVideo/onetooneVideo.dart';
-import 'package:AstrowayCustomer/views/chat/chat_screen.dart';
-import 'package:AstrowayCustomer/views/chat/incoming_chat_request.dart';
-import 'package:AstrowayCustomer/views/live_astrologer/live_astrologer_screen.dart';
-import 'package:AstrowayCustomer/views/splashScreen.dart';
+import 'package:astromeetCustomer/controllers/bottomNavigationController.dart';
+import 'package:astromeetCustomer/controllers/callController.dart';
+import 'package:astromeetCustomer/controllers/chatController.dart';
+import 'package:astromeetCustomer/controllers/customer_support_controller.dart';
+import 'package:astromeetCustomer/controllers/liveController.dart';
+import 'package:astromeetCustomer/controllers/splashController.dart';
+import 'package:astromeetCustomer/controllers/themeController.dart';
+import 'package:astromeetCustomer/firebase_options.dart';
+import 'package:astromeetCustomer/theme/nativeTheme.dart';
+import 'package:astromeetCustomer/utils/CallUtils.dart';
+import 'package:astromeetCustomer/utils/FallbackLocalizationDelegate.dart';
+import 'package:astromeetCustomer/utils/binding/networkBinding.dart';
+import 'package:astromeetCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart';
+import 'package:astromeetCustomer/utils/images.dart';
+import 'package:astromeetCustomer/views/bottomNavigationBarScreen.dart';
+import 'package:astromeetCustomer/views/call/accept_call_screen.dart';
+import 'package:astromeetCustomer/views/call/incoming_call_request.dart';
+import 'package:astromeetCustomer/views/call/oneToOneVideo/onetooneVideo.dart';
+import 'package:astromeetCustomer/views/chat/chat_screen.dart';
+import 'package:astromeetCustomer/views/chat/incoming_chat_request.dart';
+import 'package:astromeetCustomer/views/live_astrologer/live_astrologer_screen.dart';
+import 'package:astromeetCustomer/views/splashScreen.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -95,8 +95,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
           liveController.update();
         }
       }
-    }
-    else if (message.data["title"] == "For Live accept/reject") {
+    } else if (message.data["title"] == "For Live accept/reject") {
       Future.delayed(Duration(milliseconds: 500)).then((value) async {
         await _localNotifications.cancelAll();
       });
@@ -137,8 +136,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
           isFollow: isFollow,
         );
       }
-    }
-    else if (message.data["title"] ==
+    } else if (message.data["title"] ==
         "For accepting time while user already splitted") {
       Future.delayed(Duration(milliseconds: 500)).then((value) async {
         await _localNotifications.cancelAll();
@@ -150,8 +148,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
       liveController.joinUserName = message.data["joinUserName"] ?? "";
       liveController.joinUserProfile = message.data["joinUserProfile"] ?? "";
       liveController.update();
-    }
-    else if (message.data["title"] ==
+    } else if (message.data["title"] ==
         "Notification for customer support status update") {
       Future.delayed(Duration(milliseconds: 500)).then((value) async {
         await _localNotifications.cancelAll();
@@ -161,8 +158,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
         customerSupportController.status = message1["status"] ?? "WAITING";
         customerSupportController.update();
       }
-    }
-    else if (message.data["title"] == "End chat from astrologer") {
+    } else if (message.data["title"] == "End chat from astrologer") {
       Future.delayed(Duration(milliseconds: 500)).then((value) async {
         await _localNotifications.cancelAll();
       });
@@ -173,8 +169,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
       chatController.chatBottom = false;
       chatController.isAstrologerEndedChat = true;
       chatController.update();
-    }
-    else if (message.data["title"] == "Astrologer Leave call") {
+    } else if (message.data["title"] == "Astrologer Leave call") {
       Future.delayed(Duration(milliseconds: 500)).then((value) async {
         await _localNotifications.cancelAll();
       });
@@ -183,8 +178,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
       global.sp!.setInt('callBottom', 0);
       callController.callBottom = false;
       callController.update();
-    }
-    else if (messageData['notificationType'] == 4) {
+    } else if (messageData['notificationType'] == 4) {
       await bottomController.getLiveAstrologerList();
       bottomController.liveAstrologer = bottomController.liveAstrologer;
       bottomController.update();
@@ -195,8 +189,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
           await _localNotifications.cancelAll();
         });
       }
-    }
-    else if (messageData['notificationType'] == 3) {
+    } else if (messageData['notificationType'] == 3) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setBool('is_chatdataAvailable', true);
       String extraDataJson = jsonEncode(message.data);
@@ -210,13 +203,12 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
             ? "Astrologer"
             : messageData["astrologerName"],
         astroProfile:
-        messageData["profile"] == null ? "" : messageData["profile"],
+            messageData["profile"] == null ? "" : messageData["profile"],
         firebaseChatId: messageData["firebaseChatId"],
         fcmToken: messageData["fcmToken"],
         duration: messageData['call_duration'],
       );
-    }
-    else if (messageData['notificationType'] == 1) {
+    } else if (messageData['notificationType'] == 1) {
       log('notificationType background :- ${messageData["notificationType"]}');
 
       CallUtils.showIncomingCall(messageData);
@@ -232,16 +224,13 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
         fcmToken: messageData["fcmToken"] ?? "",
         callType: messageData["call_type"],
       );
-    }
-    else if (messageData['notificationType'] == 14) {
+    } else if (messageData['notificationType'] == 14) {
       Future.delayed(Duration(milliseconds: 500)).then((value) async {
         await _localNotifications.cancelAll();
       });
       await bottomController.getLiveAstrologerList();
-    }
-    else
-    {
-      foregroundNotification(message,message.data['icon']??"");
+    } else {
+      foregroundNotification(message, message.data['icon'] ?? "");
     }
   } else {
     Future.delayed(Duration(milliseconds: 500)).then((value) async {
@@ -321,6 +310,7 @@ AndroidNotificationChannel channel = const AndroidNotificationChannel(
   'High Importance Notifications for Atroguru',
   importance: Importance.defaultImportance,
 );
+
 class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   FlutterLocalNotificationsPlugin? flutterLocalNotificationsPlugin;
   @override
@@ -422,7 +412,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             var messageData = json.decode((message.data['body']));
             if (messageData['notificationType'] != null) {
               if (messageData['notificationType'] == 3) {
-                foregroundNotification(message, messageData['icon'] ??"" );
+                foregroundNotification(message, messageData['icon'] ?? "");
                 await player.setSource(AssetSource('ringtone.mp3'));
                 await player.resume();
                 showDialog(
@@ -549,32 +539,32 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                                         timerController.startTimer();
                                         chatController.update();
                                         await player.stop();
-                                       Get.to(() => AcceptChatScreen(
-                                                  flagId: 1,
-                                                  astrologerName: messageData[
-                                                              "astrologerName"] ==
-                                                          null
-                                                      ? "Astrologer"
-                                                      : messageData[
-                                                          "astrologerName"],
-                                                  profileImage: messageData[
-                                                              "profile"] ==
-                                                          null
+                                        Get.to(() => AcceptChatScreen(
+                                              flagId: 1,
+                                              astrologerName: messageData[
+                                                          "astrologerName"] ==
+                                                      null
+                                                  ? "Astrologer"
+                                                  : messageData[
+                                                      "astrologerName"],
+                                              profileImage:
+                                                  messageData["profile"] == null
                                                       ? ""
                                                       : messageData["profile"]
                                                           .toString(),
-                                                  fireBasechatId: messageData[
-                                                          "firebaseChatId"]
+                                              fireBasechatId:
+                                                  messageData["firebaseChatId"]
                                                       .toString(),
-                                                  astrologerId: messageData[
-                                                      "astrologerId"],
-                                                  chatId: int.parse(messageData["chatId"].toString()),
-                                                  fcmToken:
-                                                      messageData["fcmToken"],
-                                                  duration: messageData[
-                                                          'chat_duration']
+                                              astrologerId:
+                                                  messageData["astrologerId"],
+                                              chatId: int.parse(
+                                                  messageData["chatId"]
+                                                      .toString()),
+                                              fcmToken: messageData["fcmToken"],
+                                              duration:
+                                                  messageData['chat_duration']
                                                       .toString(),
-                                                ));
+                                            ));
                                       },
                                       child: Container(
                                         height: 40,
@@ -617,7 +607,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                   fcmToken: messageData["fcmToken"],
                   duration: messageData['call_duration'],
                 );
-                foregroundNotification(message, messageData['icon']??"");
+                foregroundNotification(message, messageData['icon'] ?? "");
                 await FirebaseMessaging.instance
                     .setForegroundNotificationPresentationOptions(
                         alert: true, badge: true, sound: true);
@@ -648,7 +638,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                 await bottomController.getLiveAstrologerList();
                 if (messageData['isFollow'] == 1) {
                   //1 means user follow that astrologer
-                  foregroundNotification(message, messageData['icon']??"");
+                  foregroundNotification(message, messageData['icon'] ?? "");
                   await FirebaseMessaging.instance
                       .setForegroundNotificationPresentationOptions(
                           alert: true, badge: true, sound: true);
@@ -656,7 +646,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
               } else if (messageData['notificationType'] == 14) {
                 await bottomController.getLiveAstrologerList();
               } else {
-                foregroundNotification(message, messageData['icon']??"");
+                foregroundNotification(message, messageData['icon'] ?? "");
                 await FirebaseMessaging.instance
                     .setForegroundNotificationPresentationOptions(
                         alert: true, badge: true, sound: true);
@@ -670,7 +660,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                         alert: true, badge: true, sound: true);
               }
             } else {
-              foregroundNotification(message, messageData['icon']??"");
+              foregroundNotification(message, messageData['icon'] ?? "");
               await FirebaseMessaging.instance
                   .setForegroundNotificationPresentationOptions(
                       alert: true, badge: true, sound: true);
@@ -716,10 +706,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       print("App is detached and disposed");
     }
   }
-
-
-
-
 
   ThemeController themeController = Get.put(ThemeController());
   SplashController splashController = Get.put(SplashController());
@@ -932,13 +918,12 @@ Future<void> foregroundNotificatioCustomAuddio(RemoteMessage payload) async {
       android: android, iOS: initializationSettingsDarwin);
   FlutterLocalNotificationsPlugin().initialize(initialSetting,
       onDidReceiveNotificationResponse: (_) {
-        log('foregroundNotificatioCustomAuddio tap');
+    log('foregroundNotificatioCustomAuddio tap');
 
-        onSelectNotification(json.encode(payload.data));
-      });
+    onSelectNotification(json.encode(payload.data));
+  });
   final customSound = 'app_sound.wav';
-  AndroidNotificationDetails androidDetails =
-  const AndroidNotificationDetails(
+  AndroidNotificationDetails androidDetails = const AndroidNotificationDetails(
     'channel_id_17',
     'channel.name',
     importance: Importance.max,
@@ -952,11 +937,11 @@ Future<void> foregroundNotificatioCustomAuddio(RemoteMessage payload) async {
     sound: customSound,
   );
   final platformChannelSpecifics =
-  NotificationDetails(android: androidDetails, iOS: iOSDetails);
+      NotificationDetails(android: androidDetails, iOS: iOSDetails);
   global.sp = await SharedPreferences.getInstance();
 
   if (global.sp!.getString("currentUser") != null) {
-    await  FlutterLocalNotificationsPlugin().show(
+    await FlutterLocalNotificationsPlugin().show(
       10,
       payload.data['title'], //message.data["title"]
       payload.data['description'] ?? '',
@@ -972,9 +957,9 @@ Future<void> foregroundNotification(
     RemoteMessage payload, String imageUrl) async {
   print("foreground notification:- $payload");
   final String? largeIconPath =
-  await _downloadAndSaveFile("${imgBaseurl}${imageUrl}", 'largeIcon');
+      await _downloadAndSaveFile("${imgBaseurl}${imageUrl}", 'largeIcon');
   final DarwinInitializationSettings initializationSettingsDarwin =
-  DarwinInitializationSettings(
+      DarwinInitializationSettings(
     defaultPresentBadge: true,
     requestSoundPermission: true,
     requestBadgePermission: true,
@@ -984,16 +969,16 @@ Future<void> foregroundNotification(
     },
   );
   AndroidInitializationSettings android =
-  const AndroidInitializationSettings('@mipmap/ic_launcher');
+      const AndroidInitializationSettings('@mipmap/ic_launcher');
 
   final InitializationSettings initialSetting = InitializationSettings(
       android: android, iOS: initializationSettingsDarwin);
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-  FlutterLocalNotificationsPlugin();
+      FlutterLocalNotificationsPlugin();
   flutterLocalNotificationsPlugin.initialize(initialSetting,
       onDidReceiveNotificationResponse: (_) {
-        onSelectNotification(json.encode(payload.data));
-      });
+    onSelectNotification(json.encode(payload.data));
+  });
 
   AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
       channel.id, channel.name,
@@ -1002,10 +987,10 @@ Future<void> foregroundNotification(
       icon: "@mipmap/ic_launcher",
       playSound: true,
       largeIcon: FilePathAndroidBitmap(largeIconPath!)
-    // styleInformation: BigPictureStyleInformation(
-    //   FilePathAndroidBitmap("assets/images/whatsapp.png"), // Big image (Android-specific)
-    // ),
-  );
+      // styleInformation: BigPictureStyleInformation(
+      //   FilePathAndroidBitmap("assets/images/whatsapp.png"), // Big image (Android-specific)
+      // ),
+      );
   const DarwinNotificationDetails iOSDetails = DarwinNotificationDetails();
 
   NotificationDetails platformChannelSpecifics = NotificationDetails(
@@ -1023,6 +1008,7 @@ Future<void> foregroundNotification(
     );
   }
 }
+
 Future<String> _downloadAndSaveFile(String url, String fileName) async {
   final Directory directory = await getApplicationDocumentsDirectory();
   final String filePath = '${directory.path}/$fileName';
@@ -1031,6 +1017,7 @@ Future<String> _downloadAndSaveFile(String url, String fileName) async {
   await file.writeAsBytes(response.bodyBytes);
   return filePath;
 }
+
 AudioPlayer player = new AudioPlayer();
 Future<void> onSelectNotification(String payload) async {
   global.sp = await SharedPreferences.getInstance();
@@ -1047,38 +1034,37 @@ Future<void> onSelectNotification(String payload) async {
         await player.stop();
         body['call_type'].toString() == "11"
             ? Get.to(() => OneToOneLiveScreen(
-          channelname: body["channelName"],
-          callId: body["callId"],
-          fcmToken: body["token"],
-          end_time: body['call_duration'].toString(),
-        ))
+                  channelname: body["channelName"],
+                  callId: body["callId"],
+                  fcmToken: body["token"],
+                  end_time: body['call_duration'].toString(),
+                ))
             : Get.to(() => IncomingCallRequest(
-          astrologerId: body["astrologerId"],
-          astrologerName: body["astrologerName"] == null
-              ? "Astrologer"
-              : body["astrologerName"],
-          astrologerProfile:
-          body["profile"] == null ? "" : body["profile"],
-          token: body["token"],
-          channel: body["channelName"],
-          callId: int.parse(body["callId"].toString()),
-          fcmToken: body["fcmToken"] ?? "",
-          duration: body['call_duration'].toString(),
-        ));
+                  astrologerId: body["astrologerId"],
+                  astrologerName: body["astrologerName"] == null
+                      ? "Astrologer"
+                      : body["astrologerName"],
+                  astrologerProfile:
+                      body["profile"] == null ? "" : body["profile"],
+                  token: body["token"],
+                  channel: body["channelName"],
+                  callId: int.parse(body["callId"].toString()),
+                  fcmToken: body["fcmToken"] ?? "",
+                  duration: body['call_duration'].toString(),
+                ));
       } else if (body["notificationType"] == 3) {
         await player.stop();
-          Get.to(() => IncomingChatRequest(
-            astrologerName: body["astrologerName"] == null
-                ? "Astrologer"
-                : body["astrologerName"],
-            profile: body["profile"] == null ? "" : body["profile"],
-            fireBasechatId: body["firebaseChatId"],
-            chatId: int.parse(body["chatId"].toString()),
-            astrologerId: body["astrologerId"],
-            fcmToken: body["fcmToken"],
-            duration: body['chat_duration'].toString(),
-          ));
-
+        Get.to(() => IncomingChatRequest(
+              astrologerName: body["astrologerName"] == null
+                  ? "Astrologer"
+                  : body["astrologerName"],
+              profile: body["profile"] == null ? "" : body["profile"],
+              fireBasechatId: body["firebaseChatId"],
+              chatId: int.parse(body["chatId"].toString()),
+              astrologerId: body["astrologerId"],
+              fcmToken: body["fcmToken"],
+              duration: body['chat_duration'].toString(),
+            ));
       } else if (body["notificationType"] == 4) {
         String? token = body['token'].toString();
         String channelName = body["channelName"].toString();
@@ -1086,8 +1072,7 @@ Future<void> onSelectNotification(String payload) async {
         String astrologerName = body["name"].toString();
         int astrologerId = int.parse(body["astrologerId"].toString());
         double charge = double.parse(body["charge"].toString());
-        double videoCallCharge =
-        double.parse(body["videoCallRate"].toString());
+        double videoCallCharge = double.parse(body["videoCallRate"].toString());
         bottomController.anotherLiveAstrologers = bottomController
             .liveAstrologer
             .where((element) => element.astrologerId != astrologerId)
@@ -1110,20 +1095,20 @@ Future<void> onSelectNotification(String payload) async {
         bool isFollow = bottomController.astrologerbyId[0].isFollow!;
         liveController.update();
         Get.to(() => LiveAstrologerScreen(
-          token: token,
-          channel: channelName,
-          astrologerName: astrologerName,
-          astrologerId: astrologerId,
-          isFromHome: true,
-          charge: charge,
-          isForLiveCallAcceptDecline: false,
-          videoCallCharge: videoCallCharge,
-          isFollow: isFollow,
-        ));
+              token: token,
+              channel: channelName,
+              astrologerName: astrologerName,
+              astrologerId: astrologerId,
+              isFromHome: true,
+              charge: charge,
+              isForLiveCallAcceptDecline: false,
+              videoCallCharge: videoCallCharge,
+              isFollow: isFollow,
+            ));
       } else {
         print('other notification');
         BottomNavigationController bottomNavigationController =
-        Get.find<BottomNavigationController>();
+            Get.find<BottomNavigationController>();
         bottomNavigationController.setIndex(1, 0);
         Get.off(() => BottomNavigationBarScreen(index: 1));
       }
@@ -1134,4 +1119,3 @@ Future<void> onSelectNotification(String payload) async {
     }
   }
 }
-

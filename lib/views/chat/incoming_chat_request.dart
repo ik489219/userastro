@@ -1,13 +1,13 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:AstrowayCustomer/controllers/chatController.dart';
-import 'package:AstrowayCustomer/utils/images.dart';
-import 'package:AstrowayCustomer/views/chat/chat_screen.dart';
+import 'package:astromeetCustomer/controllers/chatController.dart';
+import 'package:astromeetCustomer/utils/images.dart';
+import 'package:astromeetCustomer/views/chat/chat_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../controllers/bottomNavigationController.dart';
@@ -154,11 +154,11 @@ class IncomingChatRequest extends StatelessWidget {
                   global.callOnFcmApiSendPushNotifications(
                       fcmTokem: [fcmToken], title: 'End chat from customer');
                   BottomNavigationController bottomNavigationController =
-                  Get.find<BottomNavigationController>();
+                      Get.find<BottomNavigationController>();
                   bottomNavigationController.setIndex(0, 0);
                   Get.to(() => BottomNavigationBarScreen(
-                    index: 0,
-                  ));
+                        index: 0,
+                      ));
                 },
                 child: Text(
                   "Reject Chat Request",

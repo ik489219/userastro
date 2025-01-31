@@ -1,10 +1,10 @@
-import 'package:AstrowayCustomer/utils/images.dart';
-import 'package:AstrowayCustomer/views/customer_support/createTicketScreen.dart';
+import 'package:astromeetCustomer/utils/images.dart';
+import 'package:astromeetCustomer/views/customer_support/createTicketScreen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 class HelpDetailTileWidget extends StatelessWidget {
   final String text;
@@ -73,7 +73,12 @@ class HelpDetailTileWidget extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text('See image here', style: TextStyle(decoration: TextDecoration.underline, fontSize: 13, color: Colors.blue)).tr(),
+                        Text('See image here',
+                                style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                    fontSize: 13,
+                                    color: Colors.blue))
+                            .tr(),
                         SizedBox(
                           width: 10,
                         ),
@@ -90,7 +95,10 @@ class HelpDetailTileWidget extends StatelessWidget {
               ? Center(
                   child: Column(
                     children: [
-                      Text('Still need help?', style: Get.textTheme.titleMedium!.copyWith(fontSize: 10)).tr(),
+                      Text('Still need help?',
+                              style: Get.textTheme.titleMedium!
+                                  .copyWith(fontSize: 10))
+                          .tr(),
                       GestureDetector(
                         onTap: () {
                           Get.to(() => CreateTiketScreen(
@@ -105,16 +113,22 @@ class HelpDetailTileWidget extends StatelessWidget {
                           width: 100,
                           padding: const EdgeInsets.all(4),
                           alignment: Alignment.center,
-                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Get.theme.primaryColor),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Get.theme.primaryColor),
                           child: FittedBox(
                             child: Text(
                               'Chat with us',
-                              style: Get.textTheme.titleMedium!.copyWith(fontSize: 13),
+                              style: Get.textTheme.titleMedium!
+                                  .copyWith(fontSize: 13),
                             ).tr(),
                           ),
                         ),
                       ),
-                      Text('Wait time - 5 min', style: Get.textTheme.titleMedium!.copyWith(fontSize: 10)).tr(),
+                      Text('Wait time - 5 min',
+                              style: Get.textTheme.titleMedium!
+                                  .copyWith(fontSize: 10))
+                          .tr(),
                     ],
                   ),
                 )

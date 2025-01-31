@@ -1,8 +1,8 @@
-import 'package:AstrowayCustomer/model/home_Model.dart';
-import 'package:AstrowayCustomer/utils/services/api_helper.dart';
+import 'package:astromeetCustomer/model/home_Model.dart';
+import 'package:astromeetCustomer/utils/services/api_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 class BlogController extends GetxController {
   APIHelper apiHelper = APIHelper();
@@ -37,14 +37,18 @@ class BlogController extends GetxController {
 
   void paginateTask() {
     blogScrollController.addListener(() async {
-      if (blogScrollController.position.pixels == blogScrollController.position.maxScrollExtent && !isAllDataLoaded) {
+      if (blogScrollController.position.pixels ==
+              blogScrollController.position.maxScrollExtent &&
+          !isAllDataLoaded) {
         isMoreDataAvailable = true;
         await getAstrologyBlog("", true);
       }
       update();
     });
     blogSearchScrollController.addListener(() async {
-      if (blogSearchScrollController.position.pixels == blogSearchScrollController.position.maxScrollExtent && !isAllDataLoadedForSearch) {
+      if (blogSearchScrollController.position.pixels ==
+              blogSearchScrollController.position.maxScrollExtent &&
+          !isAllDataLoadedForSearch) {
         isMoreDataAvailableForSearch = true;
         if (searchString != null) {
           await getAstrologyBlog(searchString!, true);
@@ -59,7 +63,12 @@ class BlogController extends GetxController {
     if (kundliName.isEmpty) {
       result = blogList;
     } else {
-      result = blogList.where((element) => element.title.toString().toLowerCase().contains(kundliName.toLowerCase())).toList();
+      result = blogList
+          .where((element) => element.title
+              .toString()
+              .toLowerCase()
+              .contains(kundliName.toLowerCase()))
+          .toList();
     }
     searchBlogList = result;
     update();
@@ -86,7 +95,12 @@ class BlogController extends GetxController {
       }
       await global.checkBody().then((result) async {
         if (result) {
-          await apiHelper.getBlog(searchString, searchString == "" ? startIndex : startIndexForSearch, fetchRecord).then((result) {
+          await apiHelper
+              .getBlog(
+                  searchString,
+                  searchString == "" ? startIndex : startIndexForSearch,
+                  fetchRecord)
+              .then((result) {
             if (result.status == "200") {
               if (searchString == "") {
                 astrologyBlogs.addAll(result.recordList);
@@ -98,7 +112,8 @@ class BlogController extends GetxController {
                 update();
               } else {
                 astrologySearchBlogs.addAll(result.recordList);
-                print('astrology blog search length ${astrologySearchBlogs.length}');
+                print(
+                    'astrology blog search length ${astrologySearchBlogs.length}');
                 if (result.recordList.length == 0) {
                   isMoreDataAvailableForSearch = false;
                   isAllDataLoadedForSearch = true;

@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 class TextFieldWidget extends StatelessWidget {
   final TextEditingController controller;
@@ -14,12 +14,22 @@ class TextFieldWidget extends StatelessWidget {
 
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatter;
-  const TextFieldWidget({Key? key, this.onTap, required this.controller, this.labelText, this.hintText, this.keyboardType, this.maxlen, this.inputFormatter, this.focusNode}) : super(key: key);
+  const TextFieldWidget(
+      {Key? key,
+      this.onTap,
+      required this.controller,
+      this.labelText,
+      this.hintText,
+      this.keyboardType,
+      this.maxlen,
+      this.inputFormatter,
+      this.focusNode})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(bottom: labelText=="Time of Birth"?0:12),
+      padding: EdgeInsets.only(bottom: labelText == "Time of Birth" ? 0 : 12),
       child: Column(
         children: [
           Container(
@@ -38,11 +48,13 @@ class TextFieldWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Get.theme.primaryColor, width: 1.0),
+                  borderSide:
+                      BorderSide(color: Get.theme.primaryColor, width: 1.0),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Get.theme.primaryColor, width: 1.0),
+                  borderSide:
+                      BorderSide(color: Get.theme.primaryColor, width: 1.0),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 fillColor: Colors.grey,

@@ -1,15 +1,14 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:AstrowayCustomer/controllers/bottomNavigationController.dart';
-import 'package:AstrowayCustomer/controllers/reviewController.dart';
-import 'package:AstrowayCustomer/utils/date_converter.dart';
+import 'package:astromeetCustomer/controllers/bottomNavigationController.dart';
+import 'package:astromeetCustomer/controllers/reviewController.dart';
+import 'package:astromeetCustomer/utils/date_converter.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
-
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 import '../utils/images.dart';
 
@@ -24,7 +23,8 @@ class ShowReviewWidget extends StatelessWidget {
     required this.astroImage,
   }) : super(key: key);
   ReviewController reviewController = Get.find<ReviewController>();
-  BottomNavigationController bottomController = Get.find<BottomNavigationController>();
+  BottomNavigationController bottomController =
+      Get.find<BottomNavigationController>();
 
   @override
   Widget build(BuildContext context) {
@@ -49,21 +49,28 @@ class ShowReviewWidget extends StatelessWidget {
                               CircleAvatar(
                                 backgroundColor: Colors.white,
                                 radius: 22,
-                                child: reviewController.reviewList[index].profile == ""
+                                child: reviewController
+                                            .reviewList[index].profile ==
+                                        ""
                                     ? CircleAvatar(
                                         backgroundColor: Colors.white,
-                                        backgroundImage: AssetImage(Images.deafultUser),
+                                        backgroundImage:
+                                            AssetImage(Images.deafultUser),
                                       )
                                     : CachedNetworkImage(
-                                  color: Colors.white,
-                                        imageUrl: '${global.imgBaseurl}${reviewController.reviewList[index].profile}',
+                                        color: Colors.white,
+                                        imageUrl:
+                                            '${global.imgBaseurl}${reviewController.reviewList[index].profile}',
                                         imageBuilder: (context, imageProvider) {
                                           return CircleAvatar(
                                             backgroundColor: Colors.white,
                                             backgroundImage: imageProvider,
                                           );
                                         },
-                                        placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                                        placeholder: (context, url) =>
+                                            const Center(
+                                                child:
+                                                    CircularProgressIndicator()),
                                         errorWidget: (context, url, error) {
                                           return CircleAvatar(
                                               backgroundColor: Colors.white,
@@ -78,12 +85,16 @@ class ShowReviewWidget extends StatelessWidget {
                               SizedBox(
                                 width: 10,
                               ),
-                              Text(reviewController.reviewList[index].username != '' &&
-                                          // ignore: unnecessary_null_comparison
-                                          reviewController.reviewList[index].username != null
-                                      ? reviewController.reviewList[index].username
-                                      : 'Unknown',
-                                  style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600))
+                              Text(
+                                      reviewController.reviewList[index]
+                                                      .username !=
+                                                  ''
+                                          ? reviewController
+                                              .reviewList[index].username
+                                          : 'Unknown',
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w600))
                                   .tr()
                             ],
                           ),
@@ -97,11 +108,17 @@ class ShowReviewWidget extends StatelessWidget {
                                 if (isLogin) {
                                   if (value == 'block') {
                                     global.showOnlyLoaderDialog(context);
-                                    reviewController.blockAstrologerReview(reviewController.reviewList[index].id!, 1, null);
+                                    reviewController.blockAstrologerReview(
+                                        reviewController.reviewList[index].id!,
+                                        1,
+                                        null);
                                     global.hideLoader();
                                   } else {
                                     global.showOnlyLoaderDialog(context);
-                                    reviewController.blockAstrologerReview(reviewController.reviewList[index].id!, null, 1);
+                                    reviewController.blockAstrologerReview(
+                                        reviewController.reviewList[index].id!,
+                                        null,
+                                        1);
                                     global.hideLoader();
                                   }
                                 }
@@ -114,7 +131,8 @@ class ShowReviewWidget extends StatelessWidget {
                                     PopupMenuItem(
                                         child: Text(
                                           'Block review',
-                                          style: Get.textTheme.titleMedium!.copyWith(
+                                          style: Get.textTheme.titleMedium!
+                                              .copyWith(
                                             color: Colors.red,
                                           ),
                                         ).tr(),
@@ -126,28 +144,40 @@ class ShowReviewWidget extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           RatingBar(
-                            initialRating: reviewController.reviewList[index].rating,
+                            initialRating:
+                                reviewController.reviewList[index].rating,
                             itemCount: 5,
                             allowHalfRating: true,
                             itemSize: 15,
                             ignoreGestures: true,
                             ratingWidget: RatingWidget(
-                              full: const Icon(Icons.grade, color: Colors.yellow),
-                              half: const Icon(Icons.star_half, color: Colors.yellow),
-                              empty: const Icon(Icons.grade, color: Colors.grey),
+                              full:
+                                  const Icon(Icons.grade, color: Colors.yellow),
+                              half: const Icon(Icons.star_half,
+                                  color: Colors.yellow),
+                              empty:
+                                  const Icon(Icons.grade, color: Colors.grey),
                             ),
                             onRatingUpdate: (rating) {},
                           ),
                           SizedBox(
                             width: 10,
                           ),
-                          Text(DateConverter.isoStringToLocalDateOnly(reviewController.reviewList[index].updatedAt.toIso8601String()), style: Get.textTheme.titleMedium!.copyWith(color: Colors.grey, fontSize: 10))
+                          Text(
+                              DateConverter.isoStringToLocalDateOnly(
+                                  reviewController.reviewList[index].updatedAt
+                                      .toIso8601String()),
+                              style: Get.textTheme.titleMedium!
+                                  .copyWith(color: Colors.grey, fontSize: 10))
                         ],
                       ),
                       SizedBox(
                         height: 5,
                       ),
-                      Text(reviewController.reviewList[index].review,style: TextStyle(fontSize: 13,fontWeight: FontWeight.w400)).tr(),
+                      Text(reviewController.reviewList[index].review,
+                              style: TextStyle(
+                                  fontSize: 13, fontWeight: FontWeight.w400))
+                          .tr(),
                       reviewController.reviewList[index].reply == ""
                           ? const SizedBox()
                           : Container(
@@ -165,16 +195,26 @@ class ShowReviewWidget extends StatelessWidget {
                                     children: [
                                       CircleAvatar(
                                         radius: 22,
-                                        backgroundImage:NetworkImage("$astroImage"),
+                                        backgroundImage:
+                                            NetworkImage("$astroImage"),
                                       ),
-                                      SizedBox(width: 6,),
-                                      Text(astologername, style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600)).tr(),
+                                      SizedBox(
+                                        width: 6,
+                                      ),
+                                      Text(astologername,
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w600))
+                                          .tr(),
                                     ],
                                   ),
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  Text(reviewController.reviewList[index].reply, style: Get.textTheme.titleMedium!.copyWith(fontSize: 12)).tr()
+                                  Text(reviewController.reviewList[index].reply,
+                                          style: Get.textTheme.titleMedium!
+                                              .copyWith(fontSize: 12))
+                                      .tr()
                                 ],
                               ),
                             )

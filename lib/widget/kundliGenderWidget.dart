@@ -1,13 +1,13 @@
-import 'package:AstrowayCustomer/controllers/kundliController.dart';
+import 'package:astromeetCustomer/controllers/kundliController.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class KundliGenderWidget extends StatelessWidget {
   final KundliController kundliController;
 
-  const KundliGenderWidget({Key? key, required this.kundliController}) : super(key: key);
+  const KundliGenderWidget({Key? key, required this.kundliController})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +32,15 @@ class KundliGenderWidget extends StatelessWidget {
                         onTap: () {
                           kundliController.updateBg(index);
                           kundliController.updateInitialIndex();
-                          kundliController.updateIcon(kundliController.initialIndex);
+                          kundliController
+                              .updateIcon(kundliController.initialIndex);
                         },
                         child: CircleAvatar(
                           radius: 35,
-                          backgroundColor: kundliController.gender[index].isSelected ? Get.theme.primaryColor : Colors.white,
+                          backgroundColor:
+                              kundliController.gender[index].isSelected
+                                  ? Get.theme.primaryColor
+                                  : Colors.white,
                           child: Image.asset(
                             kundliController.gender[index].image,
                             height: 70,

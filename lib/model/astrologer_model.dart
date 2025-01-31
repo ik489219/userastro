@@ -1,4 +1,4 @@
-import 'package:AstrowayCustomer/model/availableTimes_model.dart';
+import 'package:astromeetCustomer/model/availableTimes_model.dart';
 
 import 'availability_model.dart';
 
@@ -131,9 +131,16 @@ class AstrologerModel {
     email = json["email"] ?? "";
     mobileNo = json["mobileNo"];
     gender = json["gender"] ?? "";
-    birthDate = DateTime.parse(json["birthDate"] ?? DateTime.now().toIso8601String());
-    chatWaitTime = json["chatWaitTime"] != null ? DateTime.parse(json["chatWaitTime"] ?? DateTime.now().toIso8601String()) : DateTime.now();
-    callWaitTime = json["callWaitTime"] != null ? DateTime.parse(json["callWaitTime"] ?? DateTime.now().toIso8601String()) : DateTime.now();
+    birthDate =
+        DateTime.parse(json["birthDate"] ?? DateTime.now().toIso8601String());
+    chatWaitTime = json["chatWaitTime"] != null
+        ? DateTime.parse(
+            json["chatWaitTime"] ?? DateTime.now().toIso8601String())
+        : DateTime.now();
+    callWaitTime = json["callWaitTime"] != null
+        ? DateTime.parse(
+            json["callWaitTime"] ?? DateTime.now().toIso8601String())
+        : DateTime.now();
     primarySkill = json["primarySkill"] ?? "";
     allSkill = json["allSkill"] ?? "";
     languageKnown = json["languageKnown"] ?? "";
@@ -176,12 +183,21 @@ class AstrologerModel {
     astorlogerId = json["astorlogerId"] ?? 0;
     reportRate = json["reportRate"] ?? 0;
     astrologerRating = Rating.fromMap(json["astrologerRating"] ?? {});
-    rating = json["rating"] != null ? double.parse(json["rating"].toString()) : 0;
-    createdAt = json['created_at'] != null ? DateTime.parse(json['created_at'].toString()) : null;
-    availability = json['availability'] != null ? List<Availability>.from(json['availability'].map((p) => Availability.fromJson(p))) : [];
+    rating =
+        json["rating"] != null ? double.parse(json["rating"].toString()) : 0;
+    createdAt = json['created_at'] != null
+        ? DateTime.parse(json['created_at'].toString())
+        : null;
+    availability = json['availability'] != null
+        ? List<Availability>.from(
+            json['availability'].map((p) => Availability.fromJson(p)))
+        : [];
     isFreeAvailable = json['isFreeAvailable'];
     videoCallRate = json['videoCallRate'];
-    similiarConsultant = json['similiarConsultant'] != null ? List<SimiliarConsultant>.from(json["similiarConsultant"].map((x) => SimiliarConsultant.fromJson(x))) : [];
+    similiarConsultant = json['similiarConsultant'] != null
+        ? List<SimiliarConsultant>.from(json["similiarConsultant"]
+            .map((x) => SimiliarConsultant.fromJson(x)))
+        : [];
   }
 
   Map<String, dynamic> toJson() => {
@@ -234,7 +250,9 @@ class AstrologerModel {
         "rating": rating,
         "isFreeAvailable": isFreeAvailable,
         "videoCallRate": videoCallRate,
-        "similiarConsultant": similiarConsultant != null ? List<dynamic>.from(similiarConsultant!.map((x) => x.toJson())) : null,
+        "similiarConsultant": similiarConsultant != null
+            ? List<dynamic>.from(similiarConsultant!.map((x) => x.toJson()))
+            : null,
       };
 }
 
@@ -254,11 +272,21 @@ class Rating {
   double? fiveStarRating;
 
   factory Rating.fromMap(Map<String, dynamic> json) => Rating(
-        oneStarRating: json["oneStarRating"] != null ? double.parse(json["oneStarRating"].toString()) : 0,
-        twoStarRating: json["twoStarRating"] != null ? double.parse(json["twoStarRating"].toString()) : 0,
-        threeStarRating: json["threeStarRating"] != null ? double.parse(json["threeStarRating"].toString()) : 0,
-        fourStarRating: json["fourStarRating"] != null ? double.parse(json["fourStarRating"].toString()) : 0,
-        fiveStarRating: json["fiveStarRating"] != null ? double.parse(json["fiveStarRating"].toString()) : 0,
+        oneStarRating: json["oneStarRating"] != null
+            ? double.parse(json["oneStarRating"].toString())
+            : 0,
+        twoStarRating: json["twoStarRating"] != null
+            ? double.parse(json["twoStarRating"].toString())
+            : 0,
+        threeStarRating: json["threeStarRating"] != null
+            ? double.parse(json["threeStarRating"].toString())
+            : 0,
+        fourStarRating: json["fourStarRating"] != null
+            ? double.parse(json["fourStarRating"].toString())
+            : 0,
+        fiveStarRating: json["fiveStarRating"] != null
+            ? double.parse(json["fiveStarRating"].toString())
+            : 0,
       );
 
   Map<String, dynamic> toMap() => {
@@ -285,7 +313,8 @@ class SimiliarConsultant {
     this.id,
   });
 
-  factory SimiliarConsultant.fromJson(Map<String, dynamic> json) => SimiliarConsultant(
+  factory SimiliarConsultant.fromJson(Map<String, dynamic> json) =>
+      SimiliarConsultant(
         profileImage: json["profileImage"] ?? "",
         name: json["name"] ?? "",
         charge: json["charge"] ?? 0,

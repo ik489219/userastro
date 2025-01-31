@@ -2,10 +2,10 @@
 
 import 'dart:async';
 import 'dart:developer';
-import 'package:AstrowayCustomer/controllers/bottomNavigationController.dart';
-import 'package:AstrowayCustomer/controllers/callController.dart';
-import 'package:AstrowayCustomer/controllers/history_controller.dart';
-import 'package:AstrowayCustomer/views/chat/endDialog.dart';
+import 'package:astromeetCustomer/controllers/bottomNavigationController.dart';
+import 'package:astromeetCustomer/controllers/callController.dart';
+import 'package:astromeetCustomer/controllers/history_controller.dart';
+import 'package:astromeetCustomer/views/chat/endDialog.dart';
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:draggable_widget/draggable_widget.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +13,7 @@ import 'package:flutter_countdown_timer/current_remaining_time.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../bottomNavigationBarScreen.dart';
 import 'AgoraEventHandler.dart';
@@ -645,7 +645,6 @@ class OneToOneLiveScreenState extends State<OneToOneLiveScreen> {
                 callController.isLeaveCall = true;
                 log('totalSeconds ${callController.totalSeconds}');
                 global.hideLoader();
-
               }
             },
           );

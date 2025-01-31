@@ -1,9 +1,9 @@
 import 'dart:developer';
 
-import 'package:AstrowayCustomer/controllers/bottomNavigationController.dart';
-import 'package:AstrowayCustomer/model/astrologer_model.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
-import 'package:AstrowayCustomer/utils/services/api_helper.dart';
+import 'package:astromeetCustomer/controllers/bottomNavigationController.dart';
+import 'package:astromeetCustomer/model/astrologer_model.dart';
+import 'package:astromeetCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/services/api_helper.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -31,7 +31,9 @@ class FollowAstrologerController extends GetxController {
 
   void paginateTask() {
     scrollController.addListener(() async {
-      if (scrollController.position.pixels == scrollController.position.maxScrollExtent && !isAllDataLoaded) {
+      if (scrollController.position.pixels ==
+              scrollController.position.maxScrollExtent &&
+          !isAllDataLoaded) {
         isMoreDataAvailable = true;
         print('scroll my following');
         update();
@@ -67,13 +69,15 @@ class FollowAstrologerController extends GetxController {
           await apiHelper.followAstrologer(astrologerId).then((result) {
             if (result.status == "200") {
               global.showToast(
-                message: 'You will be recived notifed when Astrologer is online and live !',
+                message:
+                    'You will be recived notifed when Astrologer is online and live !',
                 textColor: global.textColor,
                 bgColor: global.toastBackGoundColor,
               );
               isFollowed = true;
               update();
-              BottomNavigationController bottomNavigationController = Get.find<BottomNavigationController>();
+              BottomNavigationController bottomNavigationController =
+                  Get.find<BottomNavigationController>();
               bottomNavigationController.getAstrologerbyId(astrologerId);
             } else {
               if (global.currentUserId != null) {
@@ -131,10 +135,13 @@ class FollowAstrologerController extends GetxController {
       }
       await global.checkBody().then((result) async {
         if (result) {
-          await apiHelper.getFollowedAstrologer(startIndex, fetchRecord).then((result) async {
+          await apiHelper
+              .getFollowedAstrologer(startIndex, fetchRecord)
+              .then((result) async {
             if (result.status == "200") {
               followedAstrologer.addAll(result.recordList);
-              print('follow astrologer list length ${followedAstrologer.length} ');
+              print(
+                  'follow astrologer list length ${followedAstrologer.length} ');
               if (result.recordList.length == 0) {
                 isMoreDataAvailable = false;
                 isAllDataLoaded = true;

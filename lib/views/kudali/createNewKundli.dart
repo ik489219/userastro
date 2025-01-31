@@ -1,11 +1,10 @@
-import 'package:AstrowayCustomer/controllers/kundliController.dart';
-import 'package:AstrowayCustomer/widget/createKundliTitleWidget.dart';
-import 'package:AstrowayCustomer/widget/kundliBrithdateWidget.dart';
+import 'package:astromeetCustomer/controllers/kundliController.dart';
+import 'package:astromeetCustomer/widget/createKundliTitleWidget.dart';
+import 'package:astromeetCustomer/widget/kundliBrithdateWidget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
 
 import '../../widget/kudliBirthTimeWidget.dart';
 import '../../widget/kudliBornPlaceWidget.dart';
@@ -24,7 +23,10 @@ class CreateNewKundki extends StatelessWidget {
         height: Get.height,
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          gradient: LinearGradient(begin: Alignment.bottomCenter, end: Alignment.topLeft, colors: [Get.theme.primaryColor, Colors.white]),
+          gradient: LinearGradient(
+              begin: Alignment.bottomCenter,
+              end: Alignment.topLeft,
+              colors: [Get.theme.primaryColor, Colors.white]),
         ),
         child: SingleChildScrollView(
           child: GetBuilder<KundliController>(builder: (c) {
@@ -61,7 +63,9 @@ class CreateNewKundki extends StatelessWidget {
                                 radius: 13,
                                 backgroundColor: Get.theme.primaryColor,
                                 child: Icon(
-                                  kundliController.listIcon[kundliController.initialIndex].icon,
+                                  kundliController
+                                      .listIcon[kundliController.initialIndex]
+                                      .icon,
                                   size: 15,
                                   color: Colors.black,
                                 ),
@@ -69,8 +73,10 @@ class CreateNewKundki extends StatelessWidget {
                             : kundliController.initialIndex >= index
                                 ? GestureDetector(
                                     onTap: () {
-                                      kundliController.backStepForCreateKundli(index);
-                                      kundliController.updateIcon(kundliController.initialIndex);
+                                      kundliController
+                                          .backStepForCreateKundli(index);
+                                      kundliController.updateIcon(
+                                          kundliController.initialIndex);
                                     },
                                     child: CircleAvatar(
                                       radius: 10,
@@ -101,12 +107,15 @@ class CreateNewKundki extends StatelessWidget {
                 ),
                 if (kundliController.initialIndex == 0)
                   KundliNameWidget(
-                    inputFormatters: [FilteringTextInputFormatter.allow(RegExp('[a-zA-Z ]'))],
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp('[a-zA-Z ]'))
+                    ],
                     kundliController: kundliController,
                     onPressed: () {
                       if (!kundliController.isDisable) {
                         kundliController.updateInitialIndex();
-                        kundliController.updateIcon(kundliController.initialIndex);
+                        kundliController
+                            .updateIcon(kundliController.initialIndex);
                       }
                     },
                   ),
@@ -119,7 +128,8 @@ class CreateNewKundki extends StatelessWidget {
                     kundliController: kundliController,
                     onPressed: () {
                       kundliController.updateInitialIndex();
-                      kundliController.updateIcon(kundliController.initialIndex);
+                      kundliController
+                          .updateIcon(kundliController.initialIndex);
                     },
                   ),
                 if (kundliController.initialIndex == 3)
@@ -127,7 +137,8 @@ class CreateNewKundki extends StatelessWidget {
                     kundliController: kundliController,
                     onPressed: () {
                       kundliController.updateInitialIndex();
-                      kundliController.updateIcon(kundliController.initialIndex);
+                      kundliController
+                          .updateIcon(kundliController.initialIndex);
                     },
                   ),
                 if (kundliController.initialIndex == 4)

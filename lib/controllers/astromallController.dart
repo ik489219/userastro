@@ -1,13 +1,14 @@
-import 'package:AstrowayCustomer/model/astromall_category_model.dart';
-import 'package:AstrowayCustomer/model/astromall_product_model.dart';
-import 'package:AstrowayCustomer/model/user_address_model.dart';
-import 'package:AstrowayCustomer/utils/services/api_helper.dart';
+import 'package:astromeetCustomer/model/astromall_category_model.dart';
+import 'package:astromeetCustomer/model/astromall_product_model.dart';
+import 'package:astromeetCustomer/model/user_address_model.dart';
+import 'package:astromeetCustomer/utils/services/api_helper.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
-class AstromallController extends GetxController with GetSingleTickerProviderStateMixin {
+class AstromallController extends GetxController
+    with GetSingleTickerProviderStateMixin {
   List astroCategory = <AstromallCategoryModel>[];
   List astroProduct = <AstromallProductModel>[];
   List astroProductbyId = <AstromallProductModel>[];
@@ -54,7 +55,8 @@ class AstromallController extends GetxController with GetSingleTickerProviderSta
 
   @override
   void onInit() async {
-    tabControllerAstroMall = TabController(length: 3, vsync: this, initialIndex: currentIndexAstroMall);
+    tabControllerAstroMall = TabController(
+        length: 3, vsync: this, initialIndex: currentIndexAstroMall);
     _init();
     super.onInit();
   }
@@ -72,7 +74,9 @@ class AstromallController extends GetxController with GetSingleTickerProviderSta
     astromallCatScrollController.addListener(() async {
       isScrollable = true;
       update();
-      if (astromallCatScrollController.position.pixels == astromallCatScrollController.position.maxScrollExtent && !isAllDataLoaded) {
+      if (astromallCatScrollController.position.pixels ==
+              astromallCatScrollController.position.maxScrollExtent &&
+          !isAllDataLoaded) {
         isMoreDataAvailable = true;
         print('notify in paginatetask');
         update();
@@ -80,7 +84,9 @@ class AstromallController extends GetxController with GetSingleTickerProviderSta
       }
     });
     astromallProductScrollController.addListener(() async {
-      if (astromallProductScrollController.position.pixels == astromallProductScrollController.position.maxScrollExtent && !isAllDataLoadedForProduct) {
+      if (astromallProductScrollController.position.pixels ==
+              astromallProductScrollController.position.maxScrollExtent &&
+          !isAllDataLoadedForProduct) {
         isMoreDataAvailableForProduct = true;
         print('productCatIdddd $productCatId');
         update();
@@ -136,7 +142,9 @@ class AstromallController extends GetxController with GetSingleTickerProviderSta
       }
       await global.checkBody().then((result) async {
         if (result) {
-          await apiHelper.getAstromallCategory(startIndex, fetchRecord).then((result) {
+          await apiHelper
+              .getAstromallCategory(startIndex, fetchRecord)
+              .then((result) {
             if (result.status == "200") {
               astroCategory.addAll(result.recordList);
               update();
@@ -155,14 +163,32 @@ class AstromallController extends GetxController with GetSingleTickerProviderSta
     }
   }
 
-  orderRequest({int? catId, int? prodId, int? addId, double? payAmount, int? gstPercent, String? payMethod, double? totalPayment}) async {
+  orderRequest(
+      {int? catId,
+      int? prodId,
+      int? addId,
+      double? payAmount,
+      int? gstPercent,
+      String? payMethod,
+      double? totalPayment}) async {
     try {
       await global.checkBody().then((result) async {
         if (result) {
-          await apiHelper.orderAdd(productCatId: catId, productId: prodId, addressId: addId, gst: gstPercent, paymentMethod: payMethod, amount: payAmount, totalPay: totalPayment).then((result) async {
+          await apiHelper
+              .orderAdd(
+                  productCatId: catId,
+                  productId: prodId,
+                  addressId: addId,
+                  gst: gstPercent,
+                  paymentMethod: payMethod,
+                  amount: payAmount,
+                  totalPay: totalPayment)
+              .then((result) async {
             if (result.status == "200") {
               await global.splashController.getCurrentUserData();
-              global.splashController.currentUser?.walletAmount = global.splashController.currentUser?.walletAmount ?? 0 - (totalPayment ?? 0);
+              global.splashController.currentUser?.walletAmount =
+                  global.splashController.currentUser?.walletAmount ??
+                      0 - (totalPayment ?? 0);
               update();
 
               global.showToast(
@@ -197,7 +223,9 @@ class AstromallController extends GetxController with GetSingleTickerProviderSta
       }
       await global.checkBody().then((result) async {
         if (result) {
-          await apiHelper.getAstromallProduct(id, startIndexForProduct, fetchRecord).then((result) {
+          await apiHelper
+              .getAstromallProduct(id, startIndexForProduct, fetchRecord)
+              .then((result) {
             if (result.status == "200") {
               astroProduct.addAll(result.recordList);
               update();

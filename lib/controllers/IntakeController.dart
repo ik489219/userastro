@@ -1,15 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:AstrowayCustomer/controllers/bottomNavigationController.dart';
-import 'package:AstrowayCustomer/controllers/dropDownController.dart';
-import 'package:AstrowayCustomer/model/astrologer_model.dart';
-import 'package:AstrowayCustomer/model/intake_model.dart';
-import 'package:AstrowayCustomer/utils/services/api_helper.dart';
+import 'package:astromeetCustomer/controllers/bottomNavigationController.dart';
+import 'package:astromeetCustomer/controllers/dropDownController.dart';
+import 'package:astromeetCustomer/model/astrologer_model.dart';
+import 'package:astromeetCustomer/model/intake_model.dart';
+import 'package:astromeetCustomer/utils/services/api_helper.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 import '../utils/date_converter.dart';
 
@@ -31,7 +31,7 @@ class IntakeController extends GetxController {
   TextEditingController verifyPhoneController = TextEditingController();
 
   double? lat;
-   double? long;
+  double? long;
   dynamic tzone;
 
   APIHelper apiHelper = APIHelper();
@@ -56,8 +56,7 @@ class IntakeController extends GetxController {
   String? intakeContact;
   String? countryCode;
   bool isAddNewRequestByFreeuser = false;
-  String ?freedefaultTime;
-
+  String? freedefaultTime;
 
   @override
   void onInit() {
@@ -74,10 +73,10 @@ class IntakeController extends GetxController {
     update();
   }
 
-  getGeoCodingLatLong(
-      {double? latitude,
-        double? longitude,
-        }) async {
+  getGeoCodingLatLong({
+    double? latitude,
+    double? longitude,
+  }) async {
     try {
       await global.checkBody().then((result) async {
         if (result) {
@@ -85,8 +84,7 @@ class IntakeController extends GetxController {
               .geoCoding(lat: latitude, long: longitude)
               .then((result) {
             if (result.status == "true") {
-              tzone =
-                    double.parse(result.recordList['timezone'].toString());
+              tzone = double.parse(result.recordList['timezone'].toString());
 
               print("timezone");
               print("$tzone");
@@ -105,7 +103,6 @@ class IntakeController extends GetxController {
       print('Exception in getGeoCodingLatLong():' + e.toString());
     }
   }
-
 
   partnerDetails(bool value) {
     isEnterPartnerDetails = value;
@@ -150,15 +147,14 @@ class IntakeController extends GetxController {
     } else if (dobController.text == "") {
       errorText = "Please Enter Date of Birth";
       return false;
-    } else if (birthTimeController.text == " " || birthTimeController.text.isEmpty) {
+    } else if (birthTimeController.text == " " ||
+        birthTimeController.text.isEmpty) {
       errorText = "Please Enter time of Birth";
       return false;
-    }  else if (placeController.text == " " || placeController.text.isEmpty) {
+    } else if (placeController.text == " " || placeController.text.isEmpty) {
       errorText = "Please Enter Place of Birth";
       return false;
-    }
-
-    else {
+    } else {
       if (isEnterPartnerDetails) {
         if (partnerNameController.text == "") {
           errorText = "Please Enter partner name";
@@ -166,7 +162,7 @@ class IntakeController extends GetxController {
         } else if (partnerDobController.text == "") {
           errorText = "Please Enter partner DOB";
           return false;
-        }  else if (partnerPlaceController.text == "") {
+        } else if (partnerPlaceController.text == "") {
           errorText = "Please Enter partner birth place";
           return false;
         }
@@ -176,8 +172,6 @@ class IntakeController extends GetxController {
   }
 
   addCallIntakeFormData() async {
-
-
     IntakeModel intakeModel = isEnterPartnerDetails == true
         ? IntakeModel(
             name: nameController.text,
@@ -189,9 +183,8 @@ class IntakeController extends GetxController {
             countryCode: countryCode ?? "+91",
             gender: gender,
             maritalStatus: dropDownController.maritalStatus ?? "Single",
-            occupation: ocupationController.text == ""
-                ? ""
-                : ocupationController.text,
+            occupation:
+                ocupationController.text == "" ? "" : ocupationController.text,
             partnerBirthDate: isEnterPartnerDetails == true
                 ? selctedPartnerDate == null
                     ? DateTime(1994)
@@ -208,9 +201,9 @@ class IntakeController extends GetxController {
                 : partnerNameController.text,
             phoneNumber: phoneController.text,
             topicOfConcern: dropDownController.topic ?? 'Study',
-      latitude: lat,
-      longitude: long,
-      timezone: tzone,
+            latitude: lat,
+            longitude: long,
+            timezone: tzone,
           )
         : IntakeModel(
             name: nameController.text,
@@ -227,9 +220,9 @@ class IntakeController extends GetxController {
                 : ocupationController.text,
             phoneNumber: phoneController.text,
             topicOfConcern: dropDownController.topic ?? 'StuGLOdy',
-      latitude: lat,
-      longitude: long,
-      timezone: tzone,
+            latitude: lat,
+            longitude: long,
+            timezone: tzone,
           );
     try {
       await global.checkBody().then((result) async {
@@ -258,9 +251,10 @@ class IntakeController extends GetxController {
         if (result) {
           await apiHelper.getIntakedata().then((result) {
             if (jsonDecode(result)['status'].toString() == "200") {
-              freedefaultTime=jsonDecode(result)['default_time'];
+              freedefaultTime = jsonDecode(result)['default_time'];
               // intakeData = IntakeModel.fromJson(jsonDecode(result['recordList']));
-              intakeData = List<IntakeModel>.from(jsonDecode(result)['recordList']
+              intakeData = List<IntakeModel>.from(
+                  jsonDecode(result)['recordList']
                       .map((x) => IntakeModel.fromJson(x)));
               if (intakeData.isNotEmpty) {
                 nameController.text = intakeData[0].name ?? "";
@@ -270,9 +264,18 @@ class IntakeController extends GetxController {
                     intakeData[0].birthDate!.toIso8601String());
                 birthTimeController.text = intakeData[0].birthTime ?? "";
                 placeController.text = intakeData[0].birthPlace ?? "";
-                intakeData[0].latitude==null || intakeData[0].latitude=="null"? null: lat = intakeData[0].latitude;
-                intakeData[0].longitude==null || intakeData[0].longitude=="null"? null:long = intakeData[0].longitude;
-                intakeData[0].timezone==null || intakeData[0].timezone=="null"? null: tzone = intakeData[0].timezone;
+                intakeData[0].latitude == null ||
+                        intakeData[0].latitude == "null"
+                    ? null
+                    : lat = intakeData[0].latitude;
+                intakeData[0].longitude == null ||
+                        intakeData[0].longitude == "null"
+                    ? null
+                    : long = intakeData[0].longitude;
+                intakeData[0].timezone == null ||
+                        intakeData[0].timezone == "null"
+                    ? null
+                    : tzone = intakeData[0].timezone;
 
                 print("latitute and long");
                 print("${lat}");

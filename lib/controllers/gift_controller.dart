@@ -1,8 +1,8 @@
-import 'package:AstrowayCustomer/controllers/splashController.dart';
-import 'package:AstrowayCustomer/model/gift_model.dart';
-import 'package:AstrowayCustomer/utils/services/api_helper.dart';
+import 'package:astromeetCustomer/controllers/splashController.dart';
+import 'package:astromeetCustomer/model/gift_model.dart';
+import 'package:astromeetCustomer/utils/services/api_helper.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 class GiftController extends GetxController {
   SplashController splashController = Get.find<SplashController>();
@@ -52,7 +52,9 @@ class GiftController extends GetxController {
     try {
       await global.checkBody().then((result) async {
         if (result) {
-          await apiHelper.sendGiftToAstrologer(giftId, astrologerId).then((result) {
+          await apiHelper
+              .sendGiftToAstrologer(giftId, astrologerId)
+              .then((result) {
             if (result.status == "200") {
               global.user.walletAmount = global.user.walletAmount! - cutAmount;
               isGiftSend = true;

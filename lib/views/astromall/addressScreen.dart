@@ -1,14 +1,13 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:AstrowayCustomer/controllers/walletController.dart';
-import 'package:AstrowayCustomer/views/astromall/addNewAddressScreen.dart';
-import 'package:AstrowayCustomer/views/astromall/productPurchaseScreen.dart';
-import 'package:AstrowayCustomer/views/paymentInformationScreen.dart';
+import 'package:astromeetCustomer/controllers/walletController.dart';
+import 'package:astromeetCustomer/views/astromall/addNewAddressScreen.dart';
+import 'package:astromeetCustomer/views/astromall/productPurchaseScreen.dart';
+import 'package:astromeetCustomer/views/paymentInformationScreen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
-
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 import '../../controllers/astromallController.dart';
 
@@ -36,7 +35,8 @@ class AddressScreen extends StatelessWidget {
             children: [
               SizedBox(
                 width: Get.width,
-                child: GetBuilder<AstromallController>(builder: (astromallController) {
+                child: GetBuilder<AstromallController>(
+                    builder: (astromallController) {
                   return TextButton(
                     onPressed: () async {
                       await astromallController.removeData();
@@ -49,7 +49,9 @@ class AddressScreen extends StatelessWidget {
                     style: ButtonStyle(
                       padding: WidgetStateProperty.all(const EdgeInsets.all(8)),
                       shape: WidgetStateProperty.all(
-                        RoundedRectangleBorder(borderRadius: BorderRadius.circular(10), side: BorderSide(color: Colors.black)),
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            side: BorderSide(color: Colors.black)),
                       ),
                     ),
                   );
@@ -72,45 +74,68 @@ class AddressScreen extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.all(14.0),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Expanded(
                                       flex: 2,
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          Text('${astromallController.userAddress[index].name}'),
-                                          Text('${astromallController.userAddress[index].flatNo},${astromallController.userAddress[index].locality},${astromallController.userAddress[index].city},${astromallController.userAddress[index].state},${astromallController.userAddress[index].country}'),
-                                          Text('${astromallController.userAddress[index].pincode}'),
-                                          Text('${astromallController.userAddress[index].phoneNumber}'),
-                                          if (astromallController.userAddress[index].phoneNumber2 != "") Text('${astromallController.userAddress[index].phoneNumber2}'),
+                                          Text(
+                                              '${astromallController.userAddress[index].name}'),
+                                          Text(
+                                              '${astromallController.userAddress[index].flatNo},${astromallController.userAddress[index].locality},${astromallController.userAddress[index].city},${astromallController.userAddress[index].state},${astromallController.userAddress[index].country}'),
+                                          Text(
+                                              '${astromallController.userAddress[index].pincode}'),
+                                          Text(
+                                              '${astromallController.userAddress[index].phoneNumber}'),
+                                          if (astromallController
+                                                  .userAddress[index]
+                                                  .phoneNumber2 !=
+                                              "")
+                                            Text(
+                                                '${astromallController.userAddress[index].phoneNumber2}'),
                                         ],
                                       ),
                                     ),
                                     Expanded(
                                       flex: 1,
                                       child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         children: [
                                           InkWell(
                                               onTap: () async {
-                                                global.showOnlyLoaderDialog(context);
-                                                await astromallController.getEditAddress(index);
+                                                global.showOnlyLoaderDialog(
+                                                    context);
+                                                await astromallController
+                                                    .getEditAddress(index);
                                                 astromallController.update();
                                                 global.hideLoader();
-                                                Get.to(() => AddNewAddressScreen(
-                                                      id: astromallController.userAddress[index].id,
+                                                Get.to(() =>
+                                                    AddNewAddressScreen(
+                                                      id: astromallController
+                                                          .userAddress[index]
+                                                          .id,
                                                     ));
                                               },
                                               child: Icon(Icons.edit)),
                                           TextButton(
                                             style: ButtonStyle(
-                                              padding: WidgetStateProperty.all(EdgeInsets.all(0)),
-                                              fixedSize: WidgetStateProperty.all(Size.fromWidth(90)),
-                                              backgroundColor: WidgetStateProperty.all(Colors.white),
+                                              padding: WidgetStateProperty.all(
+                                                  EdgeInsets.all(0)),
+                                              fixedSize:
+                                                  WidgetStateProperty.all(
+                                                      Size.fromWidth(90)),
+                                              backgroundColor:
+                                                  WidgetStateProperty.all(
+                                                      Colors.white),
                                               shape: WidgetStateProperty.all(
                                                 RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(10),
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
                                                   side: BorderSide(
                                                     color: Colors.green,
                                                   ),
@@ -118,20 +143,46 @@ class AddressScreen extends StatelessWidget {
                                               ),
                                             ),
                                             onPressed: () async {
-                                              double charge = double.parse(astromallController.astroProductbyId[0].amount.toString());
-                                              double gst= (astromallController.astroProductbyId[0].amount * double.parse(global.getSystemFlagValue(global.systemFlagNameList.gst)))/100;
-                                              if (charge + gst <= global.splashController.currentUser!.walletAmount!) {
-                                                Get.to(() => OrderPurchaseScreen(amount: double.parse(astromallController.astroProductbyId[0].amount.toString())));
+                                              double charge = double.parse(
+                                                  astromallController
+                                                      .astroProductbyId[0]
+                                                      .amount
+                                                      .toString());
+                                              double gst = (astromallController
+                                                          .astroProductbyId[0]
+                                                          .amount *
+                                                      double.parse(global
+                                                          .getSystemFlagValue(global
+                                                              .systemFlagNameList
+                                                              .gst))) /
+                                                  100;
+                                              if (charge + gst <=
+                                                  global
+                                                      .splashController
+                                                      .currentUser!
+                                                      .walletAmount!) {
+                                                Get.to(() => OrderPurchaseScreen(
+                                                    amount: double.parse(
+                                                        astromallController
+                                                            .astroProductbyId[0]
+                                                            .amount
+                                                            .toString())));
                                               } else {
-                                                global.showOnlyLoaderDialog(context);
-                                                await walletController.getAmount();
+                                                global.showOnlyLoaderDialog(
+                                                    context);
+                                                await walletController
+                                                    .getAmount();
                                                 global.hideLoader();
-                                                openBottomSheetRechrage(context, (charge + gst).toString());
+                                                openBottomSheetRechrage(context,
+                                                    (charge + gst).toString());
                                               }
                                             },
                                             child: Text(
                                               'Select',
-                                              style: Get.theme.primaryTextTheme.bodySmall!.copyWith(color: Colors.green),
+                                              style: Get.theme.primaryTextTheme
+                                                  .bodySmall!
+                                                  .copyWith(
+                                                      color: Colors.green),
                                             ).tr(),
                                           ),
                                         ],
@@ -178,11 +229,19 @@ class AddressScreen extends StatelessWidget {
                             children: [
                               SizedBox(
                                 width: Get.width * 0.85,
-                                child: minBalance != '' ? Text('${tr("Minimum balance")} ${global.getSystemFlagValueForLogin(global.systemFlagNameList.currency)} $minBalance ${tr("is required to get product")}', style: TextStyle(fontWeight: FontWeight.w500, color: Colors.red)) : const SizedBox(),
+                                child: minBalance != ''
+                                    ? Text(
+                                        '${tr("Minimum balance")} ${global.getSystemFlagValueForLogin(global.systemFlagNameList.currency)} $minBalance ${tr("is required to get product")}',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.red))
+                                    : const SizedBox(),
                               ),
                               GestureDetector(
                                 child: Padding(
-                                  padding: minBalance == '' ? const EdgeInsets.only(top: 8) : const EdgeInsets.only(top: 0),
+                                  padding: minBalance == ''
+                                      ? const EdgeInsets.only(top: 8)
+                                      : const EdgeInsets.only(top: 0),
                                   child: Icon(Icons.close, size: 18),
                                 ),
                                 onTap: () {
@@ -193,16 +252,24 @@ class AddressScreen extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 8.0, bottom: 5),
-                            child: Text('Recharge Now', style: TextStyle(fontWeight: FontWeight.w500)).tr(),
+                            child: Text('Recharge Now',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.w500))
+                                .tr(),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(right: 5),
-                                child: Icon(Icons.lightbulb_rounded, color: Get.theme.primaryColor, size: 13),
+                                child: Icon(Icons.lightbulb_rounded,
+                                    color: Get.theme.primaryColor, size: 13),
                               ),
-                              Expanded(child: Text('Tip:90% users recharge for 10 mins or more.', style: TextStyle(fontSize: 12)).tr())
+                              Expanded(
+                                  child: Text(
+                                          'Tip:90% users recharge for 10 mins or more.',
+                                          style: TextStyle(fontSize: 12))
+                                      .tr())
                             ],
                           ),
                         ],
@@ -214,7 +281,8 @@ class AddressScreen extends StatelessWidget {
             ),
             Expanded(
                 child: GridView.builder(
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 4,
                       childAspectRatio: 3.8 / 2.3,
                       crossAxisSpacing: 1,
@@ -227,7 +295,10 @@ class AddressScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
-                          Get.to(() => PaymentInformationScreen(flag: 0, amount: double.parse(walletController.payment[index])));
+                          Get.to(() => PaymentInformationScreen(
+                              flag: 0,
+                              amount: double.parse(
+                                  walletController.payment[index])));
                         },
                         child: Container(
                           margin: const EdgeInsets.all(8.0),

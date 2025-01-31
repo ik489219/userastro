@@ -1,14 +1,13 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:AstrowayCustomer/controllers/dailyHoroscopeController.dart';
-import 'package:AstrowayCustomer/utils/images.dart';
-import 'package:AstrowayCustomer/views/daily_horoscope/dailyHoroscopeScreen.dart';
+import 'package:astromeetCustomer/controllers/dailyHoroscopeController.dart';
+import 'package:astromeetCustomer/utils/images.dart';
+import 'package:astromeetCustomer/views/daily_horoscope/dailyHoroscopeScreen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
-
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 class DailyHoroscopeContainer extends StatelessWidget {
   final isFreeServices;
@@ -19,7 +18,16 @@ class DailyHoroscopeContainer extends StatelessWidget {
   final String? luckyNumber;
   final String? luckyTime;
   // final zodiacImage;
-  DailyHoroscopeContainer({Key? key, this.isFreeServices = false, this.date, this.luckyNumber, this.luckyTime, required this.moodOfDay, this.colorCode, this.colorCode2}) : super(key: key);
+  DailyHoroscopeContainer(
+      {Key? key,
+      this.isFreeServices = false,
+      this.date,
+      this.luckyNumber,
+      this.luckyTime,
+      required this.moodOfDay,
+      this.colorCode,
+      this.colorCode2})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +37,11 @@ class DailyHoroscopeContainer extends StatelessWidget {
       child: Container(
         width: double.infinity,
         padding: EdgeInsets.all(8),
-        decoration: BoxDecoration(border: Border.all(color: Colors.black), borderRadius: BorderRadius.circular(10), image: DecorationImage(image: AssetImage(Images.sky), fit: BoxFit.cover)),
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.black),
+            borderRadius: BorderRadius.circular(10),
+            image: DecorationImage(
+                image: AssetImage(Images.sky), fit: BoxFit.cover)),
         child: Column(children: [
           isFreeServices
               ? SizedBox()
@@ -50,7 +62,9 @@ class DailyHoroscopeContainer extends StatelessWidget {
                       const SizedBox(
                         width: 8,
                       ),
-                      Text('$date', style: Get.textTheme.titleMedium!.copyWith(color: Colors.white)),
+                      Text('$date',
+                          style: Get.textTheme.titleMedium!
+                              .copyWith(color: Colors.white)),
                       const SizedBox(
                         width: 8,
                       ),
@@ -76,25 +90,40 @@ class DailyHoroscopeContainer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Your Daily horoscope is ready!', style: Get.textTheme.titleMedium!.copyWith(fontSize: 13, color: Colors.white)).tr(),
+                  Text('Your Daily horoscope is ready!',
+                          style: Get.textTheme.titleMedium!
+                              .copyWith(fontSize: 13, color: Colors.white))
+                      .tr(),
                   SizedBox(
                     height: 10,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      colorCode == null || colorCode == "" ? const SizedBox() : Text('Lucky Colour', style: Get.textTheme.titleMedium!.copyWith(fontSize: 10, color: Colors.white)).tr(),
+                      colorCode == null || colorCode == ""
+                          ? const SizedBox()
+                          : Text('Lucky Colour',
+                                  style: Get.textTheme.titleMedium!.copyWith(
+                                      fontSize: 10, color: Colors.white))
+                              .tr(),
                       SizedBox(
                         width: 25,
                       ),
-                      moodOfDay == "" ? const SizedBox() : Text('Mood of day', style: Get.textTheme.titleMedium!.copyWith(fontSize: 10, color: Colors.white)).tr()
+                      moodOfDay == ""
+                          ? const SizedBox()
+                          : Text('Mood of day',
+                                  style: Get.textTheme.titleMedium!.copyWith(
+                                      fontSize: 10, color: Colors.white))
+                              .tr()
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CircleAvatar(
-                        backgroundColor: colorCode != null ? Color(int.parse("FF$colorCode", radix: 16)) : Colors.transparent,
+                        backgroundColor: colorCode != null
+                            ? Color(int.parse("FF$colorCode", radix: 16))
+                            : Colors.transparent,
                         radius: 7,
                       ),
                       SizedBox(
@@ -103,7 +132,9 @@ class DailyHoroscopeContainer extends StatelessWidget {
                       SizedBox(
                         width: 80,
                       ),
-                      Text('$moodOfDay', style: Get.textTheme.titleMedium!.copyWith(fontSize: 10, color: Colors.red))
+                      Text('$moodOfDay',
+                          style: Get.textTheme.titleMedium!
+                              .copyWith(fontSize: 10, color: Colors.red))
                     ],
                   ),
                   SizedBox(
@@ -112,21 +143,35 @@ class DailyHoroscopeContainer extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      luckyNumber == "" ? const SizedBox() : Text('Lucky Number', style: Get.textTheme.titleMedium!.copyWith(fontSize: 10, color: Colors.white)).tr(),
+                      luckyNumber == ""
+                          ? const SizedBox()
+                          : Text('Lucky Number',
+                                  style: Get.textTheme.titleMedium!.copyWith(
+                                      fontSize: 10, color: Colors.white))
+                              .tr(),
                       SizedBox(
                         width: 25,
                       ),
-                      luckyTime == "" ? const SizedBox() : Text('Lucky Time', style: Get.textTheme.titleMedium!.copyWith(fontSize: 10, color: Colors.white)).tr()
+                      luckyTime == ""
+                          ? const SizedBox()
+                          : Text('Lucky Time',
+                                  style: Get.textTheme.titleMedium!.copyWith(
+                                      fontSize: 10, color: Colors.white))
+                              .tr()
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text(luckyNumber ?? '8', style: Get.textTheme.titleMedium!.copyWith(fontSize: 10, color: Colors.white)),
+                      Text(luckyNumber ?? '8',
+                          style: Get.textTheme.titleMedium!
+                              .copyWith(fontSize: 10, color: Colors.white)),
                       SizedBox(
                         width: 88,
                       ),
-                      Text(luckyTime ?? '10AM', style: Get.textTheme.titleMedium!.copyWith(fontSize: 10, color: Colors.white))
+                      Text(luckyTime ?? '10AM',
+                          style: Get.textTheme.titleMedium!
+                              .copyWith(fontSize: 10, color: Colors.white))
                     ],
                   )
                 ],
@@ -134,9 +179,12 @@ class DailyHoroscopeContainer extends StatelessWidget {
               CachedNetworkImage(
                 height: 80,
                 width: 80,
-                imageUrl: '${global.imgBaseurl}${global.hororscopeSignList.firstWhere((e) => e.isSelected).image}',
-                placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-                errorWidget: (context, url, error) => Icon(Icons.grid_view_rounded, size: 20),
+                imageUrl:
+                    '${global.imgBaseurl}${global.hororscopeSignList.firstWhere((e) => e.isSelected).image}',
+                placeholder: (context, url) =>
+                    const Center(child: CircularProgressIndicator()),
+                errorWidget: (context, url, error) =>
+                    Icon(Icons.grid_view_rounded, size: 20),
               ),
             ],
           ),
@@ -147,7 +195,9 @@ class DailyHoroscopeContainer extends StatelessWidget {
               ? InkWell(
                   onTap: () async {
                     Get.find<DailyHoroscopeController>().selectZodic(0);
-                    await Get.find<DailyHoroscopeController>().getHoroscopeList(horoscopeId: Get.find<DailyHoroscopeController>().signId);
+                    await Get.find<DailyHoroscopeController>().getHoroscopeList(
+                        horoscopeId:
+                            Get.find<DailyHoroscopeController>().signId);
                     Get.to(() => DailyHoroscopeScreen());
                   },
                   child: Container(
@@ -157,17 +207,20 @@ class DailyHoroscopeContainer extends StatelessWidget {
                       color: Get.theme.primaryColor,
                       borderRadius: BorderRadius.circular(25),
                     ),
-                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                      Text('View Your Detailed Horoscope').tr(),
-                      CircleAvatar(
-                          radius: 14,
-                          backgroundColor: Color.fromARGB(255, 241, 239, 221),
-                          child: Icon(
-                            Icons.arrow_forward_ios,
-                            size: 15,
-                            color: Colors.black,
-                          ))
-                    ]),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text('View Your Detailed Horoscope').tr(),
+                          CircleAvatar(
+                              radius: 14,
+                              backgroundColor:
+                                  Color.fromARGB(255, 241, 239, 221),
+                              child: Icon(
+                                Icons.arrow_forward_ios,
+                                size: 15,
+                                color: Colors.black,
+                              ))
+                        ]),
                   ),
                 )
               : SizedBox()

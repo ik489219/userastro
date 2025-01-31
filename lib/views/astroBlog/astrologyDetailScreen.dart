@@ -1,4 +1,4 @@
-import 'package:AstrowayCustomer/controllers/homeController.dart';
+import 'package:astromeetCustomer/controllers/homeController.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 import '../../utils/images.dart';
 import '../../widget/commonAppbar.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 class AstrologyBlogDetailScreen extends StatelessWidget {
   final String title;
@@ -16,7 +16,15 @@ class AstrologyBlogDetailScreen extends StatelessWidget {
   final String extension;
   final VideoPlayerController? controller;
   final VoidCallback? ontap;
-  const AstrologyBlogDetailScreen({Key? key, this.ontap, this.controller, required this.extension, required this.title, required this.description, required this.image}) : super(key: key);
+  const AstrologyBlogDetailScreen(
+      {Key? key,
+      this.ontap,
+      this.controller,
+      required this.extension,
+      required this.title,
+      required this.description,
+      required this.image})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +33,7 @@ class AstrologyBlogDetailScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(56),
-            child: Stack(
-                children: [
+            child: Stack(children: [
               CommonAppBar(
                 title: 'Astrology Blog',
               ),
@@ -51,9 +58,14 @@ class AstrologyBlogDetailScreen extends StatelessWidget {
                               width: 35,
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 5, right: 10, top: 5, bottom: 5),
-                              child: Text('Share', style: Get.textTheme.titleMedium!.copyWith(fontSize: 12,
-                              color: Colors.white)).tr(),
+                              padding: const EdgeInsets.only(
+                                  left: 5, right: 10, top: 5, bottom: 5),
+                              child: Text('Share',
+                                      style: Get.textTheme.titleMedium!
+                                          .copyWith(
+                                              fontSize: 12,
+                                              color: Colors.white))
+                                  .tr(),
                             )
                           ],
                         ),
@@ -68,7 +80,10 @@ class AstrologyBlogDetailScreen extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300, color: Colors.black),
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w300,
+                      color: Colors.black),
                 ).tr(),
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
@@ -82,14 +97,16 @@ class AstrologyBlogDetailScreen extends StatelessWidget {
                             fit: BoxFit.fill,
                           )
                         : extension == "mp4" || extension == 'gif'
-                            ? GetBuilder<HomeController>(builder: (homeController) {
+                            ? GetBuilder<HomeController>(
+                                builder: (homeController) {
                                 return Column(
                                   children: [
                                     Stack(
                                       alignment: Alignment.center,
                                       children: [
                                         ClipRRect(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                           child: SizedBox(
                                             height: 230,
                                             width: Get.width,
@@ -98,10 +115,13 @@ class AstrologyBlogDetailScreen extends StatelessWidget {
                                         ),
                                         InkWell(
                                           onTap: () {
-                                            homeController.blogplayPauseVideo(controller!);
+                                            homeController.blogplayPauseVideo(
+                                                controller!);
                                           },
                                           child: Icon(
-                                            controller!.value.isPlaying ? Icons.pause : Icons.play_arrow,
+                                            controller!.value.isPlaying
+                                                ? Icons.pause
+                                                : Icons.play_arrow,
                                             size: 40,
                                             color: Colors.white,
                                           ),
@@ -111,21 +131,26 @@ class AstrologyBlogDetailScreen extends StatelessWidget {
                                     VideoProgressIndicator(
                                       controller!,
                                       allowScrubbing: true,
-                                      colors: VideoProgressColors(backgroundColor: Colors.grey, playedColor: Colors.red),
+                                      colors: VideoProgressColors(
+                                          backgroundColor: Colors.grey,
+                                          playedColor: Colors.red),
                                     )
                                   ],
                                 );
                               })
                             : CachedNetworkImage(
                                 imageUrl: '${global.imgBaseurl}$image',
-                                imageBuilder: (context, imageProvider) => Image.network(
+                                imageBuilder: (context, imageProvider) =>
+                                    Image.network(
                                   '${global.imgBaseurl}$image',
                                   height: 230,
                                   fit: BoxFit.fill,
                                   width: MediaQuery.of(context).size.width,
                                 ),
-                                placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-                                errorWidget: (context, url, error) => Image.asset(
+                                placeholder: (context, url) => const Center(
+                                    child: CircularProgressIndicator()),
+                                errorWidget: (context, url, error) =>
+                                    Image.asset(
                                   Images.blog,
                                   height: 230,
                                   width: MediaQuery.of(context).size.width,
@@ -139,10 +164,8 @@ class AstrologyBlogDetailScreen extends StatelessWidget {
                     child: FutureBuilder(
                       future: global.showHtml(
                         html: description,
-                        style:{
-                          "body": Style(
-                            color: Colors.black
-                          ),
+                        style: {
+                          "body": Style(color: Colors.black),
                         },
                       ),
                       builder: (context, snapshot) {

@@ -1,6 +1,6 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:AstrowayCustomer/controllers/dropDownController.dart';
+import 'package:astromeetCustomer/controllers/dropDownController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,14 +8,15 @@ class DropDownWidget extends StatelessWidget {
   final List<String> item;
   final String? hint;
   final callId;
-  DropDownWidget({Key? key, required this.item, this.hint, this.callId}) : super(key: key);
+  DropDownWidget({Key? key, required this.item, this.hint, this.callId})
+      : super(key: key);
   DropDownController dropDownController = Get.find<DropDownController>();
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<DropDownController>(builder: (c) {
       return DropdownButton(
-        dropdownColor: Colors.white,
+          dropdownColor: Colors.white,
           isExpanded: true,
           underline: Container(
             height: 1,
@@ -23,7 +24,9 @@ class DropDownWidget extends StatelessWidget {
           ),
           alignment: Alignment.bottomLeft,
           value: dropDownController.innitialValue(callId, item),
-          hint: Text(hint ?? 'hint',),
+          hint: Text(
+            hint ?? 'hint',
+          ),
           items: item.map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
                 value: value,
@@ -48,10 +51,9 @@ class DropDownWidget extends StatelessWidget {
             if (callId == 3) {
               dropDownController.topicChoose(value!);
             }
-            if(callId==4)
-              {
-                dropDownController.kundaliLanguage(value!);
-              }
+            if (callId == 4) {
+              dropDownController.kundaliLanguage(value!);
+            }
           });
     });
   }

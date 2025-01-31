@@ -1,6 +1,6 @@
 // ignore_for_file: unnecessary_null_comparison
 
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 import 'package:intl/intl.dart';
 
 class DateConverter {
@@ -25,11 +25,13 @@ class DateConverter {
   }
 
   static String dateTimeStringToDateTime(String dateTime) {
-    return DateFormat('dd MMM yyyy  ${_timeFormatter()}').format(DateFormat('yyyy-MM-dd HH:mm:ss').parse(dateTime));
+    return DateFormat('dd MMM yyyy  ${_timeFormatter()}')
+        .format(DateFormat('yyyy-MM-dd HH:mm:ss').parse(dateTime));
   }
 
   static String dateTimeStringToDateOnly(String dateTime) {
-    return DateFormat('dd MMM yyyy').format(DateFormat('yyyy-MM-dd HH:mm:ss').parse(dateTime));
+    return DateFormat('dd MMM yyyy')
+        .format(DateFormat('yyyy-MM-dd HH:mm:ss').parse(dateTime));
   }
 
   static DateTime dateTimeStringToDate(String dateTime) {
@@ -41,7 +43,8 @@ class DateConverter {
   }
 
   static String isoStringToDateTimeString(String dateTime) {
-    return DateFormat('dd MMM yyyy  ${_timeFormatter()}').format(isoStringToLocalDate(dateTime));
+    return DateFormat('dd MMM yyyy  ${_timeFormatter()}')
+        .format(isoStringToLocalDate(dateTime));
   }
 
   static String isoStringToLocalDateOnly(String dateTime) {
@@ -49,7 +52,8 @@ class DateConverter {
   }
 
   static String stringToLocalDateOnly(String dateTime) {
-    return DateFormat('dd MMM yyyy').format(DateFormat('yyyy-MM-dd').parse(dateTime));
+    return DateFormat('dd MMM yyyy')
+        .format(DateFormat('yyyy-MM-dd').parse(dateTime));
   }
 
   static String localDateToIsoString(DateTime dateTime) {
@@ -64,7 +68,8 @@ class DateConverter {
     return DateFormat('HH:mm').parse(time);
   }
 
-  static bool isAvailable(String start, String end, {DateTime? time, bool isoTime = false}) {
+  static bool isAvailable(String start, String end,
+      {DateTime? time, bool isoTime = false}) {
     DateTime _currentTime;
     if (time != null) {
       _currentTime = time;
@@ -80,11 +85,15 @@ class DateConverter {
         ? isoTime
             ? isoStringToLocalDate(end)
             : DateFormat('HH:mm').parse(end)
-        : DateTime(_currentTime.year, _currentTime.month, _currentTime.day, 23, 59);
-    DateTime _startTime = DateTime(_currentTime.year, _currentTime.month, _currentTime.day, _start.hour, _start.minute, _start.second);
-    DateTime _endTime = DateTime(_currentTime.year, _currentTime.month, _currentTime.day, _end.hour, _end.minute, _end.second);
+        : DateTime(
+            _currentTime.year, _currentTime.month, _currentTime.day, 23, 59);
+    DateTime _startTime = DateTime(_currentTime.year, _currentTime.month,
+        _currentTime.day, _start.hour, _start.minute, _start.second);
+    DateTime _endTime = DateTime(_currentTime.year, _currentTime.month,
+        _currentTime.day, _end.hour, _end.minute, _end.second);
     if (_endTime.isBefore(_startTime)) {
-      if (_currentTime.isBefore(_startTime) && _currentTime.isBefore(_endTime)) {
+      if (_currentTime.isBefore(_startTime) &&
+          _currentTime.isBefore(_endTime)) {
         _startTime = _startTime.add(Duration(days: -1));
       } else {
         _endTime = _endTime.add(Duration(days: 1));

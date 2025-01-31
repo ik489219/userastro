@@ -1,15 +1,16 @@
 import 'dart:developer';
 
-import 'package:AstrowayCustomer/controllers/bottomNavigationController.dart';
-import 'package:AstrowayCustomer/model/skillModel.dart';
-import 'package:AstrowayCustomer/utils/services/api_helper.dart';
+import 'package:astromeetCustomer/controllers/bottomNavigationController.dart';
+import 'package:astromeetCustomer/model/skillModel.dart';
+import 'package:astromeetCustomer/utils/services/api_helper.dart';
 
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 class SkillController extends GetxController {
   APIHelper apiHelper = APIHelper();
-  BottomNavigationController bottomNavigationController = Get.find<BottomNavigationController>();
+  BottomNavigationController bottomNavigationController =
+      Get.find<BottomNavigationController>();
 
   var skillList = <SkillModel>[];
   List<int> skillFilterList = [];
@@ -64,13 +65,20 @@ class SkillController extends GetxController {
   bool isDataLoaded = false;
   bool isAllDataLoaded = false;
   bool isMoreDataAvailable = false;
-  addFilter({List<int>? skills, List<int>? language, List<String>? gender, String? sortBy, bool isLazyLoading = false, int? catId}) async {
+  addFilter(
+      {List<int>? skills,
+      List<int>? language,
+      List<String>? gender,
+      String? sortBy,
+      bool isLazyLoading = false,
+      int? catId}) async {
     try {
       bottomNavigationController.startIndex = 0;
       bottomNavigationController.astrologerList.clear();
 
       if (bottomNavigationController.astrologerList.isNotEmpty) {
-        bottomNavigationController.startIndex = bottomNavigationController.astrologerList.length;
+        bottomNavigationController.startIndex =
+            bottomNavigationController.astrologerList.length;
       }
       if (!isLazyLoading) {
         isDataLoaded = false;
@@ -78,12 +86,23 @@ class SkillController extends GetxController {
       global.showOnlyLoaderDialog(Get.context);
       await global.checkBody().then((result) async {
         if (result) {
-          await apiHelper.getAstrologer(sortingKey: sortBy, skills: skills, language: language, gender: gender, startIndex: bottomNavigationController.startIndex, fetchRecords: fetchRecord, catId: catId).then((result) {
+          await apiHelper
+              .getAstrologer(
+                  sortingKey: sortBy,
+                  skills: skills,
+                  language: language,
+                  gender: gender,
+                  startIndex: bottomNavigationController.startIndex,
+                  fetchRecords: fetchRecord,
+                  catId: catId)
+              .then((result) {
             if (result.status == "200") {
-              bottomNavigationController.astrologerList.addAll(result.recordList);
+              bottomNavigationController.astrologerList
+                  .addAll(result.recordList);
               log('astrologer list length ${bottomNavigationController.astrologerList.length} ');
               bottomNavigationController.update();
-              print('filter length ${bottomNavigationController.astrologerList.length}');
+              print(
+                  'filter length ${bottomNavigationController.astrologerList.length}');
               global.hideLoader();
             } else {
               global.hideLoader();

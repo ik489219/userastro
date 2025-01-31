@@ -1,11 +1,10 @@
-
-import 'package:AstrowayCustomer/controllers/bottomNavigationController.dart';
-import 'package:AstrowayCustomer/controllers/splashController.dart';
-import 'package:AstrowayCustomer/model/Allstories.dart';
-import 'package:AstrowayCustomer/model/app_review_model.dart';
-import 'package:AstrowayCustomer/model/home_Model.dart';
-import 'package:AstrowayCustomer/model/viewStories.dart';
-import 'package:AstrowayCustomer/utils/services/api_helper.dart';
+import 'package:astromeetCustomer/controllers/bottomNavigationController.dart';
+import 'package:astromeetCustomer/controllers/splashController.dart';
+import 'package:astromeetCustomer/model/Allstories.dart';
+import 'package:astromeetCustomer/model/app_review_model.dart';
+import 'package:astromeetCustomer/model/home_Model.dart';
+import 'package:astromeetCustomer/model/viewStories.dart';
+import 'package:astromeetCustomer/utils/services/api_helper.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart' as material;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,7 +12,7 @@ import 'package:video_player/video_player.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../model/language.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 class HomeController extends GetxController {
   List<Language> lan = [];
@@ -452,5 +451,4 @@ class HomeController extends GetxController {
       print("Exception in  storyViewed:-" + e.toString());
     }
   }
-
 }

@@ -1,30 +1,29 @@
 // ignore_for_file: must_be_immutable, deprecated_member_use
 
-
-import 'package:AstrowayCustomer/controllers/bottomNavigationController.dart';
-import 'package:AstrowayCustomer/controllers/callController.dart';
-import 'package:AstrowayCustomer/controllers/chatController.dart';
-import 'package:AstrowayCustomer/controllers/filtterTabController.dart';
-import 'package:AstrowayCustomer/controllers/languageController.dart';
-import 'package:AstrowayCustomer/controllers/reportController.dart';
-import 'package:AstrowayCustomer/controllers/skillController.dart';
-import 'package:AstrowayCustomer/controllers/walletController.dart';
-import 'package:AstrowayCustomer/utils/AppColors.dart';
-import 'package:AstrowayCustomer/utils/images.dart';
-import 'package:AstrowayCustomer/views/addMoneyToWallet.dart';
-import 'package:AstrowayCustomer/views/call/incoming_call_request.dart';
-import 'package:AstrowayCustomer/views/callIntakeFormScreen.dart';
-import 'package:AstrowayCustomer/views/paymentInformationScreen.dart';
-import 'package:AstrowayCustomer/views/searchAstrologerScreen.dart';
-import 'package:AstrowayCustomer/widget/customAppbarWidget.dart';
-import 'package:AstrowayCustomer/widget/drawerWidget.dart';
+import 'package:astromeetCustomer/controllers/bottomNavigationController.dart';
+import 'package:astromeetCustomer/controllers/callController.dart';
+import 'package:astromeetCustomer/controllers/chatController.dart';
+import 'package:astromeetCustomer/controllers/filtterTabController.dart';
+import 'package:astromeetCustomer/controllers/languageController.dart';
+import 'package:astromeetCustomer/controllers/reportController.dart';
+import 'package:astromeetCustomer/controllers/skillController.dart';
+import 'package:astromeetCustomer/controllers/walletController.dart';
+import 'package:astromeetCustomer/utils/AppColors.dart';
+import 'package:astromeetCustomer/utils/images.dart';
+import 'package:astromeetCustomer/views/addMoneyToWallet.dart';
+import 'package:astromeetCustomer/views/call/incoming_call_request.dart';
+import 'package:astromeetCustomer/views/callIntakeFormScreen.dart';
+import 'package:astromeetCustomer/views/paymentInformationScreen.dart';
+import 'package:astromeetCustomer/views/searchAstrologerScreen.dart';
+import 'package:astromeetCustomer/widget/customAppbarWidget.dart';
+import 'package:astromeetCustomer/widget/drawerWidget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
+import 'package:astromeetCustomer/utils/global.dart' as global;
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -1170,8 +1169,12 @@ class TabViewAstrologer extends StatelessWidget {
                                               bool isLogin =
                                                   await global.isLogin();
 
-                                              _logedIn(context, isLogin, index,
-                                                  true,astrologerList[index].charge);
+                                              _logedIn(
+                                                  context,
+                                                  isLogin,
+                                                  index,
+                                                  true,
+                                                  astrologerList[index].charge);
                                             },
                                             child: CircleAvatar(
                                               radius: 18,
@@ -1204,8 +1207,13 @@ class TabViewAstrologer extends StatelessWidget {
                                             onTap: () async {
                                               bool isLogin =
                                                   await global.isLogin();
-                                              _logedIn(context, isLogin, index,
-                                                  false,astrologerList[index].videoCallRate);
+                                              _logedIn(
+                                                  context,
+                                                  isLogin,
+                                                  index,
+                                                  false,
+                                                  astrologerList[index]
+                                                      .videoCallRate);
                                             },
                                             child: CircleAvatar(
                                               radius: 18,
@@ -1410,14 +1418,13 @@ class TabViewAstrologer extends StatelessWidget {
     );
   }
 
-  void _logedIn(context, isLogin, index, audio,dynamic charge) async {
+  void _logedIn(context, isLogin, index, audio, dynamic charge) async {
     if (isLogin) {
       //_checkAstrologerAvailability(index);
       await bottomNavigationController
           .getAstrologerbyId(astrologerList[index].id);
       print('charge${charge}');
-      if (charge * 5 <=
-              global.splashController.currentUser!.walletAmount! ||
+      if (charge * 5 <= global.splashController.currentUser!.walletAmount! ||
           astrologerList[index].isFreeAvailable == true) {
         await bottomNavigationController
             .checkAlreadyInReqForCall(astrologerList[index].id);
@@ -1440,7 +1447,9 @@ class TabViewAstrologer extends StatelessWidget {
                   astrologerId: astrologerList[index].id,
                   astrologerName: astrologerList[index].name,
                   isFreeAvailable: astrologerList[index].isFreeAvailable,
-              rate:audio ? astrologerList[index].charge.toString():astrologerList[index].videoCallRate.toString(),
+                  rate: audio
+                      ? astrologerList[index].charge.toString()
+                      : astrologerList[index].videoCallRate.toString(),
                 ));
 
             global.hideLoader();
@@ -1463,9 +1472,7 @@ class TabViewAstrologer extends StatelessWidget {
         await walletController.getAmount();
         global.hideLoader();
         openBottomSheetRechrage(
-            context,
-            (charge * 5).toString(),
-            '${astrologerList[index].name}');
+            context, (charge * 5).toString(), '${astrologerList[index].name}');
       }
     }
   }

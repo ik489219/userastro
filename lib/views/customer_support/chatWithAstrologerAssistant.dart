@@ -1,11 +1,10 @@
-import 'package:AstrowayCustomer/controllers/astrologer_assistant_controller.dart';
-import 'package:AstrowayCustomer/views/searchAstrologerScreen.dart';
+import 'package:astromeetCustomer/controllers/astrologer_assistant_controller.dart';
+import 'package:astromeetCustomer/views/searchAstrologerScreen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:AstrowayCustomer/utils/global.dart' as global;
-
+import 'package:astromeetCustomer/utils/global.dart' as global;
 
 import '../../utils/images.dart';
 import '../../widget/customBottomButton.dart';
@@ -14,7 +13,8 @@ import '../astrologerProfile/chat_with_assistant_screen.dart';
 class ChatWithAstrologerAssistant extends StatelessWidget {
   ChatWithAstrologerAssistant({Key? key}) : super(key: key);
 
-  final AstrologerAssistantController astrologerAssistantController = Get.find<AstrologerAssistantController>();
+  final AstrologerAssistantController astrologerAssistantController =
+      Get.find<AstrologerAssistantController>();
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +25,15 @@ class ChatWithAstrologerAssistant extends StatelessWidget {
           decoration: BoxDecoration(color: Color.fromARGB(255, 240, 233, 233)),
           child: astrologerAssistantController.assistantList.isEmpty
               ? Center(
-                  child: FittedBox(child: Text("You have not texted any astrologer's assistant yet").tr()),
+                  child: FittedBox(
+                      child: Text(
+                              "You have not texted any astrologer's assistant yet")
+                          .tr()),
                 )
               : GetBuilder<AstrologerAssistantController>(builder: (c) {
                   return ListView.builder(
-                      itemCount: astrologerAssistantController.assistantList.length,
+                      itemCount:
+                          astrologerAssistantController.assistantList.length,
                       padding: const EdgeInsets.all(8),
                       itemBuilder: (context, index) {
                         return GestureDetector(
@@ -37,9 +41,12 @@ class ChatWithAstrologerAssistant extends StatelessWidget {
                             Get.to(() => ChatWithAstrologerAssistantScreen(
                                   flagId: 1,
                                   profileImage: '',
-                                  astrologerName: astrologerAssistantController.assistantList[index].astrologerName!,
-                                  fireBasechatId: astrologerAssistantController.assistantList[index].chatId,
-                                  astrologerId: astrologerAssistantController.assistantList[index].astrologerId,
+                                  astrologerName: astrologerAssistantController
+                                      .assistantList[index].astrologerName!,
+                                  fireBasechatId: astrologerAssistantController
+                                      .assistantList[index].chatId,
+                                  astrologerId: astrologerAssistantController
+                                      .assistantList[index].astrologerId,
                                   chatId: 1,
                                 ));
                           },
@@ -69,7 +76,10 @@ class ChatWithAstrologerAssistant extends StatelessWidget {
                                     child: ElevatedButton(
                                       onPressed: () async {
                                         global.showOnlyLoaderDialog(context);
-                                        astrologerAssistantController.assistantDelete(astrologerAssistantController.assistantList[index].id);
+                                        astrologerAssistantController
+                                            .assistantDelete(
+                                                astrologerAssistantController
+                                                    .assistantList[index].id);
                                         global.hideLoader();
                                         Get.back();
                                       },
@@ -89,12 +99,16 @@ class ChatWithAstrologerAssistant extends StatelessWidget {
                                     height: 50,
                                     width: 50,
                                     decoration: BoxDecoration(
-                                      border: Border.all(color: Get.theme.primaryColor),
+                                      border: Border.all(
+                                          color: Get.theme.primaryColor),
                                       borderRadius: BorderRadius.circular(7),
                                     ),
                                     child: CircleAvatar(
                                       radius: 25,
-                                      child: astrologerAssistantController.assistantList[index].profileImage == ""
+                                      child: astrologerAssistantController
+                                                  .assistantList[index]
+                                                  .profileImage ==
+                                              ""
                                           ? CircleAvatar(
                                               radius: 24,
                                               backgroundColor: Colors.white,
@@ -106,18 +120,27 @@ class ChatWithAstrologerAssistant extends StatelessWidget {
                                               ),
                                             )
                                           : CachedNetworkImage(
-                                              imageUrl: '${global.imgBaseurl}${astrologerAssistantController.assistantList[index].profileImage}',
-                                              imageBuilder: (context, imageProvider) => CircleAvatar(
-                                                  radius: 24,
-                                                  backgroundColor: Colors.white,
-                                                  child: Image.network(
-                                                    fit: BoxFit.cover,
-                                                    height: 50,
-                                                    width: 40,
-                                                    '${global.imgBaseurl}${astrologerAssistantController.assistantList[index].profileImage}',
-                                                  )),
-                                              placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-                                              errorWidget: (context, url, error) => Image.asset(
+                                              imageUrl:
+                                                  '${global.imgBaseurl}${astrologerAssistantController.assistantList[index].profileImage}',
+                                              imageBuilder:
+                                                  (context, imageProvider) =>
+                                                      CircleAvatar(
+                                                          radius: 24,
+                                                          backgroundColor:
+                                                              Colors.white,
+                                                          child: Image.network(
+                                                            fit: BoxFit.cover,
+                                                            height: 50,
+                                                            width: 40,
+                                                            '${global.imgBaseurl}${astrologerAssistantController.assistantList[index].profileImage}',
+                                                          )),
+                                              placeholder: (context, url) =>
+                                                  const Center(
+                                                      child:
+                                                          CircularProgressIndicator()),
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      Image.asset(
                                                 Images.deafultUser,
                                                 fit: BoxFit.cover,
                                                 height: 50,
@@ -130,15 +153,27 @@ class ChatWithAstrologerAssistant extends StatelessWidget {
                                     width: 20,
                                   ),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Text("${astrologerAssistantController.assistantList[index].astrologerName}'s Assistant"),
                                       Text(
-                                        astrologerAssistantController.assistantList[index].lastMessage ?? '',
-                                        style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+                                          "${astrologerAssistantController.assistantList[index].astrologerName}'s Assistant"),
+                                      Text(
+                                        astrologerAssistantController
+                                                .assistantList[index]
+                                                .lastMessage ??
+                                            '',
+                                        style: TextStyle(
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                       Text(
-                                        DateFormat('dd MMM yyyy , hh:mm a').format(astrologerAssistantController.assistantList[index].lastMessageTime ?? DateTime.now()),
+                                        DateFormat('dd MMM yyyy , hh:mm a')
+                                            .format(
+                                                astrologerAssistantController
+                                                        .assistantList[index]
+                                                        .lastMessageTime ??
+                                                    DateTime.now()),
                                         style: TextStyle(color: Colors.grey),
                                       ),
                                     ],
