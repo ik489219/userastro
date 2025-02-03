@@ -2592,6 +2592,7 @@ class APIHelper {
         }),
       );
 
+      debugPrint('response of status recording ${response.statusCode}');
       debugPrint('response of start recording ${response.body}');
       dynamic recordList;
       if (response.statusCode == 200) {

@@ -42,20 +42,14 @@ class CallScreen extends StatefulWidget {
 
 class _CallScreenState extends State<CallScreen> {
   final drawerKey = new GlobalKey<ScaffoldState>();
-  FiltterTabController filtterTabController = Get.find<FiltterTabController>();
-
-  SkillController skillController = Get.find<SkillController>();
-
-  LanguageController languageController = Get.find<LanguageController>();
-
-  ReportController reportController = Get.find<ReportController>();
-
-  ChatController chatController = Get.find<ChatController>();
-  CallController callController = Get.find<CallController>();
-
-  BottomNavigationController bottomNavigationController =
-      Get.find<BottomNavigationController>();
-  WalletController walletController = Get.find<WalletController>();
+  final filtterTabController = Get.find<FiltterTabController>();
+  final skillController = Get.find<SkillController>();
+  final languageController = Get.find<LanguageController>();
+  final reportController = Get.find<ReportController>();
+  final chatController = Get.find<ChatController>();
+  final callController = Get.find<CallController>();
+  final bottomNavigationController = Get.find<BottomNavigationController>();
+  final walletController = Get.find<WalletController>();
 
   @override
   void initState() {
@@ -133,9 +127,7 @@ class _CallScreenState extends State<CallScreen> {
             ),
             GestureDetector(
               onTap: () {
-                Get.to(() => SearchAstrologerScreen(
-                      type: 'Call',
-                    ));
+                Get.to(() => SearchAstrologerScreen(type: 'Call'));
               },
               child: Padding(
                 padding: const EdgeInsets.only(left: 10, right: 10),

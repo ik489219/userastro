@@ -354,11 +354,12 @@ class _AstrologerProfileState extends State<AstrologerProfile> {
             actions: [
               GestureDetector(
                 onTap: () async {
- global.fluttershare();                // await FlutterShare.share(
-                   //   title:
-                     //     '${global.getSystemFlagValueForLogin(global.systemFlagNameList.appName)}',
-                     // text:
-                       //   "Hey! I am using ${global.getSystemFlagValue(global.systemFlagNameList.appName)} to get predictions related to marriage/career. I would recommend you to connect with best Astrologer at ${global.getSystemFlagValue(global.systemFlagNameList.appName)}. ");
+                  global.fluttershare();
+                  // await FlutterShare.share(
+                  //   title:
+                  //     '${global.getSystemFlagValueForLogin(global.systemFlagNameList.appName)}',
+                  // text:
+                  //   "Hey! I am using ${global.getSystemFlagValue(global.systemFlagNameList.appName)} to get predictions related to marriage/career. I would recommend you to connect with best Astrologer at ${global.getSystemFlagValue(global.systemFlagNameList.appName)}. ");
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),

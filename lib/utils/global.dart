@@ -32,7 +32,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 
 import '../views/loginScreen.dart';
 
-String myAudioRecordingUid = '2299887766';
+String myAudioRecordingUid = '2299865766';
 String currentLocation = '';
 SharedPreferences? sp;
 String? currencyISOCode3;
@@ -172,19 +172,19 @@ Future<Map<String, dynamic>> loadCredentials() async {
   return json.decode(content);
 }
 
-fluttershare(){
-  String? appShareLinkForLiveSreaming='https://play.google.com/store/apps/details?id=com.astromeet.user';
+fluttershare() {
+  String? myappLink =
+      'https://play.google.com/store/apps/details?id=com.astromeet.user';
 
   FlutterShare.share(
-      title: getSystemFlagValue(systemFlagNameList.appName),
-      text:
-      "Check out your free daily horoscope on ${getSystemFlagValue(systemFlagNameList.appName)} & plan your day batter ",
-      linkUrl: '${splashController.appShareLinkForLiveSreaming}')
+          title: getSystemFlagValue(systemFlagNameList.appName),
+          text:
+              "Check out your free daily horoscope on ${getSystemFlagValue(systemFlagNameList.appName)} & plan your day batter ",
+          linkUrl: '${myappLink}')
       .then((value) {})
       .catchError((e) {
     print(e);
   });
-
 }
 
 //Strip implement finish
