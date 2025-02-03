@@ -196,7 +196,7 @@ class _CallHistoryDetailScreenState extends State<CallHistoryDetailScreen> {
                                         print('startPlay');
                                         await historyController.audioPlayer
                                             .play(UrlSource(
-                                                "https://s3-ap-south-1.amazonaws.com/astroway/${historyController.callHistoryListById[0].sId1}_${historyController.callHistoryListById[0].channelName}.m3u8"));
+                                                "https://storage.googleapis.com/astro-food-pay/${historyController.callHistoryListById[0].sId1}_${historyController.callHistoryListById[0].channelName}.m3u8"));
                                         //     await historyController.audioPlayer.play(UrlSource("https://file-examples.com/storage/fe3269a6ea65d68689ae021/2017/11/file_example_WAV_1MG.wav"));
                                         if (historyController
                                                     .callHistoryListById[
@@ -210,7 +210,7 @@ class _CallHistoryDetailScreenState extends State<CallHistoryDetailScreen> {
                                                 "") {
                                           await historyController.audioPlayer2
                                               .play(UrlSource(
-                                                  "https://s3-ap-south-1.amazonaws.com/astroway/${historyController.callHistoryListById[0].sId}_${historyController.callHistoryListById[0].channelName}.m3u8"));
+                                                  "https://storage.googleapis.com/astro-food-pay/${historyController.callHistoryListById[0].sId}_${historyController.callHistoryListById[0].channelName}.m3u8"));
                                         }
                                       }
 

@@ -172,6 +172,21 @@ Future<Map<String, dynamic>> loadCredentials() async {
   return json.decode(content);
 }
 
+fluttershare(){
+  String? appShareLinkForLiveSreaming='https://play.google.com/store/apps/details?id=com.astromeet.user';
+
+  FlutterShare.share(
+      title: getSystemFlagValue(systemFlagNameList.appName),
+      text:
+      "Check out your free daily horoscope on ${getSystemFlagValue(systemFlagNameList.appName)} & plan your day batter ",
+      linkUrl: '${splashController.appShareLinkForLiveSreaming}')
+      .then((value) {})
+      .catchError((e) {
+    print(e);
+  });
+
+}
+
 //Strip implement finish
 
 Future<void> createAndShareLinkForHistoryChatCall() async {

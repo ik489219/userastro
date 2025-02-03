@@ -1088,10 +1088,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                                                                 width: 50.w,
                                                                                 child: GestureDetector(
                                                                                   onTap: () {
-                                                                                    ChatController chatController = Get.find<ChatController>();
-                                                                                    global.showOnlyLoaderDialog(context);
-                                                                                    chatController.shareChat(historyController.chatHistoryList[index].chatId ?? '', historyController.chatHistoryList[index].astrologerName ?? '');
-                                                                                    global.hideLoader();
+                                                                                   // ChatController chatController = Get.find<ChatController>();
+                                                                                   // global.showOnlyLoaderDialog(context);
+                                                                                   // chatController.shareChat(historyController.chatHistoryList[index].chatId ?? '', historyController.chatHistoryList[index].astrologerName ?? '');
+                                                                                   // global.hideLoader();
+                                                                                    global.fluttershare();
                                                                                   },
                                                                                   child: Container(
                                                                                     margin: const EdgeInsets.only(top: 6),

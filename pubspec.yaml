@@ -2,7 +2,7 @@ name: astromeetCustomer
 description: The Astrology app
 
 publish_to: "none"
-version: 1.0.1
+version: 1.0.9
 environment:
   sdk: ">=3.2.1 <4.0.0"
 

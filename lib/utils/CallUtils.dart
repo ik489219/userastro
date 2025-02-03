@@ -34,8 +34,8 @@ class CallUtils {
     CallKitParams callKitParams = CallKitParams(
       id: currentUuid,
       nameCaller: body['astrologerName'] ?? 'Astrologer',
-      appName: 'Astroway',
-      handle: 'Astroway Partner',
+      appName: 'Astro Meet',
+      handle: 'Astro Meet Partner',
       type: calltype ? 0 : 1, // 0 for audio call, 1 for video call
       textAccept: 'Accept',
       textDecline: 'Decline',
